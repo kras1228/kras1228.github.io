@@ -3,130 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kras1228 | Links</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>kras | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #0f0f0f; /* Глубокий темный фон */
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .fire-text {
+            color: #ff4d00;
+            text-shadow: 0 0 10px rgba(255, 77, 0, 0.5);
+        }
+
+        .btn-fire {
+            background: linear-gradient(45deg, #ff4d00, #ff8c00);
+            border: none;
             color: white;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .profile-img {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            border: 2px solid #333;
-            margin-bottom: 16px;
-            object-fit: cover;
-        }
-
-        h1 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .description {
-            font-size: 14px;
-            color: #999;
-            margin-bottom: 32px;
-        }
-
-        /* Стили кнопок-ссылок */
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .link-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 16px;
-            border-radius: 12px;
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .link-card:hover {
-            background: #252525;
-            transform: translateY(-2px);
-            border-color: #444;
-        }
-
-        .link-card i {
-            position: absolute;
-            left: 20px;
-            font-size: 18px;
-        }
-
-        /* Секция иконок внизу */
-        .socials {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .socials a {
-            color: #999;
-            font-size: 24px;
+            padding: 10px 25px;
+            font-weight: bold;
             transition: 0.3s;
         }
 
-        .socials a:hover {
+        .btn-fire:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 77, 0, 0.7);
             color: white;
         }
+
+        .skill-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+            height: 100%;
+        }
+
+        .skill-card:hover {
+            border-color: #ff4d00;
+            transform: translateY(-5px);
+        }
+
+        .navbar {
+            background: rgba(15, 15, 15, 0.95);
+            border-bottom: 1px solid #333;
+        }
+
+        .hero-section {
+            padding: 100px 0;
+            background: radial-gradient(circle at top right, rgba(255, 77, 0, 0.1), transparent);
+        }
+
+        footer {
+            padding: 50px 0;
+            border-top: 1px solid #333;
+        }
+
+        .badge-js { background-color: #f7df1e; color: black; }
+        .badge-py { background-color: #3776ab; }
+        .badge-html { background-color: #e34f26; }
+        .badge-bs { background-color: #7952b3; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <img src="https://github.com/kras1228.png" alt="Avatar" class="profile-img">
-    
-    <h1>kras1228</h1>
-    <p class="description">Разработчик & Геймер</p>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><span class="fire-text">KRAS</span>.DEV</a>
+            <div class="ms-auto">
+                <a href="https://t.me/pik_fra" class="btn btn-outline-light btn-sm me-2">Telegram</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="links-container">
-        <a href="https://t.me/твой_ник" target="_blank" class="link-card">
-            <i class="fab fa-telegram"></i> Telegram
-        </a>
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold mb-3">Привет, я <span class="fire-text">kras</span></h1>
+            <p class="lead text-secondary mb-4">Мне 16 лет. Обожаю Minecraft и учусь кодить магию в вебе.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="https://t.me/pik_fra" class="btn btn-fire">Связаться со мной</a>
+                <a href="#skills" class="btn btn-outline-light">Мои навыки</a>
+            </div>
+        </div>
+    </header>
 
-        <a href="https://discord.com" target="_blank" class="link-card">
-            <i class="fab fa-discord"></i> Мой Discord
-        </a>
+    <section id="skills" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Технологии, которые я <span class="fire-text">юзаю</span></h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="skill-card text-center">
+                        <h4 class="badge-html p-2 rounded">HTML & CSS</h4>
+                        <p class="text-secondary small mt-2">Верстаю адаптивные и красивые сайты.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="skill-card text-center">
+                        <h4 class="badge-bs p-2 rounded">Bootstrap</h4>
+                        <p class="text-secondary small mt-2">Ускоряю разработку с помощью фреймворков.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="skill-card text-center">
+                        <h4 class="badge-js p-2 rounded text-dark">JavaScript</h4>
+                        <p class="text-secondary small mt-2">Добавляю интерактив (пока чуть-чуть).</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="skill-card text-center">
+                        <h4 class="badge-py p-2 rounded">Python</h4>
+                        <p class="text-secondary small mt-2">Пишу скрипты и изучаю логику бэкенда.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <a href="https://github.com/kras1228" target="_blank" class="link-card">
-            <i class="fab fa-github"></i> Мой GitHub
-        </a>
-    </div>
+    <footer class="text-center">
+        <div class="container">
+            <h3 class="mb-4">Где меня найти?</h3>
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <a href="https://t.me/pik_fra" class="text-decoration-none text-white">
+                    <strong>Telegram:</strong> @pik_fra
+                </a>
+                <a href="https://discord.com/users/1186341967806865450" class="text-decoration-none text-white">
+                    <strong>Discord:</strong> kras
+                </a>
+            </div>
+            <p class="text-muted small">&copy; 2026 kras. Сделано с огоньком.</p>
+        </div>
+    </footer>
 
-    <div class="socials">
-        <a href="#"><i class="fab fa-steam"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-twitch"></i></a>
-    </div>
-</div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
