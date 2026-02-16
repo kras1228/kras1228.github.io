@@ -3,160 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRAS // TERMINAL</title>
+    <title>kras // dev</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <style>
-        :root { --a: #ff4d00; --blue: #0084ff; --bg: #030303; }
+        :root { --a: #ff4d00; --blue: #00d4ff; --bg: #050505; --br: 25px; }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { background: var(--bg); color: #fff; font-family: 'JetBrains Mono', monospace; overflow-x: hidden; }
-        #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
         
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--a); box-shadow: 0 0 10px var(--a); }
+        #c { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--a); border-radius: 10px; }
 
-        .ln { position: absolute; top:0; left:0; pointer-events:none; }
+        .s { min-height: 100vh; display: flex; align-items: center; padding: 100px 20px; position: relative; }
         
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
-        .big-k { font-family: 'Space Grotesk', sans-serif; font-size: clamp(5rem, 20vw, 12rem); line-height: 0.8; letter-spacing: -8px; background: linear-gradient(180deg, #fff 40%, var(--a)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(255,77,0,0.3)); }
+        /* Заголовок */
+        .k-title { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; color: #fff; text-shadow: 0 0 20px rgba(255,77,0,0.4); }
         
-        .card-wrap { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 0; transition: 0.3s; position: relative; overflow: hidden; }
-        .card-wrap:hover { border-color: var(--blue); box-shadow: 0 0 30px rgba(0,132,255,0.2); }
-        .card-wrap::before { content: ""; position: absolute; top:0; left:0; width:2px; height:100%; background: var(--a); }
+        /* 3D Карточки */
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(15px); 
+            border-radius: var(--br); 
+            padding: 40px; 
+            transition: 0.1s; 
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .glass:hover { border-color: var(--a); box-shadow: 0 0 30px rgba(255,77,0,0.1); }
 
-        .mc-item { width: 30px; height: 30px; background: #222; box-shadow: inset -3px -3px 0 #000, inset 3px 3px 0 #444; display: inline-block; position: relative; animation: h 2s infinite; }
-        .mc-d { position: absolute; top: 6px; left: 6px; width: 6px; height: 6px; background: #00fbff; box-shadow: 10px 8px 0 #00fbff, 4px 14px 0 #00fbff; }
-        @keyframes h { 0%,100% {transform:translateY(0)} 50% {transform:translateY(-10px)} }
+        /* Иконка кода */
+        .av-box { width: 80px; height: 80px; background: var(--a); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(255,77,0,0.3); }
 
-        .player { position: fixed; bottom: 20px; right: 20px; background: #000; border: 1px solid var(--a); padding: 12px; display: flex; align-items: center; gap: 15px; z-index: 100; font-size: 10px; }
-        .btn-p { background: var(--a); border:0; color:#fff; width:30px; height:30px; cursor: pointer; }
-        
-        section { padding: 120px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .soc-i { font-size: 2rem; color: #fff; transition: 0.3s; margin-right: 25px; }
-        .soc-i:hover { color: var(--blue); filter: drop-shadow(0 0 10px var(--blue)); }
+        /* Плеер (Fixed) */
+        .m-bar { 
+            position: fixed; bottom: 30px; right: 30px; 
+            background: rgba(10,10,10,0.9); border: 1px solid var(--a); 
+            padding: 15px 25px; border-radius: 50px; 
+            display: flex; align-items: center; gap: 15px; z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+        .p-btn { background: var(--a); border: 0; width: 40px; height: 40px; border-radius: 50%; color: #fff; cursor: pointer; transition: 0.3s; }
+        .p-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px var(--a); }
+
+        /* Майнкрафт Тех */
+        .mc-b { width: 34px; height: 34px; background: #333; box-shadow: inset -4px -4px 0 #111, inset 4px 4px 0 #777; position: relative; display: inline-block; animation: move 3s infinite ease-in-out; }
+        .mc-o { position: absolute; top: 6px; left: 6px; width: 8px; height: 8px; background: var(--blue); box-shadow: 12px 10px 0 var(--blue), 4px 16px 0 var(--blue); }
+        @keyframes move { 0%,100% {transform:translateY(0)} 50% {transform:translateY(-15px)} }
+
+        .tech-i { font-size: 3rem; margin: 15px; color: #555; transition: 0.3s; }
+        .tech-i:hover { color: var(--a); transform: translateY(-10px); }
+
+        .soc { font-size: 1.8rem; color: #fff; margin-right: 25px; transition: 0.3s; }
+        .soc:hover { color: var(--a); transform: scale(1.2); }
     </style>
 </head>
 <body>
 
-<canvas id="canvas"></canvas>
+<canvas id="c"></canvas>
 
-<div class="hero">
-    <div class="text-center">
-        <div style="color: var(--a); font-weight: bold; letter-spacing: 5px;">EST. 2026</div>
-        <h1 class="big-k">KRAS</h1>
-        <p class="mt-4 text-secondary">16 Y.O. // DEV // MINECRAFT ENJOYER</p>
-        <div class="mt-5">
-            <a href="https://t.me/pik_fra" class="soc-i"><i class="fab fa-telegram"></i></a>
-            <a href="https://discord.com/users/1186341967806865450" class="soc-i"><i class="fab fa-discord"></i></a>
-        </div>
-    </div>
-</div>
-
-<section>
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-md-6">
-                <h2 style="font-weight: 800; font-size: 3rem;">SYSTEM.<br><span style="color:var(--a)">STACK</span></h2>
-                <p class="text-secondary mt-4">Кодю на Python, оживляю фронтенд через JS. Не юзаю готовые шаблоны, только хардкор и кастом.</p>
-                <div class="mt-5 d-flex gap-4 fs-1">
-                    <i class="fab fa-html5 text-white-50"></i>
-                    <i class="fab fa-js-square text-white-50"></i>
-                    <i class="fab fa-python text-white-50"></i>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card-wrap">
-                    <div class="mc-item"><div class="mc-d"></div></div>
-                    <h4 class="mt-3">MINECRAFT TECH</h4>
-                    <p class="text-secondary small mt-3">Админю, настраиваю конфиги, создаю уникальные механики. Знаю как заставить сервер работать как часы.</p>
-                </div>
+<section class="s container">
+    <div class="row align-items-center">
+        <div class="col-lg-7">
+            <div class="av-box"><i class="fa-solid fa-code"></i></div>
+            <p style="color:var(--a); letter-spacing: 4px;">// PORTFOLIO_2026</p>
+            <h1 class="k-title">kras</h1>
+            <p class="text-secondary fs-5 mb-5">16 лет. Программирую реальность и создаю миры в Minecraft. Стек: Python, JS и любовь к качественному коду.</p>
+            <div class="d-flex">
+                <a href="https://t.me/pik_fra" class="soc"><i class="fab fa-telegram"></i></a>
+                <a href="https://discord.com/users/1186341967806865450" class="soc"><i class="fab fa-discord"></i></a>
             </div>
         </div>
     </div>
 </section>
 
-<div class="player">
-    <button class="btn-p" id="play"><i class="fas fa-play"></i></button>
-    <div>
-        <div style="color: var(--a)">NOW PLAYING</div>
+<section class="s container">
+    <div class="row w-100 g-5">
+        <div class="col-lg-6">
+            <h2 class="mb-5 fw-800">MY_<span style="color:var(--a)">SKILLS</span></h2>
+            <div class="d-flex flex-wrap">
+                <i class="devicon-python-plain tech-i"></i>
+                <i class="devicon-javascript-plain tech-i"></i>
+                <i class="devicon-html5-plain tech-i"></i>
+                <i class="devicon-bootstrap-plain tech-i"></i>
+                <i class="devicon-css3-plain tech-i"></i>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="glass tilt">
+                <div class="mc-b mb-4"><div class="mc-o"></div></div>
+                <h4>Minecraft Tech</h4>
+                <p class="text-secondary mt-3">Полная настройка серверов, создание сложных систем и оптимизация. Опыт работы с JSON/YAML конфигами и администрированием.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="s container">
+    <div class="glass tilt w-100 p-5">
+        <h2 class="mb-4">Development_Log</h2>
+        <p class="text-secondary">Я верю в то, что код должен быть не просто рабочим, но и эстетичным. В 16 лет я фокусируюсь на изучении архитектуры приложений и создании интерфейсов, которые вызывают эмоции.</p>
+        <hr class="my-5" style="opacity: 0.1;">
+        <div class="row">
+            <div class="col-md-4"><h5>Frontend</h5><small class="text-secondary">Чистая верстка и анимации.</small></div>
+            <div class="col-md-4"><h5>Backend</h5><small class="text-secondary">Скрипты на Python и автоматизация.</small></div>
+            <div class="col-md-4"><h5>Community</h5><small class="text-secondary">Управление игровыми проектами.</small></div>
+        </div>
+    </div>
+</section>
+
+<div class="m-bar">
+    <button class="p-btn" id="pb"><i class="fas fa-play"></i></button>
+    <div class="small">
+        <div style="color:var(--a); font-size: 10px;">PLAYING</div>
         <b>MIYAGI - BULLET</b>
     </div>
-    <input type="range" id="vol" min="0" max="1" step="0.1" value="0.5" style="width:60px; accent-color: var(--a);">
-    <audio id="track" src="ССЫЛКА_ТУТ" loop></audio>
+    <input type="range" id="vol" min="0" max="1" step="0.05" value="0.5" style="width:60px; accent-color:var(--a);">
+    <audio id="aud" src="URL_MP3" loop></audio>
 </div>
 
 <script>
-    const cvs = document.getElementById('canvas');
+    const cvs = document.getElementById('c');
     const ctx = cvs.getContext('2d');
     let pts = [];
-    const m = { x: -100, y: -100 };
+    const mouse = { x: -100, y: -100 };
 
-    function resize() {
+    function init() {
         cvs.width = window.innerWidth;
         cvs.height = window.innerHeight;
+        pts = [];
+        for(let i=0; i<100; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
     }
 
-    // Молнии
-    function drawLightning() {
-        if (Math.random() > 0.94) {
-            ctx.strokeStyle = '#0084ff';
-            ctx.lineWidth = 2;
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = '#0084ff';
-            let x = Math.random() * cvs.width;
+    function lightning() {
+        if(Math.random() > 0.97) {
+            ctx.strokeStyle = '#00d4ff';
+            ctx.lineWidth = 3;
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = '#00d4ff';
             ctx.beginPath();
+            let x = Math.random() * cvs.width;
             ctx.moveTo(x, 0);
-            for(let i=0; i<10; i++) {
-                x += (Math.random()-0.5)*100;
-                ctx.lineTo(x, (cvs.height/10)*i);
+            for(let i=0; i<8; i++) {
+                x += (Math.random()-0.5)*150;
+                ctx.lineTo(x, (cvs.height/8)*i);
             }
             ctx.stroke();
-            ctx.shadowBlur = 0;
+            // Вспышка
+            ctx.fillStyle = 'rgba(0, 212, 255, 0.05)';
+            ctx.fillRect(0,0,cvs.width, cvs.height);
         }
     }
 
-    function init() {
-        resize();
-        pts = [];
-        for(let i=0; i<100; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*1, vy: (Math.random()-0.5)*1 });
-    }
-
-    function render() {
-        ctx.fillStyle = 'rgba(0,0,0,0.15)';
+    function draw() {
+        ctx.fillStyle = 'rgba(5,5,5,0.2)';
         ctx.fillRect(0,0,cvs.width, cvs.height);
         
-        drawLightning();
+        lightning();
 
         pts.forEach(p => {
             p.x += p.vx; p.y += p.vy;
             if(p.x<0 || p.x>cvs.width) p.vx *= -1;
             if(p.y<0 || p.y>cvs.height) p.vy *= -1;
-            
             ctx.fillStyle = '#fff';
             ctx.beginPath(); ctx.arc(p.x, p.y, 1, 0, Math.PI*2); ctx.fill();
 
-            let d = Math.hypot(m.x - p.x, m.y - p.y);
-            if(d < 180) {
-                ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`;
+            let d = Math.hypot(mouse.x - p.x, mouse.y - p.y);
+            if(d < 200) {
+                ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/200})`;
                 ctx.lineWidth = 1;
-                ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
             }
         });
-        requestAnimationFrame(render);
+        requestAnimationFrame(draw);
     }
 
-    window.addEventListener('mousemove', e => { m.x = e.clientX; m.y = e.clientY; });
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
     window.addEventListener('resize', init);
-    init(); render();
+    init(); draw();
 
-    const t = document.getElementById('track');
-    const b = document.getElementById('play');
+    // 3D Tilt
+    const cards = document.querySelectorAll('.tilt');
+    cards.forEach(c => {
+        c.addEventListener('mousemove', e => {
+            const r = c.getBoundingClientRect();
+            const x = (e.clientX - r.left) - r.width/2;
+            const y = (e.clientY - r.top) - r.height/2;
+            c.style.transform = `perspective(1000px) rotateY(${x/20}deg) rotateX(${-y/20}deg)`;
+        });
+        c.addEventListener('mouseleave', () => c.style.transform = 'none');
+    });
+
+    // Music
+    const a = document.getElementById('aud');
+    const b = document.getElementById('pb');
     b.onclick = () => {
-        if(t.paused) { t.play(); b.innerHTML = '<i class="fas fa-pause"></i>'; }
-        else { t.pause(); b.innerHTML = '<i class="fas fa-play"></i>'; }
+        if(a.paused) { a.play(); b.innerHTML = '<i class="fas fa-pause"></i>'; }
+        else { a.pause(); b.innerHTML = '<i class="fas fa-play"></i>'; }
     }
-    document.getElementById('vol').oninput = e => t.volume = e.target.value;
+    document.getElementById('vol').oninput = e => a.volume = e.target.value;
 </script>
 </body>
 </html>
