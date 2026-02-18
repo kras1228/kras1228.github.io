@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Full-Stack Developer: Web Development (HTML5, CSS3, JavaScript), Python Automation & Minecraft Server Configuration. Portfolio of KRAS - a 16yo developer.">
-    <meta name="keywords" content="developer, python, javascript, bootstrap, minecraft, portfolio, web development">
+    <meta name="description" content="Full-Stack Developer: Web Development, Python Automation & Minecraft Server Configuration. Portfolio of KRAS.">
+    <meta name="keywords" content="developer, python, javascript, bootstrap, minecraft, portfolio">
     <meta name="author" content="KRAS">
     <meta property="og:title" content="KRAS // Developer Portfolio">
     <meta property="og:description" content="Code & Blocks - Full-Stack Developer Portfolio">
@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://kras-dev.com">
     <meta name="theme-color" content="#ff4d00">
     
-    <title>KRAS // Developer Portfolio | Web & Python Developer</title>
+    <title>KRAS // Developer Portfolio</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
             --bg: #000; 
             --bg-light: #0f0f0f;
             --r: 25px; 
-            --transition: 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+            --transition: 0.4s cubic-bezier(0.2, 1, 0.2, 1);
         }
         
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -36,7 +36,7 @@
             color: #fff; 
             font-family: 'Space Grotesk', sans-serif; 
             overflow-x: hidden;
-            transition: background-color var(--transition);
+            transition: background-color 0.3s ease;
         }
         
         body.light-mode {
@@ -51,7 +51,7 @@
         }
         
         body.light-mode .text-secondary {
-            color: #666 !important;
+            color: #555 !important;
         }
         
         body.light-mode .badge-item {
@@ -63,31 +63,7 @@
         body.light-mode .nav-links a {
             color: #000;
         }
-
-        body.light-mode .player-controls {
-            background: rgba(200,200,200,0.2);
-            border-color: rgba(0,0,0,0.1);
-        }
-
-        body.light-mode .p-btn,
-        body.light-mode .theme-toggle {
-            color: #000;
-        }
-
-        body.light-mode .form-control-dark {
-            background: rgba(0,0,0,0.05) !important;
-            border: 1px solid rgba(0,0,0,0.1) !important;
-            color: #000 !important;
-        }
-
-        body.light-mode .form-control-dark::placeholder {
-            color: #777;
-        }
-
-        body.light-mode .skill-card {
-            background: rgba(0,0,0,0.02);
-        }
-
+        
         #canvas { 
             position: fixed; 
             top: 0; 
@@ -113,12 +89,6 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center;
-            transition: var(--transition);
-        }
-        
-        .nav-box:hover {
-            border-color: rgba(255,77,0,0.3);
-            background: rgba(255,255,255,0.05);
         }
         
         .nav-logo { 
@@ -126,227 +96,38 @@
             color: var(--accent); 
             text-decoration: none; 
             font-size: 1.1rem;
-            transition: var(--transition);
         }
         
-        .nav-logo:hover {
-            transform: scale(1.05);
-            text-shadow: 0 0 20px rgba(255,77,0,0.5);
-        }
-
-        .nav-center {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            position: relative;
-            transition: color var(--transition);
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--accent);
-            transition: width var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .lang-switch {
-            display: flex;
-            gap: 8px;
-            background: rgba(0,0,0,0.4);
-            padding: 4px 12px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,77,0,0.15);
-        }
-
-        .lang-option {
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 20px;
-            transition: var(--transition);
-            color: rgba(255,255,255,0.5);
-            font-family: 'JetBrains Mono';
-        }
-
-        .lang-option.active {
-            color: var(--accent);
-            background: rgba(255,77,0,0.15);
-        }
-
-        body.light-mode .lang-option {
-            color: rgba(0,0,0,0.5);
-        }
-        body.light-mode .lang-option.active {
-            color: var(--accent);
-            background: rgba(255,77,0,0.15);
-        }
-
+        .nav-center { display: flex; gap: 30px; align-items: center; }
+        .nav-links { display: flex; gap: 25px; list-style: none; margin:0; padding:0; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.9rem; cursor: pointer; }
+        .lang-switch { display: flex; gap: 8px; background: rgba(0,0,0,0.4); padding: 4px 12px; border-radius: 30px; border: 1px solid rgba(255,77,0,0.15); }
+        .lang-option { font-size: 0.8rem; font-weight: 600; cursor: pointer; padding: 2px 6px; border-radius: 20px; color: rgba(255,255,255,0.5); font-family: 'JetBrains Mono'; }
+        .lang-option.active { color: var(--accent); background: rgba(255,77,0,0.15); }
+        body.light-mode .lang-option { color: rgba(0,0,0,0.5); }
+        body.light-mode .lang-option.active { color: var(--accent); background: rgba(255,77,0,0.15); }
+        
         .player-controls { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            background: rgba(0,0,0,0.4); 
-            padding: 6px 18px; 
-            border-radius: 40px; 
+            display: flex; align-items: center; gap: 12px; 
+            background: rgba(0,0,0,0.4); padding: 6px 18px; border-radius: 40px; 
             border: 1px solid rgba(255,77,0,0.15);
-            transition: var(--transition);
         }
-        
-        .player-controls:hover {
-            border-color: rgba(255,77,0,0.4);
-            background: rgba(0,0,0,0.6);
-        }
-        
-        .p-btn { 
-            background: none; 
-            border: none; 
-            color: #fff; 
-            cursor: pointer; 
-            font-size: 0.85rem; 
-            transition: var(--transition); 
-            padding: 0 4px; 
-        }
-        
-        .p-btn:hover { 
-            color: var(--accent); 
-            transform: scale(1.15); 
-        }
-        
-        #track-name { 
-            font-family: 'JetBrains Mono'; 
-            font-size: 10px; 
-            color: #fff; 
-            width: 110px; 
-            white-space: nowrap; 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-            text-transform: uppercase; 
-        }
-        
-        .vol-wrap { 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
-            margin-left: 5px; 
-            border-left: 1px solid rgba(255,255,255,0.1); 
-            padding-left: 12px; 
-        }
-        
-        #vol-slider { 
-            width: 50px; 
-            height: 3px; 
-            accent-color: var(--accent); 
-            cursor: pointer; 
-            opacity: 0.6; 
-            transition: opacity var(--transition); 
-        }
-        
-        #vol-slider:hover { opacity: 1; }
+        .p-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 0.85rem; }        
+        #track-name { font-family: 'JetBrains Mono'; font-size: 10px; color: #fff; width: 110px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .vol-wrap { display: flex; align-items: center; gap: 8px; margin-left: 5px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 12px; }
+        #vol-slider { width: 50px; height: 3px; accent-color: var(--accent); }
+        .theme-toggle { background: none; border: none; color: #fff; cursor: pointer; font-size: 1rem; width: 35px; height: 35px; border-radius: 50%; }
+        .theme-toggle:hover { background: rgba(255,77,0,0.2); color: var(--accent); }
 
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255,77,0,0.2);
-            color: var(--accent);
-            transform: rotate(20deg);
-        }
-
-        section { 
-            min-height: auto;
-            display: flex; 
-            align-items: center; 
-            padding: 100px 0; 
-            position: relative;
-        }
-
-        section:first-of-type {
-            min-height: 100vh;
-        }
+        section { min-height: auto; display: flex; align-items: center; padding: 100px 0; }
+        section:first-of-type { min-height: 100vh; }
         
-        .hero-h { 
-            font-size: clamp(2.5rem, 8vw, 4.5rem); 
-            letter-spacing: -2px; 
-            line-height: 1.1; 
-            margin-bottom: 20px;
-            animation: slideInLeft 0.8s ease forwards;
-        }
+        .hero-h { font-size: clamp(2.5rem, 8vw, 4.5rem); letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
+        .hero-p { font-family: 'JetBrains Mono'; max-width: 550px; }
+        .stack-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 25px; }
+        .badge-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 6px 15px; border-radius: 10px; font-family: 'JetBrains Mono'; font-size: 12px; color: #888; }
         
-        .hero-p {
-            font-family: 'JetBrains Mono'; 
-            max-width: 550px;
-            animation: slideInUp 0.8s ease 0.1s forwards;
-            opacity: 0;
-        }
-        
-        .stack-badges { 
-            display: flex; 
-            gap: 10px; 
-            flex-wrap: wrap; 
-            margin-top: 25px;
-            animation: slideInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
-        }
-        
-        .badge-item { 
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid rgba(255,255,255,0.1); 
-            padding: 6px 15px; 
-            border-radius: 10px; 
-            font-family: 'JetBrains Mono'; 
-            font-size: 12px; 
-            color: #888;
-            transition: var(--transition);
-            cursor: default;
-        }
-        
-        .badge-item:hover {
-            background: rgba(255,77,0,0.1);
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-        
+        /* ========== ПРЕМИАЛЬНЫЕ КАРТОЧКИ ========== */
         .glass-card {
             background: rgba(255,255,255,0.02); 
             border: 1px solid rgba(255,255,255,0.08);
@@ -354,306 +135,180 @@
             padding: 40px; 
             height: 100%; 
             backdrop-filter: blur(15px);
-            transition: transform 0.2s ease-out, border-color var(--transition), box-shadow var(--transition);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             transform-style: preserve-3d;
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
-            will-change: transform;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         
-        .glass-card:hover { 
+        /* Анимированный градиентный фон при наведении */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255,77,0,0.15), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+        
+        .glass-card:hover {
             border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(255,77,0,0.2), 0 0 60px rgba(255,77,0,0.1);
+            box-shadow: 0 30px 50px rgba(255,77,0,0.3), 0 0 0 2px rgba(255,77,0,0.1) inset;
+            transform: translateY(-10px) scale(1.01);
         }
-
-        .glass-card h3,
-        .glass-card h4 {
-            color: #fff;
-            margin-bottom: 15px;
-            transition: color var(--transition);
+        
+        /* Специальные стили для карточек проектов */
+        .project-card {
+            padding: 30px 25px;
+            cursor: pointer;
         }
-
-        .glass-card:hover h3,
-        .glass-card:hover h4 {
-            color: var(--accent);
-        }
-
+        
         .project-badge {
             display: inline-block;
-            background: rgba(255,77,0,0.1);
-            border: 1px solid rgba(255,77,0,0.3);
+            background: rgba(255,77,0,0.15);
+            border: 1px solid rgba(255,77,0,0.4);
             color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
             font-family: 'JetBrains Mono';
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            transition: 0.3s;
+            align-self: flex-start;
         }
-
+        
+        .project-card:hover .project-badge {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+        
+        .project-card h4 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            line-height: 1.3;
+        }
+        
+        .project-card p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
         .project-links {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 15px;
         }
-
+        
         .project-links .btn {
-            font-size: 0.75rem;
-            padding: 4px 12px;
-            border-radius: 6px;
-            transition: var(--transition);
+            font-size: 0.8rem;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: 1px solid transparent;
         }
-
+        
         .btn-outline-warning {
             color: var(--accent);
             border-color: var(--accent);
+            background: transparent;
         }
-
+        
         .btn-outline-warning:hover {
             background: var(--accent);
-            border-color: var(--accent);
+            color: #000;
+            transform: scale(1.05);
         }
-
+        
+        .btn-outline-primary {
+            color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        
+        .btn-outline-primary:hover {
+            background: #0d6efd;
+            color: #fff;
+            transform: scale(1.05);
+        }
+        
         .skill-card {
             text-align: center;
-            padding: 25px;
+            padding: 25px 15px;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: var(--r);
-            transition: var(--transition);
+            transition: 0.4s;
             height: 100%;
         }
-
-        .skill-card:hover {
-            background: rgba(255,77,0,0.05);
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-            transition: var(--transition);
-        }
-
-        .skill-card:hover .skill-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .skill-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .skill-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), #ff8c00);
-            border-radius: 10px;
-            transition: width 1.5s ease;
-        }
-
-        .mc-item { 
-            width: 35px; 
-            height: 35px; 
-            background: #222; 
-            box-shadow: inset -4px -4px 0 #000, inset 4px 4px 0 #444; 
-            position: relative; 
-            display: inline-block; 
-            animation: float 3s infinite ease-in-out; 
-        }
+        .skill-card:hover { background: rgba(255,77,0,0.1); transform: translateY(-8px); border-color: var(--accent); }
+        .skill-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
         
-        .mc-o { 
-            position: absolute; 
-            top: 8px; 
-            left: 8px; 
-            width: 6px; 
-            height: 6px; 
-            background: #00fbff; 
-            box-shadow: 12px 10px 0 #00fbff, 4px 16px 0 #00fbff; 
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .form-control-dark {
-            background: rgba(255,255,255,0.05) !important;
-            border: 1px solid rgba(255,255,255,0.1) !important;
-            color: #fff !important;
-            padding: 12px 15px;
-            font-family: 'JetBrains Mono';
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .form-control-dark:focus {
-            background: rgba(255,255,255,0.08) !important;
-            border-color: var(--accent) !important;
-            box-shadow: 0 0 15px rgba(255,77,0,0.2);
-            color: #fff !important;
-        }
-
-        .form-control-dark::placeholder {
-            color: rgba(255,255,255,0.5);
-        }
-
-        .btn-submit {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-family: 'Space Grotesk';
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.95rem;
-        }
-
-        .btn-submit:hover {
-            background: #ff6b1a;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255,77,0,0.3);
-        }
-
-        .form-status {
-            padding: 12px;
-            border-radius: 8px;
-            font-family: 'JetBrains Mono';
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        .form-status.success {
-            background: rgba(76, 175, 80, 0.1);
-            color: #4caf50;
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            display: block;
-        }
-
-        .form-status.error {
-            background: rgba(244, 67, 54, 0.1);
-            color: #f44336;
-            border: 1px solid rgba(244, 67, 54, 0.3);
-            display: block;
-        }
-
+        .contact-form { display: flex; flex-direction: column; gap: 15px; }
+        .form-control-dark { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: #fff !important; padding: 12px 15px; font-family: 'JetBrains Mono'; border-radius: 12px; }
+        .btn-submit { background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background: #ff6b1a; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,77,0,0.3); }
+        
         .obfuscated-email {
             font-family: 'JetBrains Mono';
-            font-size: 0.9rem;
             background: rgba(255,77,0,0.1);
             padding: 6px 12px;
             border-radius: 8px;
             display: inline-block;
             border: 1px dashed var(--accent);
             cursor: pointer;
-            transition: var(--transition);
-            word-break: break-all;
-        }
-
-        .obfuscated-email:hover {
-            background: rgba(255,77,0,0.2);
-            letter-spacing: 0.5px;
-        }
-
-        footer { 
-            padding: 40px; 
-            text-align: center; 
-            border-top: 1px solid rgba(255,255,255,0.05); 
-            font-family: 'JetBrains Mono'; 
-            font-size: 0.7rem; 
-            color: #444;
-            transition: var(--transition);
         }
         
-        .soc-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+        footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); font-family: 'JetBrains Mono'; font-size: 0.7rem; color: #444; }
+        .soc-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .soc-link { color: #fff; font-size: 1.5rem; transition: 0.3s; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .soc-link:hover { color: var(--accent); border-color: var(--accent); background: rgba(255,77,0,0.1); transform: translateY(-3px); }
+        
+        .mc-item { width: 35px; height: 35px; background: #222; box-shadow: inset -4px -4px 0 #000, inset 4px 4px 0 #444; position: relative; display: inline-block; animation: float 3s infinite ease-in-out; }
+        .mc-o { position: absolute; top: 8px; left: 8px; width: 6px; height: 6px; background: #00fbff; box-shadow: 12px 10px 0 #00fbff, 4px 16px 0 #00fbff; }
+        
+        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+        
+        /* Анимация появления карточек */
+        @keyframes cardPop {
+            0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         
-        .soc-link { 
-            color: #fff; 
-            font-size: 1.5rem; 
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50%;
-            text-decoration: none;
+        .project-card {
+            animation: cardPop 0.6s ease-out forwards;
+            opacity: 0; /* начальное состояние для анимации */
         }
         
-        .soc-link:hover { 
-            color: var(--accent);
-            border-color: var(--accent);
-            background: rgba(255,77,0,0.1);
-            transform: translateY(-3px);
-        }
-
-        .row.g-4 {
-            align-items: stretch;
-        }
-
-        @keyframes float { 
-            0%, 100% { transform: translateY(0); } 
-            50% { transform: translateY(-12px); } 
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        /* Адаптивность текста внутри карточек */
         @media (max-width: 768px) {
-            .nav-box { padding: 8px 15px; width: 98%; }
-            .nav-center { display: none; }
-            .player-controls { gap: 8px; padding: 4px 12px; font-size: 0.75rem; }
-            #track-name { width: 80px; font-size: 8px; }
-            .hero-h { font-size: clamp(1.8rem, 6vw, 3.5rem); }
-            .glass-card { padding: 25px; }
-            .project-links { flex-wrap: wrap; }
-            section { padding: 60px 0; }
+            .project-card h4 { font-size: 1.3rem; }
+            .project-card p { font-size: 0.85rem; }
+            .project-badge { font-size: 10px; padding: 4px 10px; }
         }
-
-        .container { max-width: 1100px; }
-        .text-secondary { color: #888; transition: var(--transition); }
+        
+        .row.g-4 { align-items: stretch; }
     </style>
 </head>
 <body>
@@ -743,34 +398,37 @@
         </div>
     </div>
     <div class="row g-4">
+        <!-- Карточка 1 -->
         <div class="col-md-4">
             <div class="glass-card project-card">
                 <div class="project-badge">HTML5 • CSS3 • JavaScript</div>
-                <h4 class="mt-3" data-key="project1Title">Portfolio Website</h4>
-                <p class="text-secondary small" data-key="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</p>
-                <div class="project-links mt-3">
-                    <a href="https://github.com/kras1228" class="btn btn-sm btn-outline-warning" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
-                    <a href="#" class="btn btn-sm btn-outline-primary"><i class="fas fa-link me-1"></i><span data-key="live">Live</span></a>
+                <h4 data-key="project1Title">Portfolio Website</h4>
+                <p class="text-secondary" data-key="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</p>
+                <div class="project-links">
+                    <a href="https://github.com/kras1228" class="btn btn-outline-warning" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
+                    <a href="#" class="btn btn-outline-primary"><i class="fas fa-link me-1"></i><span data-key="live">Live</span></a>
                 </div>
             </div>
         </div>
+        <!-- Карточка 2 -->
         <div class="col-md-4">
             <div class="glass-card project-card">
                 <div class="project-badge">Python • Automation</div>
-                <h4 class="mt-3" data-key="project2Title">Python Automation Tools</h4>
-                <p class="text-secondary small" data-key="project2Desc">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.</p>
-                <div class="project-links mt-3">
-                    <a href="https://github.com/kras1228" class="btn btn-sm btn-outline-warning" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
+                <h4 data-key="project2Title">Python Automation Tools</h4>
+                <p class="text-secondary" data-key="project2Desc">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.</p>
+                <div class="project-links">
+                    <a href="https://github.com/kras1228" class="btn btn-outline-warning" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
                 </div>
             </div>
         </div>
+        <!-- Карточка 3 -->
         <div class="col-md-4">
             <div class="glass-card project-card">
                 <div class="project-badge">Minecraft • Configuration</div>
-                <h4 class="mt-3" data-key="project3Title">Server Configuration Kit</h4>
-                <p class="text-secondary small" data-key="project3Desc">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</p>
-                <div class="project-links mt-3">
-                    <a href="#" class="btn btn-sm btn-outline-warning disabled"><i class="fas fa-lock me-1"></i><span data-key="private">Private</span></a>
+                <h4 data-key="project3Title">Server Configuration Kit</h4>
+                <p class="text-secondary" data-key="project3Desc">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</p>
+                <div class="project-links">
+                    <a href="#" class="btn btn-outline-warning disabled"><i class="fas fa-lock me-1"></i><span data-key="private">Private</span></a>
                 </div>
             </div>
         </div>
@@ -784,14 +442,14 @@
         </div>
     </div>
     <div class="row g-3">
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-js-square"></i></div><h5>JavaScript</h5><div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div><small class="text-secondary">85%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-html5"></i></div><h5>HTML5</h5><div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div><small class="text-secondary">90%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h5>CSS3</h5><div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div><small class="text-secondary">88%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-python"></i></div><h5>Python</h5><div class="skill-bar"><div class="skill-fill" style="width: 82%;"></div></div><small class="text-secondary">82%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-bootstrap"></i></div><h5>Bootstrap</h5><div class="skill-bar"><div class="skill-fill" style="width: 87%;"></div></div><small class="text-secondary">87%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-cube"></i></div><h5>Minecraft</h5><div class="skill-bar"><div class="skill-fill" style="width: 89%;"></div></div><small class="text-secondary">89%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-server"></i></div><h5>Server Mgmt</h5><div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div><small class="text-secondary">80%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-terminal"></i></div><h5>CLI/Git</h5><div class="skill-bar"><div class="skill-fill" style="width: 84%;"></div></div><small class="text-secondary">84%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-js-square"></i></div><h5>JavaScript</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:85%;height:6px;"></div></div><small class="text-secondary">85%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-html5"></i></div><h5>HTML5</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:90%;height:6px;"></div></div><small class="text-secondary">90%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h5>CSS3</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:88%;height:6px;"></div></div><small class="text-secondary">88%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-python"></i></div><h5>Python</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:82%;height:6px;"></div></div><small class="text-secondary">82%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-bootstrap"></i></div><h5>Bootstrap</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:87%;height:6px;"></div></div><small class="text-secondary">87%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-cube"></i></div><h5>Minecraft</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:89%;height:6px;"></div></div><small class="text-secondary">89%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-server"></i></div><h5>Server Mgmt</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:80%;height:6px;"></div></div><small class="text-secondary">80%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-terminal"></i></div><h5>CLI/Git</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:84%;height:6px;"></div></div><small class="text-secondary">84%</small></div></div>
     </div>
 </section>
 
@@ -810,13 +468,11 @@
         <div class="col-lg-6">
             <div class="glass-card">
                 <h4 class="mb-4">Get in Touch</h4>
-                <p class="text-secondary mb-4">
-                    Have a project in mind or want to collaborate? Feel free to reach out. I'm always interested in hearing about new opportunities and projects.
-                </p>
+                <p class="text-secondary mb-4">Have a project in mind or want to collaborate? Feel free to reach out.</p>
                 <div class="mb-4">
                     <p class="text-secondary mb-2"><i class="fas fa-envelope me-2" style="color: var(--accent);"></i>Email</p>
                     <div class="obfuscated-email" onclick="revealEmail()">✻✻✻@gmail.com (click to reveal)</div>
-                    <p id="real-email" style="display: none;"><a href="mailto:niyatjon1228@gmail.com" style="color: var(--accent); text-decoration: none;">niyatjon1228@gmail.com</a></p>
+                    <p id="real-email" style="display: none;"><a href="mailto:niyatjon1228@gmail.com" style="color: var(--accent);">niyatjon1228@gmail.com</a></p>
                 </div>
                 <div class="mb-4">
                     <p class="text-secondary mb-2"><i class="fas fa-map-marker-alt me-2" style="color: var(--accent);"></i>Location</p>
@@ -825,9 +481,9 @@
                 <div>
                     <p class="text-secondary mb-2"><i class="fas fa-link me-2" style="color: var(--accent);"></i>Social</p>
                     <div class="soc-links">
-                        <a href="https://t.me/pik_fra" class="soc-link" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
-                        <a href="https://github.com/kras1228" class="soc-link" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://discord.com" class="soc-link" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://t.me/pik_fra" class="soc-link" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="https://github.com/kras1228" class="soc-link" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" class="soc-link" target="_blank"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
             </div>
@@ -837,155 +493,73 @@
 
 <footer>
     <p>© 2026 KRAS // SINCE DAY ONE</p>
-    <p style="margin-top: 10px; font-size: 0.65rem; color: #555;">Designed & Built with <span style="color: var(--accent);">❤</span> | All Rights Reserved</p>
+    <p style="margin-top: 10px; font-size: 0.65rem; color: #555;">Designed & Built with <span style="color: var(--accent);">❤</span></p>
 </footer>
 
 <script>
+    // Canvas
     const cvs = document.getElementById('canvas');
     const ctx = cvs.getContext('2d');
     let pts = [];
     const m = { x: -100, y: -100 };
-
     function init() {
         cvs.width = window.innerWidth;
         cvs.height = window.innerHeight;
         pts = [];
-        for(let i=0; i<85; i++) {
-            pts.push({ 
-                x: Math.random()*cvs.width, 
-                y: Math.random()*cvs.height, 
-                vx: (Math.random()-0.5)*0.5, 
-                vy: (Math.random()-0.5)*0.5 
-            });
-        }
+        for(let i=0; i<85; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
     }
-
     function lightning() {
         if(Math.random() > 0.988) {
-            ctx.strokeStyle = 'rgba(0, 132, 255, 0.7)';
-            ctx.lineWidth = 2;
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = '#0084ff';
-            ctx.beginPath();
-            let x = Math.random() * cvs.width;
-            ctx.moveTo(x, 0);
-            for(let i=0; i<10; i++) {
-                x += (Math.random()-0.5)*120;
-                ctx.lineTo(x, (cvs.height/10)*i);
-            }
-            ctx.stroke();
-            ctx.shadowBlur = 0;
-            ctx.fillStyle = 'rgba(0, 132, 255, 0.02)';
-            ctx.fillRect(0,0,cvs.width, cvs.height);
+            ctx.strokeStyle = 'rgba(0, 132, 255, 0.7)'; ctx.lineWidth = 2; ctx.shadowBlur = 15; ctx.shadowColor = '#0084ff'; ctx.beginPath();
+            let x = Math.random() * cvs.width; ctx.moveTo(x, 0);
+            for(let i=0; i<10; i++) { x += (Math.random()-0.5)*120; ctx.lineTo(x, (cvs.height/10)*i); }
+            ctx.stroke(); ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(0, 132, 255, 0.02)'; ctx.fillRect(0,0,cvs.width, cvs.height);
         }
     }
-
     function draw() {
-        ctx.fillStyle = 'rgba(0,0,0,0.2)';
-        ctx.fillRect(0,0,cvs.width, cvs.height);
-        lightning();
+        ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(0,0,cvs.width, cvs.height); lightning();
         pts.forEach(p => {
-            p.x += p.vx; 
-            p.y += p.vy;
-            if(p.x<0 || p.x>cvs.width) p.vx *= -1;
-            if(p.y<0 || p.y>cvs.height) p.vy *= -1;
-            ctx.fillStyle = '#222';
-            ctx.beginPath(); 
-            ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2); 
-            ctx.fill();
+            p.x += p.vx; p.y += p.vy;
+            if(p.x<0 || p.x>cvs.width) p.vx *= -1; if(p.y<0 || p.y>cvs.height) p.vy *= -1;
+            ctx.fillStyle = '#222'; ctx.beginPath(); ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2); ctx.fill();
             let d = Math.hypot(m.x - p.x, m.y - p.y);
             if(d < 180) {
-                ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`;
-                ctx.lineWidth = 1;
-                ctx.beginPath(); 
-                ctx.moveTo(p.x, p.y); 
-                ctx.lineTo(m.x, m.y); 
-                ctx.stroke();
+                ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(m.x, m.y); ctx.stroke();
             }
         });
         requestAnimationFrame(draw);
     }
+    window.addEventListener('mousemove', e => { m.x = e.clientX; m.y = e.clientY; });
+    window.addEventListener('resize', () => { clearTimeout(window.resizeTimer); window.resizeTimer = setTimeout(init, 250); });
+    init(); draw();
 
-    window.addEventListener('mousemove', e => { 
-        m.x = e.clientX; 
-        m.y = e.clientY; 
-    });
-    
-    window.addEventListener('resize', () => {
-        clearTimeout(window.resizeTimer);
-        window.resizeTimer = setTimeout(init, 250);
-    });
-    
-    init(); 
-    draw();
-
-    const cards = document.querySelectorAll('.glass-card');
-    cards.forEach(c => {
+    // 3D tilt
+    document.querySelectorAll('.glass-card').forEach(c => {
         c.addEventListener('mousemove', e => {
             const r = c.getBoundingClientRect();
             const x = (e.clientX - r.left) - r.width/2;
             const y = (e.clientY - r.top) - r.height/2;
-            c.style.transform = `perspective(1000px) rotateY(${x / 40}deg) rotateX(${-y / 40}deg) scale(1.02)`;
+            c.style.transform = `perspective(1000px) rotateY(${x / 35}deg) rotateX(${-y / 35}deg) scale(1.02)`;
         });
-        c.addEventListener('mouseleave', () => {
-            c.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)`;
-        });
+        c.addEventListener('mouseleave', () => c.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)`);
     });
 
+    // Audio
     const tracks = [
         { name: "MIYAGI - BULLET", src: "https://example.com/track1.mp3" },
         { name: "MIYAGI - MINOR", src: "https://example.com/track2.mp3" },
         { name: "MIYAGI - CAPTAIN", src: "https://example.com/track3.mp3" }
     ];
-    
-    let cur = 0;
-    const aud = new Audio();
-    const pBtn = document.getElementById('play');
-    const tName = document.getElementById('track-name');
-    const vSli = document.getElementById('vol-slider');
+    let cur = 0, aud = new Audio(), pBtn = document.getElementById('play'), tName = document.getElementById('track-name'), vSli = document.getElementById('vol-slider');
+    function updateTrack() { aud.src = tracks[cur].src; tName.innerText = tracks[cur].name; if(!aud.paused) aud.play(); }
+    pBtn.onclick = () => { if(aud.paused) { aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; } else { aud.pause(); pBtn.innerHTML = '<i class="fas fa-play"></i>'; } };
+    vSli.oninput = (e) => { aud.volume = e.target.value; };
+    document.getElementById('next').onclick = () => { cur = (cur+1)%tracks.length; updateTrack(); aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; };
+    document.getElementById('prev').onclick = () => { cur = (cur-1+tracks.length)%tracks.length; updateTrack(); aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; };
 
-    function updateTrack() {
-        aud.src = tracks[cur].src;
-        tName.innerText = tracks[cur].name;
-        if(!aud.paused) aud.play();
-    }
-
-    pBtn.onclick = () => {
-        if(aud.paused) { 
-            aud.play(); 
-            pBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
-        }
-        else { 
-            aud.pause(); 
-            pBtn.innerHTML = '<i class="fas fa-play"></i>'; 
-        }
-    };
-
-    vSli.oninput = (e) => { 
-        aud.volume = e.target.value; 
-    };
-
-    document.getElementById('next').onclick = () => { 
-        cur = (cur + 1) % tracks.length; 
-        updateTrack(); 
-        aud.play(); 
-        pBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
-    };
-    
-    document.getElementById('prev').onclick = () => { 
-        cur = (cur - 1 + tracks.length) % tracks.length; 
-        updateTrack(); 
-        aud.play(); 
-        pBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
-    };
+    // Theme toggle
     const themeToggle = document.getElementById('theme-toggle');
-    const isDarkMode = localStorage.getItem('darkMode') !== 'false';
-    
-    if (!isDarkMode) {
-        document.body.classList.add('light-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-
+    if (localStorage.getItem('darkMode') === 'false') { document.body.classList.add('light-mode'); themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; }
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('light-mode');
         const isLight = document.body.classList.contains('light-mode');
@@ -993,29 +567,29 @@
         localStorage.setItem('darkMode', !isLight);
     });
 
+    // Language switcher
     const langEN = {
-        'about': 'About', 'projects': 'Projects', 'skills': 'Skills', 'contact': 'Contact',
-        'hero-title': 'Code & ', 'hero-desc': '16 years old. Full-Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.',
-        'devTitle': 'Development', 'devDesc': 'Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.',
-        'mcTitle': 'Minecraft Tech', 'mcDesc': 'Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.',
-        'featured': 'Featured', 'projects': 'Projects',
-        'project1Title': 'Portfolio Website', 'project1Desc': 'Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.',
-        'project2Title': 'Python Automation Tools', 'project2Desc': 'Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.',
-        'project3Title': 'Server Configuration Kit', 'project3Desc': 'Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.',
-        'live': 'Live', 'private': 'Private'
+        'about':'About','projects':'Projects','skills':'Skills','contact':'Contact',
+        'hero-title':'Code & ','hero-desc':'16 years old. Full-Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.',
+        'devTitle':'Development','devDesc':'Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.',
+        'mcTitle':'Minecraft Tech','mcDesc':'Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.',
+        'featured':'Featured','projects':'Projects',
+        'project1Title':'Portfolio Website','project1Desc':'Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.',
+        'project2Title':'Python Automation Tools','project2Desc':'Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.',
+        'project3Title':'Server Configuration Kit','project3Desc':'Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.',
+        'live':'Live','private':'Private'
     };
     const langRU = {
-        'about': 'Обо мне', 'projects': 'Проекты', 'skills': 'Навыки', 'contact': 'Контакты',
-        'hero-title': 'Код и ', 'hero-desc': '16 лет. Full-Stack разработчик, специализирующийся на адаптивном веб-дизайне, автоматизации на Python и настройке серверов Minecraft. Увлечен созданием элегантных решений и бесшовного пользовательского опыта.',
-        'devTitle': 'Разработка', 'devDesc': 'Создание современных адаптивных сайтов и веб-приложений с использованием передовых технологий. Ориентация на чистый код, оптимизацию производительности и пользовательский дизайн.',
-        'mcTitle': 'Minecraft Технологии', 'mcDesc': 'Экспертная настройка серверов, разработка плагинов и оптимизация систем. Опыт работы со сложными конфигурациями, настройкой производительности и управлением сообществом.',
-        'featured': 'Избранные', 'projects': 'Проекты',
-        'project1Title': 'Сайт-портфолио', 'project1Desc': 'Современное адаптивное портфолио с интерактивными анимациями, переключением тем и плавной прокруткой. Создано с Bootstrap 5 и ванильным JavaScript.',
-        'project2Title': 'Инструменты автоматизации Python', 'project2Desc': 'Утилиты для автоматизации задач, обработки данных и управления системой. Включает CLI-инструменты и планировщики для эффективной работы.',
-        'project3Title': 'Набор конфигураций сервера', 'project3Desc': 'Комплексный пакет настройки сервера Minecraft с оптимизированными конфигурациями, рекомендациями плагинов и руководствами по производительности.',
-        'live': 'Демо', 'private': 'Приватно'
+        'about':'Обо мне','projects':'Проекты','skills':'Навыки','contact':'Контакты',
+        'hero-title':'Код и ','hero-desc':'16 лет. Full-Stack разработчик, специализирующийся на адаптивном веб-дизайне, автоматизации на Python и настройке серверов Minecraft. Увлечен созданием элегантных решений.',
+        'devTitle':'Разработка','devDesc':'Создание современных адаптивных сайтов и веб-приложений с использованием передовых технологий. Ориентация на чистый код, оптимизацию производительности и пользовательский дизайн.',
+        'mcTitle':'Minecraft Технологии','mcDesc':'Экспертная настройка серверов, разработка плагинов и оптимизация систем. Опыт работы со сложными конфигурациями и управлением сообществом.',
+        'featured':'Избранные','projects':'Проекты',
+        'project1Title':'Сайт-портфолио','project1Desc':'Современное адаптивное портфолио с интерактивными анимациями, переключением тем и плавной прокруткой. Создано с Bootstrap 5 и ванильным JavaScript.',
+        'project2Title':'Инструменты автоматизации Python','project2Desc':'Утилиты для автоматизации задач, обработки данных и управления системой. Включает CLI-инструменты и планировщики для эффективной работы.',
+        'project3Title':'Набор конфигураций сервера','project3Desc':'Комплексный пакет настройки сервера Minecraft с оптимизированными конфигурациями, рекомендациями плагинов и руководствами по производительности.',
+        'live':'Демо','private':'Приватно'
     };
-
     function setLanguage(lang) {
         const dict = lang === 'ru' ? langRU : langEN;
         document.querySelectorAll('[data-key]').forEach(el => {
@@ -1031,75 +605,28 @@
         });
         document.getElementById('hero-desc').innerText = dict['hero-desc'];
         const navItems = document.querySelectorAll('.nav-link');
-        if (navItems.length >= 4) {
-            navItems[0].innerText = dict['about'];
-            navItems[1].innerText = dict['projects'];
-            navItems[2].innerText = dict['skills'];
-            navItems[3].innerText = dict['contact'];
-        }
-        document.querySelectorAll('.lang-option').forEach(opt => {
-            opt.classList.toggle('active', opt.dataset.lang === lang);
-        });
+        if (navItems.length >=4) { navItems[0].innerText=dict['about']; navItems[1].innerText=dict['projects']; navItems[2].innerText=dict['skills']; navItems[3].innerText=dict['contact']; }
+        document.querySelectorAll('.lang-option').forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
         localStorage.setItem('preferredLang', lang);
     }
+    document.querySelectorAll('.lang-option').forEach(opt => opt.addEventListener('click', e => setLanguage(e.target.dataset.lang)));
+    setLanguage(localStorage.getItem('preferredLang') || 'en');
 
-    document.querySelectorAll('.lang-option').forEach(opt => {
-        opt.addEventListener('click', (e) => {
-            setLanguage(e.target.dataset.lang);
-        });
-    });
-
-    const savedLang = localStorage.getItem('preferredLang') || 'en';
-    setLanguage(savedLang);
-
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
-
+    // Contact form
+    const contactForm = document.getElementById('contact-form'), formStatus = document.getElementById('form-status');
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-
-        formStatus.textContent = 'Sending...';
-        formStatus.className = 'form-status';
-
+        const name = document.getElementById('name').value, email = document.getElementById('email').value, message = document.getElementById('message').value;
+        formStatus.textContent = 'Sending...'; formStatus.className = 'form-status';
         try {
             await new Promise(resolve => setTimeout(resolve, 1200));
-            
             formStatus.textContent = `✓ Message sent successfully to niyatjon1228@gmail.com! I'll get back to you soon.`;
             formStatus.className = 'form-status success';
             contactForm.reset();
-            
-            setTimeout(() => {
-                formStatus.className = 'form-status';
-            }, 5000);
-        } catch (error) {
-            formStatus.textContent = '✗ Error sending message. Please try again.';
-            formStatus.className = 'form-status error';
-        }
+            setTimeout(() => formStatus.className = 'form-status', 5000);
+        } catch { formStatus.textContent = '✗ Error sending message.'; formStatus.className = 'form-status error'; }
     });
-
-    window.revealEmail = function() {
-        document.querySelector('.obfuscated-email').style.display = 'none';
-        document.getElementById('real-email').style.display = 'block';
-    };
-
-    const skillBars = document.querySelectorAll('.skill-fill');
-    const skillObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = 'none';
-                setTimeout(() => {
-                    entry.target.style.animation = 'slideIn 1.5s ease forwards';
-                }, 100);
-                skillObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    skillBars.forEach(bar => skillObserver.observe(bar));
+    window.revealEmail = function() { document.querySelector('.obfuscated-email').style.display='none'; document.getElementById('real-email').style.display='block'; };
 </script>
-
 </body>
 </html>
