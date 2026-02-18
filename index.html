@@ -60,6 +60,34 @@
             border-color: rgba(0, 0, 0, 0.1);
         }
         
+        body.light-mode .nav-links a {
+            color: #000;
+        }
+
+        body.light-mode .player-controls {
+            background: rgba(200,200,200,0.2);
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        body.light-mode .p-btn,
+        body.light-mode .theme-toggle {
+            color: #000;
+        }
+
+        body.light-mode .form-control-dark {
+            background: rgba(0,0,0,0.05) !important;
+            border: 1px solid rgba(0,0,0,0.1) !important;
+            color: #000 !important;
+        }
+
+        body.light-mode .form-control-dark::placeholder {
+            color: #777;
+        }
+
+        body.light-mode .skill-card {
+            background: rgba(0,0,0,0.02);
+        }
+
         #canvas { 
             position: fixed; 
             top: 0; 
@@ -116,6 +144,8 @@
             display: flex;
             gap: 25px;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-links a {
@@ -124,6 +154,7 @@
             font-size: 0.9rem;
             position: relative;
             transition: color var(--transition);
+            cursor: pointer;
         }
 
         .nav-links a:hover {
@@ -143,6 +174,39 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,77,0,0.15);
+        }
+
+        .lang-option {
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 20px;
+            transition: var(--transition);
+            color: rgba(255,255,255,0.5);
+            font-family: 'JetBrains Mono';
+        }
+
+        .lang-option.active {
+            color: var(--accent);
+            background: rgba(255,77,0,0.15);
+        }
+
+        body.light-mode .lang-option {
+            color: rgba(0,0,0,0.5);
+        }
+        body.light-mode .lang-option.active {
+            color: var(--accent);
+            background: rgba(255,77,0,0.15);
         }
 
         .player-controls { 
@@ -290,12 +354,11 @@
             padding: 40px; 
             height: 100%; 
             backdrop-filter: blur(15px);
-            transition: transform 0.7s cubic-bezier(0.2, 1, 0.2, 1), 
-                        border-color var(--transition),
-                        box-shadow var(--transition);
+            transition: transform 0.2s ease-out, border-color var(--transition), box-shadow var(--transition);
             transform-style: preserve-3d;
             animation: fadeInUp 0.8s ease forwards;
             opacity: 0;
+            will-change: transform;
         }
         
         .glass-card:hover { 
@@ -356,6 +419,7 @@
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: var(--r);
             transition: var(--transition);
+            height: 100%;
         }
 
         .skill-card:hover {
@@ -479,6 +543,24 @@
             display: block;
         }
 
+        .obfuscated-email {
+            font-family: 'JetBrains Mono';
+            font-size: 0.9rem;
+            background: rgba(255,77,0,0.1);
+            padding: 6px 12px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 1px dashed var(--accent);
+            cursor: pointer;
+            transition: var(--transition);
+            word-break: break-all;
+        }
+
+        .obfuscated-email:hover {
+            background: rgba(255,77,0,0.2);
+            letter-spacing: 0.5px;
+        }
+
         footer { 
             padding: 40px; 
             text-align: center; 
@@ -515,6 +597,10 @@
             border-color: var(--accent);
             background: rgba(255,77,0,0.1);
             transform: translateY(-3px);
+        }
+
+        .row.g-4 {
+            align-items: stretch;
         }
 
         @keyframes float { 
@@ -555,21 +641,6 @@
             }
         }
 
-        @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(255,77,0,0.3);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(255,77,0,0.6);
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .nav-center { gap: 20px; }
-            .nav-links { gap: 15px; }
-            .nav-links a { font-size: 0.8rem; }
-        }
-
         @media (max-width: 768px) {
             .nav-box { padding: 8px 15px; width: 98%; }
             .nav-center { display: none; }
@@ -581,23 +652,8 @@
             section { padding: 60px 0; }
         }
 
-        @media (max-width: 480px) {
-            .badge-item { padding: 4px 10px; font-size: 10px; }
-            .glass-card { padding: 20px; }
-            .mc-item { width: 30px; height: 30px; }
-            .nav-logo { font-size: 0.95rem; }
-            .hero-h { font-size: clamp(1.5rem, 5vw, 2.8rem); }
-            .stack-badges { margin-top: 15px; }
-            .player-controls { padding: 4px 10px; }
-            #track-name { width: 70px; font-size: 7px; }
-            section { padding: 40px 0; }
-        }
-
         .container { max-width: 1100px; }
         .text-secondary { color: #888; transition: var(--transition); }
-        .mb-4 { margin-bottom: 2rem !important; }
-        .mt-4 { margin-top: 2rem !important; }
-        .mt-3 { margin-top: 1.5rem !important; }
     </style>
 </head>
 <body>
@@ -608,12 +664,16 @@
     <a href="#home" class="nav-logo">KRAS</a>
     
     <div class="nav-center d-none d-lg-flex">
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <ul class="nav-links" id="nav-links-container">
+            <li><a class="nav-link" data-key="about">About</a></li>
+            <li><a class="nav-link" data-key="projects">Projects</a></li>
+            <li><a class="nav-link" data-key="skills">Skills</a></li>
+            <li><a class="nav-link" data-key="contact">Contact</a></li>
         </ul>
+        <div class="lang-switch">
+            <span class="lang-option active" data-lang="en">EN</span>
+            <span class="lang-option" data-lang="ru">RU</span>
+        </div>
     </div>
     
     <div class="player-controls">
@@ -634,8 +694,8 @@
     <div class="row">
         <div class="col-lg-10">
             <div class="mc-item mb-4"><div class="mc-o"></div></div>
-            <h1 class="hero-h">Code & <span style="color:var(--accent)">Blocks.</span></h1>
-            <p class="hero-p fs-5 text-secondary">
+            <h1 class="hero-h" id="hero-title">Code & <span style="color:var(--accent)">Blocks.</span></h1>
+            <p class="hero-p fs-5 text-secondary" id="hero-desc">
                 16 years old. Full-Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.
             </p>
             <div class="stack-badges">
@@ -649,12 +709,13 @@
         </div>
     </div>
 </section>
+
 <section class="container" id="about">
     <div class="row g-4">
         <div class="col-md-6">
             <div class="glass-card">
-                <h3 class="mb-4"><i class="fas fa-code me-2" style="color: var(--accent);"></i>Development</h3>
-                <p class="text-secondary small">Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.</p>
+                <h3 class="mb-4"><i class="fas fa-code me-2" style="color: var(--accent);"></i><span data-key="devTitle">Development</span></h3>
+                <p class="text-secondary small" data-key="devDesc">Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.</p>
                 <div class="mt-4" style="color:var(--accent); font-size: 1.5rem;">
                     <i class="fab fa-html5 me-3" title="HTML5"></i>
                     <i class="fab fa-css3-alt me-3" title="CSS3"></i>
@@ -665,8 +726,8 @@
         </div>
         <div class="col-md-6">
             <div class="glass-card">
-                <h3 class="mb-4"><i class="fas fa-cube me-2" style="color: var(--accent);"></i>Minecraft Tech</h3>
-                <p class="text-secondary small">Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.</p>
+                <h3 class="mb-4"><i class="fas fa-cube me-2" style="color: var(--accent);"></i><span data-key="mcTitle">Minecraft Tech</span></h3>
+                <p class="text-secondary small" data-key="mcDesc">Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.</p>
                 <div class="mt-4" style="font-family: 'JetBrains Mono'; color: var(--accent); font-size: 0.8rem; letter-spacing: 2px;">
                     CONFIG // PLUGINS // OPTIMIZATION
                 </div>
@@ -678,26 +739,26 @@
 <section class="container" id="projects">
     <div class="row mb-5">
         <div class="col-lg-10">
-            <h2 class="hero-h mb-4">Featured <span style="color:var(--accent)">Projects</span></h2>
+            <h2 class="hero-h mb-4"><span data-key="featured">Featured</span> <span style="color:var(--accent)" data-key="projects">Projects</span></h2>
         </div>
     </div>
     <div class="row g-4">
         <div class="col-md-4">
             <div class="glass-card project-card">
                 <div class="project-badge">HTML5 • CSS3 • JavaScript</div>
-                <h4 class="mt-3">Portfolio Website</h4>
-                <p class="text-secondary small">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</p>
+                <h4 class="mt-3" data-key="project1Title">Portfolio Website</h4>
+                <p class="text-secondary small" data-key="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</p>
                 <div class="project-links mt-3">
                     <a href="https://github.com/kras1228" class="btn btn-sm btn-outline-warning" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
-                    <a href="#" class="btn btn-sm btn-outline-primary"><i class="fas fa-link me-1"></i>Live</a>
+                    <a href="#" class="btn btn-sm btn-outline-primary"><i class="fas fa-link me-1"></i><span data-key="live">Live</span></a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="glass-card project-card">
                 <div class="project-badge">Python • Automation</div>
-                <h4 class="mt-3">Python Automation Tools</h4>
-                <p class="text-secondary small">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.</p>
+                <h4 class="mt-3" data-key="project2Title">Python Automation Tools</h4>
+                <p class="text-secondary small" data-key="project2Desc">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.</p>
                 <div class="project-links mt-3">
                     <a href="https://github.com/kras1228" class="btn btn-sm btn-outline-warning" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
                 </div>
@@ -706,10 +767,10 @@
         <div class="col-md-4">
             <div class="glass-card project-card">
                 <div class="project-badge">Minecraft • Configuration</div>
-                <h4 class="mt-3">Server Configuration Kit</h4>
-                <p class="text-secondary small">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</p>
+                <h4 class="mt-3" data-key="project3Title">Server Configuration Kit</h4>
+                <p class="text-secondary small" data-key="project3Desc">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</p>
                 <div class="project-links mt-3">
-                    <a href="#" class="btn btn-sm btn-outline-warning disabled"><i class="fas fa-lock me-1"></i>Private</a>
+                    <a href="#" class="btn btn-sm btn-outline-warning disabled"><i class="fas fa-lock me-1"></i><span data-key="private">Private</span></a>
                 </div>
             </div>
         </div>
@@ -723,70 +784,14 @@
         </div>
     </div>
     <div class="row g-3">
-        <div class="col-md-3 col-sm-6">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-js-square"></i></div>
-                <h5>JavaScript</h5>
-                <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
-                <small class="text-secondary">85%</small>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-html5"></i></div>
-                <h5>HTML5</h5>
-                <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
-                <small class="text-secondary">90%</small>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
-                <h5>CSS3</h5>
-                <div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div>
-                <small class="text-secondary">88%</small>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-python"></i></div>
-                <h5>Python</h5>
-                <div class="skill-bar"><div class="skill-fill" style="width: 82%;"></div></div>
-                <small class="text-secondary">82%</small>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fab fa-bootstrap"></i></div>
-                <h5>Bootstrap</h5>
-                <div class="skill-bar"><div class="skill-fill" style="width: 87%;"></div></div>
-                <small class="text-secondary">87%</small>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fas fa-cube"></i></div>
-                <h5>Minecraft</h5>
-                <div class="skill-bar"><div class="skill-fill" style="width: 89%;"></div></div>
-                <small class="text-secondary">89%</small>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fas fa-server"></i></div>
-                <h5>Server Mgmt</h5>
-                <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
-                <small class="text-secondary">80%</small>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="skill-card">
-                <div class="skill-icon"><i class="fas fa-terminal"></i></div>
-                <h5>CLI/Git</h5>
-                <div class="skill-bar"><div class="skill-fill" style="width: 84%;"></div></div>
-                <small class="text-secondary">84%</small>
-            </div>
-        </div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-js-square"></i></div><h5>JavaScript</h5><div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div><small class="text-secondary">85%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-html5"></i></div><h5>HTML5</h5><div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div><small class="text-secondary">90%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h5>CSS3</h5><div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div><small class="text-secondary">88%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-python"></i></div><h5>Python</h5><div class="skill-bar"><div class="skill-fill" style="width: 82%;"></div></div><small class="text-secondary">82%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-bootstrap"></i></div><h5>Bootstrap</h5><div class="skill-bar"><div class="skill-fill" style="width: 87%;"></div></div><small class="text-secondary">87%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-cube"></i></div><h5>Minecraft</h5><div class="skill-bar"><div class="skill-fill" style="width: 89%;"></div></div><small class="text-secondary">89%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-server"></i></div><h5>Server Mgmt</h5><div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div><small class="text-secondary">80%</small></div></div>
+        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-terminal"></i></div><h5>CLI/Git</h5><div class="skill-bar"><div class="skill-fill" style="width: 84%;"></div></div><small class="text-secondary">84%</small></div></div>
     </div>
 </section>
 
@@ -810,11 +815,12 @@
                 </p>
                 <div class="mb-4">
                     <p class="text-secondary mb-2"><i class="fas fa-envelope me-2" style="color: var(--accent);"></i>Email</p>
-                    <p><a href="mailto:your.email@example.com" style="color: var(--accent); text-decoration: none;">niyatjon1228@gmail.com</a></p>
+                    <div class="obfuscated-email" onclick="revealEmail()">✻✻✻@gmail.com (click to reveal)</div>
+                    <p id="real-email" style="display: none;"><a href="mailto:niyatjon1228@gmail.com" style="color: var(--accent); text-decoration: none;">niyatjon1228@gmail.com</a></p>
                 </div>
                 <div class="mb-4">
                     <p class="text-secondary mb-2"><i class="fas fa-map-marker-alt me-2" style="color: var(--accent);"></i>Location</p>
-                    <p>In your home)</p>
+                    <p>In your home )</p>
                 </div>
                 <div>
                     <p class="text-secondary mb-2"><i class="fas fa-link me-2" style="color: var(--accent);"></i>Social</p>
@@ -833,21 +839,6 @@
     <p>© 2026 KRAS // SINCE DAY ONE</p>
     <p style="margin-top: 10px; font-size: 0.65rem; color: #555;">Designed & Built with <span style="color: var(--accent);">❤</span> | All Rights Reserved</p>
 </footer>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "KRAS",
-  "url": "https://kras-dev.com",
-  "jobTitle": "Full-Stack Developer",
-  "sameAs": [
-    "https://github.com/kras1228",
-    "https://t.me/pik_fra"
-  ],
-  "skills": ["HTML5", "CSS3", "JavaScript", "Python", "Bootstrap", "Minecraft"]
-}
-</script>
 
 <script>
     const cvs = document.getElementById('canvas');
@@ -934,10 +925,10 @@
             const r = c.getBoundingClientRect();
             const x = (e.clientX - r.left) - r.width/2;
             const y = (e.clientY - r.top) - r.height/2;
-            c.style.transform = `perspective(1000px) rotateY(${x / 35}deg) rotateX(${-y / 35}deg)`;
+            c.style.transform = `perspective(1000px) rotateY(${x / 40}deg) rotateX(${-y / 40}deg) scale(1.02)`;
         });
         c.addEventListener('mouseleave', () => {
-            c.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+            c.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)`;
         });
     });
 
@@ -1002,6 +993,65 @@
         localStorage.setItem('darkMode', !isLight);
     });
 
+    const langEN = {
+        'about': 'About', 'projects': 'Projects', 'skills': 'Skills', 'contact': 'Contact',
+        'hero-title': 'Code & ', 'hero-desc': '16 years old. Full-Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.',
+        'devTitle': 'Development', 'devDesc': 'Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.',
+        'mcTitle': 'Minecraft Tech', 'mcDesc': 'Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.',
+        'featured': 'Featured', 'projects': 'Projects',
+        'project1Title': 'Portfolio Website', 'project1Desc': 'Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.',
+        'project2Title': 'Python Automation Tools', 'project2Desc': 'Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.',
+        'project3Title': 'Server Configuration Kit', 'project3Desc': 'Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.',
+        'live': 'Live', 'private': 'Private'
+    };
+    const langRU = {
+        'about': 'Обо мне', 'projects': 'Проекты', 'skills': 'Навыки', 'contact': 'Контакты',
+        'hero-title': 'Код и ', 'hero-desc': '16 лет. Full-Stack разработчик, специализирующийся на адаптивном веб-дизайне, автоматизации на Python и настройке серверов Minecraft. Увлечен созданием элегантных решений и бесшовного пользовательского опыта.',
+        'devTitle': 'Разработка', 'devDesc': 'Создание современных адаптивных сайтов и веб-приложений с использованием передовых технологий. Ориентация на чистый код, оптимизацию производительности и пользовательский дизайн.',
+        'mcTitle': 'Minecraft Технологии', 'mcDesc': 'Экспертная настройка серверов, разработка плагинов и оптимизация систем. Опыт работы со сложными конфигурациями, настройкой производительности и управлением сообществом.',
+        'featured': 'Избранные', 'projects': 'Проекты',
+        'project1Title': 'Сайт-портфолио', 'project1Desc': 'Современное адаптивное портфолио с интерактивными анимациями, переключением тем и плавной прокруткой. Создано с Bootstrap 5 и ванильным JavaScript.',
+        'project2Title': 'Инструменты автоматизации Python', 'project2Desc': 'Утилиты для автоматизации задач, обработки данных и управления системой. Включает CLI-инструменты и планировщики для эффективной работы.',
+        'project3Title': 'Набор конфигураций сервера', 'project3Desc': 'Комплексный пакет настройки сервера Minecraft с оптимизированными конфигурациями, рекомендациями плагинов и руководствами по производительности.',
+        'live': 'Демо', 'private': 'Приватно'
+    };
+
+    function setLanguage(lang) {
+        const dict = lang === 'ru' ? langRU : langEN;
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (dict[key]) {
+                if (el.tagName === 'SPAN' && key === 'hero-title') {
+                    document.getElementById('hero-title').innerHTML = `Code & <span style="color:var(--accent)">Blocks.</span>`;
+                    if (lang === 'ru') document.getElementById('hero-title').innerHTML = `Код и <span style="color:var(--accent)">Блоки.</span>`;
+                } else {
+                    el.innerText = dict[key];
+                }
+            }
+        });
+        document.getElementById('hero-desc').innerText = dict['hero-desc'];
+        const navItems = document.querySelectorAll('.nav-link');
+        if (navItems.length >= 4) {
+            navItems[0].innerText = dict['about'];
+            navItems[1].innerText = dict['projects'];
+            navItems[2].innerText = dict['skills'];
+            navItems[3].innerText = dict['contact'];
+        }
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.lang === lang);
+        });
+        localStorage.setItem('preferredLang', lang);
+    }
+
+    document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+            setLanguage(e.target.dataset.lang);
+        });
+    });
+
+    const savedLang = localStorage.getItem('preferredLang') || 'en';
+    setLanguage(savedLang);
+
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
 
@@ -1016,9 +1066,9 @@
         formStatus.className = 'form-status';
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 1200));
             
-            formStatus.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+            formStatus.textContent = `✓ Message sent successfully to niyatjon1228@gmail.com! I'll get back to you soon.`;
             formStatus.className = 'form-status success';
             contactForm.reset();
             
@@ -1031,25 +1081,10 @@
         }
     });
 
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+    window.revealEmail = function() {
+        document.querySelector('.obfuscated-email').style.display = 'none';
+        document.getElementById('real-email').style.display = 'block';
     };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                const delay = index * 0.1;
-                entry.target.style.animationDelay = `${delay}s`;
-                entry.target.style.opacity = '1';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.glass-card, .hero-p, .hero-h, .stack-badges').forEach(el => {
-        observer.observe(el);
-    });
 
     const skillBars = document.querySelectorAll('.skill-fill');
     const skillObserver = new IntersectionObserver((entries) => {
@@ -1063,7 +1098,6 @@
             }
         });
     }, { threshold: 0.5 });
-
     skillBars.forEach(bar => skillObserver.observe(bar));
 </script>
 
