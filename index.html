@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRAS // MULTI-DEV</title>
+    <title>KRAS // OFFICIAL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,119 +13,119 @@
             --bg: #000; 
             --text: #fff;
             --card-bg: rgba(255,255,255,0.02);
-            --border: rgba(255,255,255,0.08);
+            --border: rgba(255,255,255,0.1);
             --radius: 25px; 
         }
 
         body.light-mode {
-            --bg: #f5f5f5;
-            --text: #111;
-            --card-bg: rgba(0,0,0,0.03);
-            --border: rgba(0,0,0,0.1);
+            --bg: #f0f0f0; --text: #111; --card-bg: rgba(0,0,0,0.05); --border: rgba(0,0,0,0.1);
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; transition: background 0.3s, color 0.3s; }
-        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; transition: background 0.4s; }
         
         #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        .nav-box {
-            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
-            width: 95%; max-width: 1300px;
+        /* Навбар */
+        .nav-custom {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 95%; max-width: 1200px;
             background: rgba(255,255,255,0.05); backdrop-filter: blur(20px);
             border: 1px solid var(--border); border-radius: 60px;
-            padding: 8px 20px; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 25px; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
         }
 
-        .player-controls { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 40px; }
-        .p-btn { background: none; border: none; color: var(--text); cursor: pointer; font-size: 0.8rem; }
-        
-        .settings-btns { display: flex; gap: 10px; align-items: center; }
-        .btn-ui { background: var(--card-bg); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; border-radius: 20px; font-size: 11px; cursor: pointer; font-family: 'JetBrains Mono'; }
-        .btn-ui:hover { border-color: var(--accent); }
+        /* Плеер в Навбаре */
+        .player-controls { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 40px; border: 1px solid var(--accent); }
+        .p-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
+        .p-btn:hover { color: var(--accent); }
+        .vol-slider { width: 50px; accent-color: var(--accent); cursor: pointer; }
 
-        section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
+        /* Секции */
+        section { min-height: 100vh; display: flex; align-items: center; padding: 120px 0; }
 
-        .card-3d-wrap { perspective: 1000px; height: 100%; }
+        /* 3D Карточки */
+        .card-3d-wrap { perspective: 1200px; height: 100%; }
         .glass-card {
             background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 35px; height: 100%; backdrop-filter: blur(10px);
+            border-radius: var(--radius); padding: 40px; height: 100%; backdrop-filter: blur(15px);
             transition: transform 0.6s cubic-bezier(0.2, 1, 0.2, 1); transform-style: preserve-3d;
         }
         .glass-card:hover { border-color: var(--accent); }
 
-        .skill-item { margin-bottom: 20px; }
-        .skill-header { display: flex; justify-content: space-between; font-family: 'JetBrains Mono'; font-size: 12px; margin-bottom: 5px; }
-        .progress-bar-bg { background: rgba(255,255,255,0.05); height: 6px; border-radius: 10px; overflow: hidden; }
-        .progress-fill { 
-            background: var(--accent); height: 100%; width: 0; 
-            transition: width 2s ease-out; box-shadow: 0 0 10px var(--accent);
-        }
+        /* Тех Стек */
+        .skill-box { margin-bottom: 25px; }
+        .skill-info { display: flex; justify-content: space-between; font-family: 'JetBrains Mono'; font-size: 13px; margin-bottom: 8px; }
+        .progress-bg { background: rgba(255,255,255,0.05); height: 8px; border-radius: 10px; overflow: hidden; }
+        .progress-in { background: var(--accent); height: 100%; width: 0; transition: width 2s ease-in-out; box-shadow: 0 0 15px var(--accent); }
 
-        .contact-form input, .contact-form textarea {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 15px; padding: 12px; width: 100%; color: var(--text); margin-bottom: 15px;
-        }
-        .submit-btn { background: var(--accent); color: #fff; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; width: 100%; }
+        /* Форма */
+        .c-input { background: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; padding: 15px; width: 100%; color: var(--text); margin-bottom: 15px; outline: none; }
+        .c-input:focus { border-color: var(--accent); }
+        .send-btn { background: var(--accent); color: #fff; border: none; padding: 15px; border-radius: 50px; font-weight: bold; width: 100%; transition: 0.3s; }
+        .send-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(255,77,0,0.4); }
 
-        footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem; font-family: 'JetBrains Mono'; }
+        .mc-block { width: 35px; height: 35px; background: #222; box-shadow: inset -4px -4px 0 #000, inset 4px 4px 0 #444; position: relative; display: inline-block; animation: float 3s infinite ease-in-out; }
+        .mc-ore { position: absolute; top: 8px; left: 8px; width: 6px; height: 6px; background: #00fbff; box-shadow: 12px 10px 0 #00fbff, 4px 16px 0 #00fbff; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        .btn-ui { background: var(--card-bg); border: 1px solid var(--border); color: var(--text); padding: 6px 15px; border-radius: 30px; font-size: 12px; cursor: pointer; font-family: 'JetBrains Mono'; text-decoration: none; }
     </style>
 </head>
 <body class="dark-mode">
 
 <canvas id="canvas"></canvas>
 
-<nav class="nav-box">
-    <div class="settings-btns">
+<nav class="nav-custom">
+    <div class="d-flex gap-2">
         <button class="btn-ui" onclick="toggleLang()" id="langBtn">EN</button>
         <button class="btn-ui" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
     </div>
-    
-    <div class="player-controls d-none d-lg-flex">
+
+    <div class="player-controls">
         <button class="p-btn" id="prev"><i class="fas fa-backward"></i></button>
         <button class="p-btn" id="play"><i class="fas fa-play"></i></button>
         <button class="p-btn" id="next"><i class="fas fa-forward"></i></button>
-        <div id="track-name" style="font-size: 9px; width: 100px; overflow: hidden;">MIYAGI - BULLET</div>
+        <div id="track-name" style="font-family:'JetBrains Mono'; font-size: 10px; width: 100px; overflow:hidden; white-space:nowrap;">MIYAGI - BULLET</div>
+        <input type="range" id="vol" class="vol-slider" min="0" max="1" step="0.1" value="0.5">
     </div>
 
-    <a href="https://t.me/pik_fra" class="btn-ui" style="text-decoration: none;">TG</a>
+    <a href="https://t.me/pik_fra" class="btn-ui">TG</a>
 </nav>
 
 <section class="container">
     <div class="row">
         <div class="col-lg-10">
-            <p style="color:var(--accent); font-family: 'JetBrains Mono'; letter-spacing: 4px;" id="locText">Location: У тебя дома)</p>
-            <h1 class="display-1 fw-bold mb-4" id="heroTitle">Code & Blocks.</h1>
-            <p class="text-secondary fs-5" id="heroSub">16 years old. Programming reality and building worlds.</p>
+            <div class="mc-block mb-4"><div class="mc-ore"></div></div>
+            <p id="locText" style="color:var(--accent); font-family:'JetBrains Mono'; letter-spacing:2px;">Location: У тебя дома)</p>
+            <h1 class="display-1 fw-bold mb-3" id="heroTitle">Code & <span style="color:var(--accent)">Blocks.</span></h1>
+            <p class="text-secondary fs-5" id="heroSub" style="max-width: 600px;">16 лет. Программирую реальность, настраиваю плагины и создаю уникальные миры.</p>
         </div>
     </div>
 </section>
 
-<section class="container" id="skills">
-    <div class="row g-5 align-items-center">
+<section class="container">
+    <div class="row g-5">
         <div class="col-lg-6">
             <h2 class="mb-5 fw-bold" id="stackTitle">Tech Stack</h2>
-            
-            <div class="skill-item">
-                <div class="skill-header"><span>PYTHON</span><span>90%</span></div>
-                <div class="progress-bar-bg"><div class="progress-fill" style="width: 90%;"></div></div>
+            <div class="skill-box">
+                <div class="skill-info"><span>PYTHON</span><span>90%</span></div>
+                <div class="progress-bg"><div class="progress-in" style="width: 90%;"></div></div>
             </div>
-            <div class="skill-item">
-                <div class="skill-header"><span>JAVASCRIPT</span><span>80%</span></div>
-                <div class="progress-bar-bg"><div class="progress-fill" style="width: 80%;"></div></div>
+            <div class="skill-box">
+                <div class="skill-info"><span>HTML/CSS/BOOTSTRAP</span><span>95%</span></div>
+                <div class="progress-bg"><div class="progress-in" style="width: 95%;"></div></div>
             </div>
-            <div class="skill-item">
-                <div class="skill-header"><span>HTML/CSS</span><span>95%</span></div>
-                <div class="progress-bar-bg"><div class="progress-fill" style="width: 95%;"></div></div>
+            <div class="skill-box">
+                <div class="skill-info"><span>JAVASCRIPT</span><span>80%</span></div>
+                <div class="progress-bg"><div class="progress-in" style="width: 80%;"></div></div>
             </div>
         </div>
-        
-        <div class="col-lg-6">
-            <div class="card-3d-wrap">
-                <div class="glass-card tilt">
-                    <h3 id="mcTitle">Minecraft Tech</h3>
-                    <p class="text-secondary" id="mcDesc">Гибкая настройка серверов и плагинов. Оптимизация и создание уникального опыта.</p>
-                </div>
+        <div class="col-lg-6 card-3d-wrap">
+            <div class="glass-card tilt">
+                <h3 id="mcTitle">Minecraft Tech</h3>
+                <p class="text-secondary mt-3" id="mcDesc">Гибкая настройка серверов и плагинов. Оптимизация систем любой сложности и создание игровых механик.</p>
+                <div class="mt-4" style="color:var(--accent); font-family:'JetBrains Mono'; font-size: 12px;">CONFIG // PLUGINS // OPTIMIZE</div>
             </div>
         </div>
     </div>
@@ -133,102 +133,105 @@
 
 <section class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-6 glass-card tilt">
-            <h2 class="mb-4 text-center" id="contactTitle">Contact Me</h2>
-            <form action="https://formspree.io/f/niyatjon1228@gmail.com" method="POST" class="contact-form">
-                <input type="text" name="name" placeholder="Name" required id="pName">
-                <input type="email" name="email" placeholder="Email" required id="pEmail">
-                <textarea name="message" rows="4" placeholder="Message" required id="pMsg"></textarea>
-                <button type="submit" class="submit-btn" id="sendBtn">SEND</button>
-            </form>
+        <div class="col-lg-6 card-3d-wrap">
+            <div class="glass-card tilt text-center">
+                <h2 class="mb-4 fw-bold" id="contactTitle">Contact Me</h2>
+                <form action="https://formspree.io/f/niyatjon1228@gmail.com" method="POST">
+                    <input type="text" name="name" class="c-input" placeholder="Имя" required id="pName">
+                    <input type="email" name="email" class="c-input" placeholder="Почта" required id="pEmail">
+                    <textarea name="message" class="c-input" rows="4" placeholder="Сообщение" required id="pMsg"></textarea>
+                    <button type="submit" class="send-btn" id="sendBtn">ОТПРАВИТЬ</button>
+                </form>
+            </div>
         </div>
     </div>
 </section>
 
-<footer>
-    <p>© 2026 KRAS // SINCE DAY ONE</p>
+<footer class="container pb-5">
+    <hr style="opacity:0.1;">
+    <p class="text-center mt-4" style="font-family:'JetBrains Mono'; font-size:12px; opacity:0.5;">© 2026 KRAS // SINCE DAY ONE</p>
 </footer>
 
 <script>
+    // --- ТЕМА ---
     function toggleTheme() {
         document.body.classList.toggle('light-mode');
-        const icon = document.querySelector('.btn-ui i');
-        icon.classList.toggle('fa-moon');
-        icon.classList.toggle('fa-sun');
     }
 
-    let currentLang = 'RU';
-    const translations = {
+    // --- ЯЗЫКИ ---
+    let curLang = 'RU';
+    const langData = {
         RU: {
-            loc: "Location: У тебя дома)",
-            hero: "Code & Blocks.",
-            sub: "16 лет. Программирую реальность и создаю миры.",
-            stack: "Технологии",
-            mc: "Minecraft Технологии",
-            mcd: "Гибкая настройка серверов и плагинов. Оптимизация систем.",
-            contact: "Написать мне",
-            pname: "Имя", pemail: "Почта", pmsg: "Сообщение", send: "ОТПРАВИТЬ"
+            loc: "Location: У тебя дома)", hero: "Code & Blocks.", sub: "16 лет. Программирую реальность, настраиваю плагины и создаю уникальные миры.",
+            stack: "Технологии", mc: "Minecraft Технологии", mcd: "Гибкая настройка серверов и плагинов. Оптимизация систем любой сложности.",
+            contact: "Написать мне", pname: "Имя", pemail: "Почта", pmsg: "Сообщение", send: "ОТПРАВИТЬ"
         },
         EN: {
-            loc: "Location: Inside your house)",
-            hero: "Code & Blocks.",
-            sub: "16 years old. Programming reality and building worlds.",
-            stack: "Tech Stack",
-            mc: "Minecraft Tech",
-            mcd: "Flexible server and plugin configuration. System optimization.",
-            contact: "Contact Me",
-            pname: "Name", pemail: "Email", pmsg: "Message", send: "SEND"
+            loc: "Location: Inside your house)", hero: "Code & Blocks.", sub: "16 years old. Programming reality, configuring plugins and creating worlds.",
+            stack: "Tech Stack", mc: "Minecraft Tech", mcd: "Flexible server and plugin configuration. Optimization of any complexity.",
+            contact: "Contact Me", pname: "Name", pemail: "Email", pmsg: "Message", send: "SEND"
         }
     };
 
     function toggleLang() {
-        currentLang = currentLang === 'RU' ? 'EN' : 'RU';
-        document.getElementById('langBtn').innerText = currentLang === 'RU' ? 'EN' : 'RU';
-        const t = translations[currentLang];
-        document.getElementById('locText').innerText = t.loc;
-        document.getElementById('heroTitle').innerText = t.hero;
-        document.getElementById('heroSub').innerText = t.sub;
-        document.getElementById('stackTitle').innerText = t.stack;
-        document.getElementById('mcTitle').innerText = t.mc;
-        document.getElementById('mcDesc').innerText = t.mcd;
-        document.getElementById('contactTitle').innerText = t.contact;
-        document.getElementById('pName').placeholder = t.pname;
-        document.getElementById('pEmail').placeholder = t.pemail;
-        document.getElementById('pMsg').placeholder = t.pmsg;
-        document.getElementById('sendBtn').innerText = t.send;
+        curLang = curLang === 'RU' ? 'EN' : 'RU';
+        document.getElementById('langBtn').innerText = curLang === 'RU' ? 'EN' : 'RU';
+        const d = langData[curLang];
+        document.getElementById('locText').innerText = d.loc;
+        document.getElementById('heroTitle').innerHTML = curLang === 'RU' ? 'Code & <span style="color:var(--accent)">Blocks.</span>' : 'Code & <span style="color:var(--accent)">Blocks.</span>';
+        document.getElementById('heroSub').innerText = d.sub;
+        document.getElementById('stackTitle').innerText = d.stack;
+        document.getElementById('mcTitle').innerText = d.mc;
+        document.getElementById('mcDesc').innerText = d.mcd;
+        document.getElementById('contactTitle').innerText = d.contact;
+        document.getElementById('pName').placeholder = d.pname;
+        document.getElementById('pEmail').placeholder = d.pemail;
+        document.getElementById('pMsg').placeholder = d.pmsg;
+        document.getElementById('sendBtn').innerText = d.send;
     }
 
+    // --- ФОН (Оранжевые связи + Молнии) ---
     const cvs = document.getElementById('canvas');
     const ctx = cvs.getContext('2d');
     let pts = [];
-    const m = { x: -100, y: -100 };
+    const mouse = { x: -100, y: -100 };
+
     function init() {
         cvs.width = window.innerWidth; cvs.height = window.innerHeight;
         pts = [];
-        for(let i=0; i<80; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
+        for(let i=0; i<80; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*0.6, vy: (Math.random()-0.5)*0.6 });
     }
+
     function draw() {
-        ctx.fillStyle = document.body.classList.contains('light-mode') ? 'rgba(245,245,245,0.2)' : 'rgba(0,0,0,0.2)';
+        ctx.fillStyle = document.body.classList.contains('light-mode') ? 'rgba(240,240,240,0.2)' : 'rgba(0,0,0,0.2)';
         ctx.fillRect(0,0,cvs.width, cvs.height);
+
+        // Молнии
         if(Math.random() > 0.985) {
             ctx.strokeStyle = '#0084ff'; ctx.lineWidth = 2; ctx.beginPath();
-            let x = Math.random()*cvs.width; ctx.moveTo(x, 0);
-            for(let i=0; i<10; i++) { x += (Math.random()-0.5)*100; ctx.lineTo(x, (cvs.height/10)*i); }
+            let lx = Math.random()*cvs.width; ctx.moveTo(lx, 0);
+            for(let i=0; i<10; i++) { lx += (Math.random()-0.5)*100; ctx.lineTo(lx, (cvs.height/10)*i); }
             ctx.stroke();
         }
+
+        // Связи
         pts.forEach(p => {
             p.x += p.vx; p.y += p.vy;
             if(p.x<0 || p.x>cvs.width) p.vx *= -1; if(p.y<0 || p.y>cvs.height) p.vy *= -1;
             ctx.fillStyle = '#444'; ctx.beginPath(); ctx.arc(p.x, p.y, 1, 0, Math.PI*2); ctx.fill();
-            let d = Math.hypot(m.x - p.x, m.y - p.y);
-            if(d < 180) { ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(m.x, m.y); ctx.stroke(); }
+            let d = Math.hypot(mouse.x - p.x, mouse.y - p.y);
+            if(d < 180) {
+                ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`;
+                ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+            }
         });
         requestAnimationFrame(draw);
     }
-    window.addEventListener('mousemove', e => { m.x = e.clientX; m.y = e.clientY; });
+    window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
     window.addEventListener('resize', init);
     init(); draw();
 
+    // --- 3D TILT ---
     document.querySelectorAll('.tilt').forEach(c => {
         c.addEventListener('mousemove', e => {
             const r = c.getBoundingClientRect();
@@ -239,13 +242,16 @@
         c.addEventListener('mouseleave', () => c.style.transform = `rotateY(0deg) rotateX(0deg)`);
     });
 
-    const tracks = [{name:"MIYAGI - BULLET", src:""}, {name:"MIYAGI - MINOR", src:""}];
+    // --- PLAYER ---
+    const tracks = [
+        {name: "MIYAGI - BULLET", src: "LINK1"},
+        {name: "MIYAGI - MINOR", src: "LINK2"}
+    ];
     let cur = 0;
-    const aud = new Audio();
-    document.getElementById('play').onclick = () => {
-        if(aud.paused) aud.play(); else aud.pause();
-    };
+    const aud = new Audio(tracks[cur].src);
+    const pBtn = document.getElementById('play');
+    pBtn.onclick = () => { if(aud.paused) { aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; } else { aud.pause(); pBtn.innerHTML = '<i class="fas fa-play"></i>'; } };
+    document.getElementById('vol').oninput = (e) => aud.volume = e.target.value;
 </script>
-
 </body>
 </html>
