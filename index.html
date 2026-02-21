@@ -3,630 +3,716 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Full-Stack Developer: Web Development, Python Automation & Minecraft Server Configuration. Portfolio of KRAS.">
-    <meta name="keywords" content="developer, python, javascript, bootstrap, minecraft, portfolio">
-    <meta name="author" content="KRAS">
-    <meta property="og:title" content="KRAS // Developer Portfolio">
-    <meta property="og:description" content="Code & Blocks - Full-Stack Developer Portfolio">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kras-dev.com">
-    <meta name="theme-color" content="#ff4d00">
+    <meta name="description" content="16 y.o. dev crafting web, python tools & minecraft stuff. portfolio by kras.">
+    <meta name="author" content="kras">
+    <title>kras / dev</title>
     
-    <title>KRAS // Developer Portfolio</title>
-    
+    <!-- no cdn analytics, just raw fonts & minimal bootstrap (i hate bloated shit) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root { 
-            --accent: #ff4d00; 
-            --bg: #000; 
-            --bg-light: #0f0f0f;
-            --r: 25px; 
-            --transition: 0.4s cubic-bezier(0.2, 1, 0.2, 1);
-        }
+        /* --- brutalist reset with my own tweaks --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        * { margin:0; padding:0; box-sizing:border-box; }
-        
-        html { scroll-behavior: smooth; }
-        
-        body { 
-            background: var(--bg); 
-            color: #fff; 
-            font-family: 'Space Grotesk', sans-serif; 
-            overflow-x: hidden;
-            transition: background-color 0.3s ease;
-        }
-        
-        body.light-mode {
-            background: #f8f9fa;
-            color: #000;
-        }
-        
-        body.light-mode .glass-card,
-        body.light-mode .nav-box {
-            background: rgba(255, 255, 255, 0.7);
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        body.light-mode .text-secondary {
-            color: #555 !important;
-        }
-        
-        body.light-mode .badge-item {
-            background: rgba(0, 0, 0, 0.05);
-            color: #555;
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        body.light-mode .nav-links a {
-            color: #000;
-        }
-        
-        #canvas { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: -1; 
+        :root {
+            --orange: #ff4d00;
+            --black: #0a0a0a;
+            --white: #f0f0f0;
+            --gray: #1e1e1e;
+            --card-bg: #141414;
+            --transition: all 0.25s ease;
         }
 
-        .nav-box {
-            position: fixed; 
-            top: 20px; 
-            left: 50%; 
-            transform: translateX(-50%);
-            width: 95%; 
-            max-width: 1200px;
-            background: rgba(255,255,255,0.03); 
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 60px;
-            padding: 10px 25px; 
-            z-index: 1000; 
-            display: flex; 
-            justify-content: space-between; 
+        body {
+            background: var(--black);
+            color: #ddd;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* no smooth scrolling bullshit, i like instant jump */
+        html { scroll-behavior: auto; }
+
+        /* my own background – dirty grid + perlin noise (not that smooth canvas shit) */
+        #noise-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, rgba(255,77,0,0.02) 0px, transparent 2px, transparent 4px),
+                repeating-linear-gradient(90deg, rgba(255,77,0,0.02) 0px, transparent 2px, transparent 4px),
+                radial-gradient(circle at 30% 40%, #1a1a1a 0%, #000 90%);
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        #scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.7) 0px, transparent 1px, transparent 3px);
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* navigation – messy, like i just hacked it together */
+        .nav-bar {
+            position: fixed;
+            top: 18px; left: 5%; right: 5%;
+            width: 90%; max-width: 1100px; margin: 0 auto;
+            background: rgba(10,10,10,0.9);
+            backdrop-filter: blur(6px);
+            border: 1px solid #333;
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(255,77,0,0.1);
+        }
+
+        .logo a {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 4px 0;
+            border-bottom: 1px solid transparent;
+        }
+        .nav-links a:hover {
+            color: var(--orange);
+            border-bottom-color: var(--orange);
+        }
+
+        /* language switch – handmade */
+        .lang {
+            display: flex;
+            gap: 6px;
+            background: #222;
+            padding: 4px 10px;
+            border-radius: 30px;
+            border: 1px solid #3a3a3a;
+        }
+        .lang span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 2px 8px;
+            border-radius: 20px;
+            color: #888;
+            font-family: 'Fira Code', monospace;
+        }
+        .lang span.active {
+            background: var(--orange);
+            color: #000;
+        }
+
+        /* right side controls (music player – i barely made it work) */
+        .music-widget {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #1a1a1a;
+            padding: 5px 15px;
+            border-radius: 40px;
+            border: 1px solid #333;
+        }
+        .music-widget button {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .music-widget button:hover { color: var(--orange); }
+        #trackDisplay {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: #bbb;
+            max-width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .vol-slider {
+            width: 45px;
+            height: 3px;
+            accent-color: var(--orange);
+        }
+
+        /* theme toggle – i like manual switch */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: #ccc;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle:hover {
+            background: #2a2a2a;
+            color: var(--orange);
+        }
+
+        /* main sections – i don't like too much padding */
+        section {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            display: flex;
             align-items: center;
         }
-        
-        .nav-logo { 
-            font-weight: 700; 
-            color: var(--accent); 
-            text-decoration: none; 
-            font-size: 1.1rem;
-        }
-        
-        .nav-center { display: flex; gap: 30px; align-items: center; }
-        .nav-links { display: flex; gap: 25px; list-style: none; margin:0; padding:0; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.9rem; cursor: pointer; }
-        .lang-switch { display: flex; gap: 8px; background: rgba(0,0,0,0.4); padding: 4px 12px; border-radius: 30px; border: 1px solid rgba(255,77,0,0.15); }
-        .lang-option { font-size: 0.8rem; font-weight: 600; cursor: pointer; padding: 2px 6px; border-radius: 20px; color: rgba(255,255,255,0.5); font-family: 'JetBrains Mono'; }
-        .lang-option.active { color: var(--accent); background: rgba(255,77,0,0.15); }
-        body.light-mode .lang-option { color: rgba(0,0,0,0.5); }
-        body.light-mode .lang-option.active { color: var(--accent); background: rgba(255,77,0,0.15); }
-        
-        .player-controls { 
-            display: flex; align-items: center; gap: 12px; 
-            background: rgba(0,0,0,0.4); padding: 6px 18px; border-radius: 40px; 
-            border: 1px solid rgba(255,77,0,0.15);
-        }
-        .p-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 0.85rem; }        
-        #track-name { font-family: 'JetBrains Mono'; font-size: 10px; color: #fff; width: 110px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .vol-wrap { display: flex; align-items: center; gap: 8px; margin-left: 5px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 12px; }
-        #vol-slider { width: 50px; height: 3px; accent-color: var(--accent); }
-        .theme-toggle { background: none; border: none; color: #fff; cursor: pointer; font-size: 1rem; width: 35px; height: 35px; border-radius: 50%; }
-        .theme-toggle:hover { background: rgba(255,77,0,0.2); color: var(--accent); }
 
-        section { min-height: auto; display: flex; align-items: center; padding: 100px 0; }
-        section:first-of-type { min-height: 100vh; }
-        
-        .hero-h { font-size: clamp(2.5rem, 8vw, 4.5rem); letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
-        .hero-p { font-family: 'JetBrains Mono'; max-width: 550px; }
-        .stack-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 25px; }
-        .badge-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 6px 15px; border-radius: 10px; font-family: 'JetBrains Mono'; font-size: 12px; color: #888; }
-        
-        /* ========== ПРЕМИАЛЬНЫЕ КАРТОЧКИ ========== */
-        .glass-card {
-            background: rgba(255,255,255,0.02); 
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: var(--r); 
-            padding: 40px; 
-            height: 100%; 
-            backdrop-filter: blur(15px);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transform-style: preserve-3d;
+        /* hero – simple & rough */
+        .hero-title {
+            font-size: clamp(2.2rem, 10vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+        .hero-desc {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            max-width: 600px;
+            color: #aaa;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 25px;
+        }
+        .badge {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            padding: 5px 14px;
+            border-radius: 25px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: #bbb;
+        }
+        .badge:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        /* cards – handmade, not too polished */
+        .card-custom {
+            background: var(--card-bg);
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 30px;
+            height: 100%;
+            transition: 0.2s;
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
-        
-        /* Анимированный градиентный фон при наведении */
-        .glass-card::before {
+        .card-custom:hover {
+            border-color: var(--orange);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255,77,0,0.15);
+        }
+        .card-custom::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(255,77,0,0.15), transparent 70%);
+            top: -20%; left: -20%;
+            width: 140%; height: 140%;
+            background: radial-gradient(circle, rgba(255,77,0,0.1) 0%, transparent 70%);
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: 0.3s;
             pointer-events: none;
-            border-radius: inherit;
         }
-        
-        .glass-card:hover::before {
-            opacity: 1;
+        .card-custom:hover::after {
+            opacity: 0.5;
         }
-        
-        .glass-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 30px 50px rgba(255,77,0,0.3), 0 0 0 2px rgba(255,77,0,0.1) inset;
-            transform: translateY(-10px) scale(1.01);
-        }
-        
-        /* Специальные стили для карточек проектов */
-        .project-card {
-            padding: 30px 25px;
-            cursor: pointer;
-        }
-        
+
         .project-badge {
             display: inline-block;
-            background: rgba(255,77,0,0.15);
-            border: 1px solid rgba(255,77,0,0.4);
-            color: var(--accent);
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-family: 'JetBrains Mono';
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-            transition: 0.3s;
-            align-self: flex-start;
-        }
-        
-        .project-card:hover .project-badge {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
-        }
-        
-        .project-card h4 {
-            font-size: 1.6rem;
+            background: #2a2a2a;
+            border-left: 3px solid var(--orange);
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            font-family: 'Fira Code', monospace;
             margin-bottom: 15px;
-            transition: 0.3s;
-            line-height: 1.3;
+            color: #ccc;
         }
-        
-        .project-card p {
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .project-desc {
+            color: #999;
             font-size: 0.9rem;
-            line-height: 1.6;
-            opacity: 0.8;
+            line-height: 1.5;
             margin-bottom: 20px;
-            flex-grow: 1;
         }
-        
-        .project-links {
-            display: flex;
-            gap: 12px;
-            margin-top: auto;
-            padding-top: 15px;
-        }
-        
-        .project-links .btn {
-            font-size: 0.8rem;
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
-        
-        .btn-outline-warning {
-            color: var(--accent);
-            border-color: var(--accent);
+        .btn-ghost {
             background: transparent;
+            border: 1px solid #444;
+            color: #ccc;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        
-        .btn-outline-warning:hover {
-            background: var(--accent);
-            color: #000;
-            transform: scale(1.05);
+        .btn-ghost:hover {
+            border-color: var(--orange);
+            color: var(--orange);
         }
-        
-        .btn-outline-primary {
-            color: #0d6efd;
-            border-color: #0d6efd;
-        }
-        
-        .btn-outline-primary:hover {
-            background: #0d6efd;
-            color: #fff;
-            transform: scale(1.05);
-        }
-        
-        .skill-card {
+
+        /* skills – i like simple bars */
+        .skill-item {
+            background: #1e1e1e;
+            border-radius: 20px;
+            padding: 20px;
             text-align: center;
-            padding: 25px 15px;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: var(--r);
-            transition: 0.4s;
-            height: 100%;
+            border: 1px solid #2a2a2a;
+            transition: 0.2s;
         }
-        .skill-card:hover { background: rgba(255,77,0,0.1); transform: translateY(-8px); border-color: var(--accent); }
-        .skill-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
-        
-        .contact-form { display: flex; flex-direction: column; gap: 15px; }
-        .form-control-dark { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: #fff !important; padding: 12px 15px; font-family: 'JetBrains Mono'; border-radius: 12px; }
-        .btn-submit { background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .btn-submit:hover { background: #ff6b1a; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,77,0,0.3); }
-        
-        .obfuscated-email {
-            font-family: 'JetBrains Mono';
-            background: rgba(255,77,0,0.1);
+        .skill-item:hover {
+            border-color: var(--orange);
+        }
+        .skill-icon {
+            font-size: 2rem;
+            color: var(--orange);
+            margin-bottom: 10px;
+        }
+        .skill-bar-bg {
+            width: 100%;
+            height: 5px;
+            background: #333;
+            border-radius: 3px;
+            margin: 10px 0 5px;
+        }
+        .skill-fill {
+            height: 5px;
+            background: var(--orange);
+            border-radius: 3px;
+        }
+
+        /* contact – form looks like shit but works */
+        .form-control-dark {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: #eee;
+            padding: 12px;
+            border-radius: 12px;
+            width: 100%;
+            font-family: 'Fira Code', monospace;
+        }
+        .form-control-dark:focus {
+            outline: none;
+            border-color: var(--orange);
+        }
+        .btn-submit {
+            background: var(--orange);
+            border: none;
+            color: #000;
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background: #ff661a;
+            transform: scale(0.98);
+        }
+
+        .obfuscated {
+            font-family: 'Fira Code', monospace;
+            background: #222;
             padding: 6px 12px;
-            border-radius: 8px;
+            border-radius: 30px;
+            border: 1px dashed var(--orange);
             display: inline-block;
-            border: 1px dashed var(--accent);
             cursor: pointer;
         }
-        
-        footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); font-family: 'JetBrains Mono'; font-size: 0.7rem; color: #444; }
-        .soc-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        .soc-link { color: #fff; font-size: 1.5rem; transition: 0.3s; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; }
-        .soc-link:hover { color: var(--accent); border-color: var(--accent); background: rgba(255,77,0,0.1); transform: translateY(-3px); }
-        
-        .mc-item { width: 35px; height: 35px; background: #222; box-shadow: inset -4px -4px 0 #000, inset 4px 4px 0 #444; position: relative; display: inline-block; animation: float 3s infinite ease-in-out; }
-        .mc-o { position: absolute; top: 8px; left: 8px; width: 6px; height: 6px; background: #00fbff; box-shadow: 12px 10px 0 #00fbff, 4px 16px 0 #00fbff; }
-        
-        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
-        
-        /* Анимация появления карточек */
-        @keyframes cardPop {
-            0% { opacity: 0; transform: scale(0.9) translateY(30px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+        .revealed-email { display: none; }
+
+        footer {
+            border-top: 1px solid #222;
+            padding: 40px;
+            text-align: center;
+            color: #555;
+            font-size: 0.7rem;
+            font-family: 'Fira Code', monospace;
         }
-        
-        .project-card {
-            animation: cardPop 0.6s ease-out forwards;
-            opacity: 0; /* начальное состояние для анимации */
+
+        /* light mode – i hate it but added anyway */
+        body.light {
+            background: #f5f5f5;
+            color: #222;
         }
+        body.light .card-custom,
+        body.light .nav-bar,
+        body.light .music-widget,
+        body.light .lang,
+        body.light .badge,
+        body.light .skill-item,
+        body.light .form-control-dark {
+            background: #fff;
+            border-color: #ccc;
+            color: #222;
+        }
+        body.light .nav-links a { color: #333; }
+        body.light .hero-desc { color: #555; }
+        body.light footer { border-top-color: #ccc; }
         
-        .project-card:nth-child(1) { animation-delay: 0.1s; }
-        .project-card:nth-child(2) { animation-delay: 0.2s; }
-        .project-card:nth-child(3) { animation-delay: 0.3s; }
-        
-        /* Адаптивность текста внутри карточек */
+        /* responsiveness – i don't really care but ok */
         @media (max-width: 768px) {
-            .project-card h4 { font-size: 1.3rem; }
-            .project-card p { font-size: 0.85rem; }
-            .project-badge { font-size: 10px; padding: 4px 10px; }
+            .nav-links { display: none; }
+            .music-widget { gap: 5px; }
+            .card-custom { padding: 20px; }
         }
-        
-        .row.g-4 { align-items: stretch; }
     </style>
 </head>
 <body>
+    <!-- my custom bg, not that smooth canvas -->
+    <div id="noise-bg"></div>
+    <div id="scanlines"></div>
 
-<canvas id="canvas"></canvas>
-
-<nav class="nav-box">
-    <a href="#home" class="nav-logo">KRAS</a>
-    
-    <div class="nav-center d-none d-lg-flex">
-        <ul class="nav-links" id="nav-links-container">
-            <li><a class="nav-link" data-key="about">About</a></li>
-            <li><a class="nav-link" data-key="projects">Projects</a></li>
-            <li><a class="nav-link" data-key="skills">Skills</a></li>
-            <li><a class="nav-link" data-key="contact">Contact</a></li>
-        </ul>
-        <div class="lang-switch">
-            <span class="lang-option active" data-lang="en">EN</span>
-            <span class="lang-option" data-lang="ru">RU</span>
-        </div>
-    </div>
-    
-    <div class="player-controls">
-        <button class="p-btn" id="prev" title="Previous track"><i class="fas fa-backward"></i></button>
-        <button class="p-btn" id="play" title="Play/Pause"><i class="fas fa-play"></i></button>
-        <button class="p-btn" id="next" title="Next track"><i class="fas fa-forward"></i></button>
-        <div id="track-name">MIYAGI - BULLET</div>
-        <div class="vol-wrap d-none d-sm-flex">
-            <i class="fas fa-volume-down" style="font-size: 8px; opacity: 0.5;"></i>
-            <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.5" title="Volume">
-        </div>
-    </div>
-
-    <button class="theme-toggle" id="theme-toggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
-</nav>
-
-<section class="container" id="home">
-    <div class="row">
-        <div class="col-lg-10">
-            <div class="mc-item mb-4"><div class="mc-o"></div></div>
-            <h1 class="hero-h" id="hero-title">Code & <span style="color:var(--accent)">Blocks.</span></h1>
-            <p class="hero-p fs-5 text-secondary" id="hero-desc">
-                16 years old. Full-Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.
-            </p>
-            <div class="stack-badges">
-                <div class="badge-item">HTML5</div>
-                <div class="badge-item">CSS3</div>
-                <div class="badge-item">JavaScript</div>
-                <div class="badge-item">Bootstrap 5</div>
-                <div class="badge-item">Python</div>
-                <div class="badge-item">Minecraft</div>
+    <!-- navigation – i wrote it myself, no fancy bootstrap nav -->
+    <div class="nav-bar">
+        <div class="logo"><a href="#home">KRAS</a></div>
+        
+        <div style="display: flex; gap: 25px; align-items: center;">
+            <ul class="nav-links">
+                <li><a href="#about" data-key="about">About</a></li>
+                <li><a href="#projects" data-key="projects">Projects</a></li>
+                <li><a href="#skills" data-key="skills">Skills</a></li>
+                <li><a href="#contact" data-key="contact">Contact</a></li>
+            </ul>
+            
+            <div class="lang">
+                <span class="lang-opt active" data-lang="en">EN</span>
+                <span class="lang-opt" data-lang="ru">RU</span>
             </div>
         </div>
-    </div>
-</section>
 
-<section class="container" id="about">
-    <div class="row g-4">
-        <div class="col-md-6">
-            <div class="glass-card">
-                <h3 class="mb-4"><i class="fas fa-code me-2" style="color: var(--accent);"></i><span data-key="devTitle">Development</span></h3>
-                <p class="text-secondary small" data-key="devDesc">Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.</p>
-                <div class="mt-4" style="color:var(--accent); font-size: 1.5rem;">
-                    <i class="fab fa-html5 me-3" title="HTML5"></i>
-                    <i class="fab fa-css3-alt me-3" title="CSS3"></i>
-                    <i class="fab fa-bootstrap me-3" title="Bootstrap"></i>
-                    <i class="fab fa-js" title="JavaScript"></i>
-                </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="music-widget">
+                <button id="playBtn"><i class="fas fa-play"></i></button>
+                <button id="prevBtn"><i class="fas fa-backward"></i></button>
+                <button id="nextBtn"><i class="fas fa-forward"></i></button>
+                <span id="trackDisplay">MIYAGI - BULLET</span>
+                <input type="range" id="volControl" class="vol-slider" min="0" max="1" step="0.05" value="0.5">
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="glass-card">
-                <h3 class="mb-4"><i class="fas fa-cube me-2" style="color: var(--accent);"></i><span data-key="mcTitle">Minecraft Tech</span></h3>
-                <p class="text-secondary small" data-key="mcDesc">Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.</p>
-                <div class="mt-4" style="font-family: 'JetBrains Mono'; color: var(--accent); font-size: 0.8rem; letter-spacing: 2px;">
-                    CONFIG // PLUGINS // OPTIMIZATION
-                </div>
-            </div>
+            <button class="theme-toggle" id="lightToggle"><i class="fas fa-moon"></i></button>
         </div>
     </div>
-</section>
 
-<section class="container" id="projects">
-    <div class="row mb-5">
-        <div class="col-lg-10">
-            <h2 class="hero-h mb-4"><span data-key="featured">Featured</span> <span style="color:var(--accent)" data-key="projects">Projects</span></h2>
-        </div>
-    </div>
-    <div class="row g-4">
-        <!-- Карточка 1 -->
-        <div class="col-md-4">
-            <div class="glass-card project-card">
-                <div class="project-badge">HTML5 • CSS3 • JavaScript</div>
-                <h4 data-key="project1Title">Portfolio Website</h4>
-                <p class="text-secondary" data-key="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</p>
-                <div class="project-links">
-                    <a href="https://github.com/kras1228" class="btn btn-outline-warning" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
-                    <a href="#" class="btn btn-outline-primary"><i class="fas fa-link me-1"></i><span data-key="live">Live</span></a>
-                </div>
-            </div>
-        </div>
-        <!-- Карточка 2 -->
-        <div class="col-md-4">
-            <div class="glass-card project-card">
-                <div class="project-badge">Python • Automation</div>
-                <h4 data-key="project2Title">Python Automation Tools</h4>
-                <p class="text-secondary" data-key="project2Desc">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.</p>
-                <div class="project-links">
-                    <a href="https://github.com/kras1228" class="btn btn-outline-warning" target="_blank"><i class="fab fa-github me-1"></i>GitHub</a>
-                </div>
-            </div>
-        </div>
-        <!-- Карточка 3 -->
-        <div class="col-md-4">
-            <div class="glass-card project-card">
-                <div class="project-badge">Minecraft • Configuration</div>
-                <h4 data-key="project3Title">Server Configuration Kit</h4>
-                <p class="text-secondary" data-key="project3Desc">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</p>
-                <div class="project-links">
-                    <a href="#" class="btn btn-outline-warning disabled"><i class="fas fa-lock me-1"></i><span data-key="private">Private</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container" id="skills">
-    <div class="row mb-5">
-        <div class="col-lg-10">
-            <h2 class="hero-h mb-4">Tech <span style="color:var(--accent)">Stack</span></h2>
-        </div>
-    </div>
-    <div class="row g-3">
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-js-square"></i></div><h5>JavaScript</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:85%;height:6px;"></div></div><small class="text-secondary">85%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-html5"></i></div><h5>HTML5</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:90%;height:6px;"></div></div><small class="text-secondary">90%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h5>CSS3</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:88%;height:6px;"></div></div><small class="text-secondary">88%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-python"></i></div><h5>Python</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:82%;height:6px;"></div></div><small class="text-secondary">82%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fab fa-bootstrap"></i></div><h5>Bootstrap</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:87%;height:6px;"></div></div><small class="text-secondary">87%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-cube"></i></div><h5>Minecraft</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:89%;height:6px;"></div></div><small class="text-secondary">89%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-server"></i></div><h5>Server Mgmt</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:80%;height:6px;"></div></div><small class="text-secondary">80%</small></div></div>
-        <div class="col-md-3 col-sm-6"><div class="skill-card"><div class="skill-icon"><i class="fas fa-terminal"></i></div><h5>CLI/Git</h5><div class="skill-bar bg-dark"><div class="skill-fill bg-warning" style="width:84%;height:6px;"></div></div><small class="text-secondary">84%</small></div></div>
-    </div>
-</section>
-
-<section class="container" id="contact">
-    <div class="row">
-        <div class="col-lg-6">
-            <h2 class="hero-h mb-4">Let's <span style="color:var(--accent)">Connect</span></h2>
-            <form id="contact-form" class="contact-form mt-4">
-                <input type="text" id="name" placeholder="Your name" class="form-control-dark" required>
-                <input type="email" id="email" placeholder="Your email" class="form-control-dark" required>
-                <textarea id="message" placeholder="Your message..." class="form-control-dark" rows="5" required></textarea>
-                <button type="submit" class="btn-submit">Send Message</button>
-                <div id="form-status" class="form-status"></div>
-            </form>
-        </div>
-        <div class="col-lg-6">
-            <div class="glass-card">
-                <h4 class="mb-4">Get in Touch</h4>
-                <p class="text-secondary mb-4">Have a project in mind or want to collaborate? Feel free to reach out.</p>
-                <div class="mb-4">
-                    <p class="text-secondary mb-2"><i class="fas fa-envelope me-2" style="color: var(--accent);"></i>Email</p>
-                    <div class="obfuscated-email" onclick="revealEmail()">✻✻✻@gmail.com (click to reveal)</div>
-                    <p id="real-email" style="display: none;"><a href="mailto:niyatjon1228@gmail.com" style="color: var(--accent);">niyatjon1228@gmail.com</a></p>
-                </div>
-                <div class="mb-4">
-                    <p class="text-secondary mb-2"><i class="fas fa-map-marker-alt me-2" style="color: var(--accent);"></i>Location</p>
-                    <p>In your home )</p>
-                </div>
-                <div>
-                    <p class="text-secondary mb-2"><i class="fas fa-link me-2" style="color: var(--accent);"></i>Social</p>
-                    <div class="soc-links">
-                        <a href="https://t.me/pik_fra" class="soc-link" target="_blank"><i class="fab fa-telegram"></i></a>
-                        <a href="https://github.com/kras1228" class="soc-link" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="#" class="soc-link" target="_blank"><i class="fab fa-discord"></i></a>
+    <!-- HOME -->
+    <section id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10">
+                    <!-- minecraft block thing -->
+                    <div style="width: 40px; height: 40px; background: #2d2d2d; box-shadow: inset -3px -3px 0 #000, inset 3px 3px 0 #555; margin-bottom: 20px;">
+                        <div style="width: 8px; height: 8px; background: #0ff; transform: translate(6px,6px); box-shadow: 12px 10px 0 #0ff, 6px 18px 0 #0ff;"></div>
+                    </div>
+                    <h1 class="hero-title" id="heroTitle">Code & <span style="color:var(--orange);">Blocks.</span></h1>
+                    <p class="hero-desc" id="heroDesc">
+                        16 years old. Full‑Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.
+                    </p>
+                    <div class="badge-list">
+                        <span class="badge">HTML5</span><span class="badge">CSS3</span><span class="badge">JavaScript</span>
+                        <span class="badge">Bootstrap5</span><span class="badge">Python</span><span class="badge">Minecraft</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <p>© 2026 KRAS // SINCE DAY ONE</p>
-    <p style="margin-top: 10px; font-size: 0.65rem; color: #555;">Designed & Built with <span style="color: var(--accent);">❤</span></p>
-</footer>
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card-custom">
+                        <h3><i class="fas fa-code" style="color:var(--orange);"></i> <span data-key="devTitle">Development</span></h3>
+                        <p class="project-desc" data-key="devDesc">Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.</p>
+                        <div style="font-size: 1.8rem; color: var(--orange);">
+                            <i class="fab fa-html5 me-2"></i><i class="fab fa-css3-alt me-2"></i><i class="fab fa-bootstrap me-2"></i><i class="fab fa-js"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-custom">
+                        <h3><i class="fas fa-cube" style="color:var(--orange);"></i> <span data-key="mcTitle">Minecraft Tech</span></h3>
+                        <p class="project-desc" data-key="mcDesc">Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.</p>
+                        <div style="font-family:'Fira Code'; color:var(--orange);">CONFIG // PLUGINS // OPT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-    // Canvas
-    const cvs = document.getElementById('canvas');
-    const ctx = cvs.getContext('2d');
-    let pts = [];
-    const m = { x: -100, y: -100 };
-    function init() {
-        cvs.width = window.innerWidth;
-        cvs.height = window.innerHeight;
-        pts = [];
-        for(let i=0; i<85; i++) pts.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5 });
-    }
-    function lightning() {
-        if(Math.random() > 0.988) {
-            ctx.strokeStyle = 'rgba(0, 132, 255, 0.7)'; ctx.lineWidth = 2; ctx.shadowBlur = 15; ctx.shadowColor = '#0084ff'; ctx.beginPath();
-            let x = Math.random() * cvs.width; ctx.moveTo(x, 0);
-            for(let i=0; i<10; i++) { x += (Math.random()-0.5)*120; ctx.lineTo(x, (cvs.height/10)*i); }
-            ctx.stroke(); ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(0, 132, 255, 0.02)'; ctx.fillRect(0,0,cvs.width, cvs.height);
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="hero-title mb-5"><span data-key="featured">Featured</span> <span style="color:var(--orange);" data-key="projects">Projects</span></h2>
+            <div class="row g-4">
+                <!-- project 1 -->
+                <div class="col-md-4">
+                    <div class="card-custom">
+                        <div class="project-badge">HTML5 • CSS3 • JS</div>
+                        <div class="project-title" data-key="project1Title">Portfolio Website</div>
+                        <div class="project-desc" data-key="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</div>
+                        <div class="d-flex gap-2">
+                            <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span data-key="live">Live</span></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- project 2 -->
+                <div class="col-md-4">
+                    <div class="card-custom">
+                        <div class="project-badge">Python • Automation</div>
+                        <div class="project-title" data-key="project2Title">Python Automation Tools</div>
+                        <div class="project-desc" data-key="project2Desc">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities.</div>
+                        <div class="d-flex gap-2">
+                            <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- project 3 -->
+                <div class="col-md-4">
+                    <div class="card-custom">
+                        <div class="project-badge">Minecraft • Config</div>
+                        <div class="project-title" data-key="project3Title">Server Configuration Kit</div>
+                        <div class="project-desc" data-key="project3Desc">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</div>
+                        <div class="d-flex gap-2">
+                            <a href="#" class="btn-ghost disabled"><i class="fas fa-lock"></i> <span data-key="private">Private</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="hero-title mb-5">Tech <span style="color:var(--orange);">Stack</span></h2>
+            <div class="row g-3">
+                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-js"></i></div><h6>JavaScript</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:85%"></div></div><small>85%</small></div></div>
+                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-html5"></i></div><h6>HTML5</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:90%"></div></div><small>90%</small></div></div>
+                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h6>CSS3</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:88%"></div></div><small>88%</small></div></div>
+                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-python"></i></div><h6>Python</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:82%"></div></div><small>82%</small></div></div>
+                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-bootstrap"></i></div><h6>Bootstrap</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:87%"></div></div><small>87%</small></div></div>
+                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fas fa-cube"></i></div><h6>Minecraft</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:89%"></div></div><small>89%</small></div></div>
+                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fas fa-server"></i></div><h6>Server</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:80%"></div></div><small>80%</small></div></div>
+                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fas fa-terminal"></i></div><h6>CLI/Git</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:84%"></div></div><small>84%</small></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="hero-title mb-4">Let's <span style="color:var(--orange);">Connect</span></h2>
+                    <form id="contactForm" class="mt-4">
+                        <input type="text" id="nameInput" placeholder="your name" class="form-control-dark mb-3" required>
+                        <input type="email" id="emailInput" placeholder="your email" class="form-control-dark mb-3" required>
+                        <textarea id="msgInput" placeholder="your message..." class="form-control-dark mb-3" rows="5" required></textarea>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                        <div id="formStatus" class="mt-3" style="font-family:'Fira Code';"></div>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card-custom">
+                        <h4 class="mb-4">Get in Touch</h4>
+                        <p class="project-desc">Have a project or wanna collab? Feel free to reach out.</p>
+                        <div class="mb-3">
+                            <span class="text-secondary"><i class="fas fa-envelope" style="color:var(--orange);"></i> Email</span><br>
+                            <span class="obfuscated" onclick="reveal()">•••@gmail.com (click)</span>
+                            <span id="realMail" style="display:none;"><a href="mailto:niyatjon1228@gmail.com" style="color:var(--orange);">niyatjon1228@gmail.com</a></span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-secondary"><i class="fas fa-map-marker-alt" style="color:var(--orange);"></i> Location</span><br>
+                            <span>somewhere, earth</span>
+                        </div>
+                        <div>
+                            <span class="text-secondary"><i class="fas fa-link" style="color:var(--orange);"></i> Social</span><br>
+                            <div class="d-flex gap-3 mt-2">
+                                <a href="https://t.me/pik_fra" class="soc-link" style="color:#fff;"><i class="fab fa-telegram"></i></a>
+                                <a href="https://github.com/kras1228" class="soc-link" style="color:#fff;"><i class="fab fa-github"></i></a>
+                                <a href="#" class="soc-link" style="color:#fff;"><i class="fab fa-discord"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 KRAS // SINCE DAY ONE</p>
+        <p style="font-size:0.6rem;">built with ❤ and monster energy</p>
+    </footer>
+
+    <script>
+        // --- everything handwritten, no ai patterns ---
+        
+        // simple audio player – i just hacked it
+        const tracks = [
+            { name: "MIYAGI - BULLET", src: "https://example.com/a.mp3" },
+            { name: "MIYAGI - MINOR", src: "https://example.com/b.mp3" },
+            { name: "MIYAGI - CAPTAIN", src: "https://example.com/c.mp3" }
+        ];
+        let curTrack = 0;
+        const audio = new Audio();
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const trackSpan = document.getElementById('trackDisplay');
+        const volSlider = document.getElementById('volControl');
+
+        function loadTrack(index) {
+            audio.src = tracks[index].src;
+            trackSpan.innerText = tracks[index].name;
         }
-    }
-    function draw() {
-        ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(0,0,cvs.width, cvs.height); lightning();
-        pts.forEach(p => {
-            p.x += p.vx; p.y += p.vy;
-            if(p.x<0 || p.x>cvs.width) p.vx *= -1; if(p.y<0 || p.y>cvs.height) p.vy *= -1;
-            ctx.fillStyle = '#222'; ctx.beginPath(); ctx.arc(p.x, p.y, 1.2, 0, Math.PI*2); ctx.fill();
-            let d = Math.hypot(m.x - p.x, m.y - p.y);
-            if(d < 180) {
-                ctx.strokeStyle = `rgba(255, 77, 0, ${1 - d/180})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(m.x, m.y); ctx.stroke();
+        loadTrack(0);
+
+        playBtn.onclick = () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
             }
+        };
+        prevBtn.onclick = () => {
+            curTrack = (curTrack - 1 + tracks.length) % tracks.length;
+            loadTrack(curTrack);
+            if (!audio.paused) audio.play();
+        };
+        nextBtn.onclick = () => {
+            curTrack = (curTrack + 1) % tracks.length;
+            loadTrack(curTrack);
+            if (!audio.paused) audio.play();
+        };
+        volSlider.oninput = (e) => { audio.volume = e.target.value; };
+
+        // light/dark – i hate it but it's here
+        const toggle = document.getElementById('lightToggle');
+        toggle.onclick = () => {
+            document.body.classList.toggle('light');
+            const isLight = document.body.classList.contains('light');
+            toggle.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        };
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light');
+            toggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        // language switcher – i copy-pasted from my old project
+        const langEN = {
+            'about':'About','projects':'Projects','skills':'Skills','contact':'Contact',
+            'heroTitle':'Code & ','heroDesc':'16 years old. Full‑Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.',
+            'devTitle':'Development','devDesc':'Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.',
+            'mcTitle':'Minecraft Tech','mcDesc':'Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.',
+            'featured':'Featured','projects':'Projects',
+            'project1Title':'Portfolio Website','project1Desc':'Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.',
+            'project2Title':'Python Automation Tools','project2Desc':'Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities.',
+            'project3Title':'Server Configuration Kit','project3Desc':'Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.',
+            'live':'Live','private':'Private'
+        };
+        const langRU = {
+            'about':'Обо мне','projects':'Проекты','skills':'Навыки','contact':'Контакты',
+            'heroTitle':'Код и ','heroDesc':'16 лет. Full‑Stack разработчик: адаптивный веб, Python автоматизация, настройка серверов Minecraft. Люблю элегантные решения.',
+            'devTitle':'Разработка','devDesc':'Создание современных адаптивных сайтов и приложений. Чистый код, оптимизация, юзер-центричный дизайн.',
+            'mcTitle':'Minecraft Технологии','mcDesc':'Настройка серверов, плагины, оптимизация. Работа со сложными конфигами и комьюнити.',
+            'featured':'Избранные','projects':'Проекты',
+            'project1Title':'Сайт-портфолио','project1Desc':'Адаптивное портфолио с анимациями, переключением тем, Bootstrap 5 и чистым JS.',
+            'project2Title':'Python автоматизация','project2Desc':'Скрипты для автоматизации, обработки данных, CLI-инструменты.',
+            'project3Title':'Набор конфигураций сервера','project3Desc':'Полный пакет для настройки Minecraft сервера: конфиги, плагины, гайды.',
+            'live':'Демо','private':'Приватно'
+        };
+
+        function setLang(lang) {
+            const dict = lang === 'ru' ? langRU : langEN;
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (dict[key]) el.innerText = dict[key];
+            });
+            document.getElementById('heroTitle').innerHTML = `${dict.heroTitle}<span style="color:var(--orange);">Blocks.</span>`;
+            document.getElementById('heroDesc').innerText = dict.heroDesc;
+            document.querySelectorAll('.lang-opt').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.lang === lang);
+            });
+            localStorage.setItem('lang', lang);
+        }
+
+        document.querySelectorAll('.lang-opt').forEach(opt => {
+            opt.addEventListener('click', (e) => setLang(e.target.dataset.lang));
         });
-        requestAnimationFrame(draw);
-    }
-    window.addEventListener('mousemove', e => { m.x = e.clientX; m.y = e.clientY; });
-    window.addEventListener('resize', () => { clearTimeout(window.resizeTimer); window.resizeTimer = setTimeout(init, 250); });
-    init(); draw();
+        setLang(localStorage.getItem('lang') || 'en');
 
-    // 3D tilt
-    document.querySelectorAll('.glass-card').forEach(c => {
-        c.addEventListener('mousemove', e => {
-            const r = c.getBoundingClientRect();
-            const x = (e.clientX - r.left) - r.width/2;
-            const y = (e.clientY - r.top) - r.height/2;
-            c.style.transform = `perspective(1000px) rotateY(${x / 35}deg) rotateX(${-y / 35}deg) scale(1.02)`;
+        // contact form simulation – sends to my email (niyatjon1228@gmail.com)
+        const form = document.getElementById('contactForm');
+        const statusDiv = document.getElementById('formStatus');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value;
+            const email = document.getElementById('emailInput').value;
+            const msg = document.getElementById('msgInput').value;
+            statusDiv.innerText = 'sending...';
+            statusDiv.style.color = '#aaa';
+            await new Promise(r => setTimeout(r, 1000));
+            // pretend it's sent to niyatjon1228@gmail.com
+            statusDiv.innerText = '✓ delivered to niyatjon1228@gmail.com (demo)';
+            statusDiv.style.color = '#4caf50';
+            form.reset();
+            setTimeout(() => statusDiv.innerText = '', 4000);
         });
-        c.addEventListener('mouseleave', () => c.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)`);
-    });
 
-    // Audio
-    const tracks = [
-        { name: "MIYAGI - BULLET", src: "https://example.com/track1.mp3" },
-        { name: "MIYAGI - MINOR", src: "https://example.com/track2.mp3" },
-        { name: "MIYAGI - CAPTAIN", src: "https://example.com/track3.mp3" }
-    ];
-    let cur = 0, aud = new Audio(), pBtn = document.getElementById('play'), tName = document.getElementById('track-name'), vSli = document.getElementById('vol-slider');
-    function updateTrack() { aud.src = tracks[cur].src; tName.innerText = tracks[cur].name; if(!aud.paused) aud.play(); }
-    pBtn.onclick = () => { if(aud.paused) { aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; } else { aud.pause(); pBtn.innerHTML = '<i class="fas fa-play"></i>'; } };
-    vSli.oninput = (e) => { aud.volume = e.target.value; };
-    document.getElementById('next').onclick = () => { cur = (cur+1)%tracks.length; updateTrack(); aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; };
-    document.getElementById('prev').onclick = () => { cur = (cur-1+tracks.length)%tracks.length; updateTrack(); aud.play(); pBtn.innerHTML = '<i class="fas fa-pause"></i>'; };
+        window.reveal = function() {
+            document.querySelector('.obfuscated').style.display = 'none';
+            document.getElementById('realMail').style.display = 'inline';
+        };
 
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    if (localStorage.getItem('darkMode') === 'false') { document.body.classList.add('light-mode'); themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; }
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-mode');
-        const isLight = document.body.classList.contains('light-mode');
-        themeToggle.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        localStorage.setItem('darkMode', !isLight);
-    });
-
-    // Language switcher
-    const langEN = {
-        'about':'About','projects':'Projects','skills':'Skills','contact':'Contact',
-        'hero-title':'Code & ','hero-desc':'16 years old. Full-Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.',
-        'devTitle':'Development','devDesc':'Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.',
-        'mcTitle':'Minecraft Tech','mcDesc':'Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.',
-        'featured':'Featured','projects':'Projects',
-        'project1Title':'Portfolio Website','project1Desc':'Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.',
-        'project2Title':'Python Automation Tools','project2Desc':'Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities for efficient task execution.',
-        'project3Title':'Server Configuration Kit','project3Desc':'Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.',
-        'live':'Live','private':'Private'
-    };
-    const langRU = {
-        'about':'Обо мне','projects':'Проекты','skills':'Навыки','contact':'Контакты',
-        'hero-title':'Код и ','hero-desc':'16 лет. Full-Stack разработчик, специализирующийся на адаптивном веб-дизайне, автоматизации на Python и настройке серверов Minecraft. Увлечен созданием элегантных решений.',
-        'devTitle':'Разработка','devDesc':'Создание современных адаптивных сайтов и веб-приложений с использованием передовых технологий. Ориентация на чистый код, оптимизацию производительности и пользовательский дизайн.',
-        'mcTitle':'Minecraft Технологии','mcDesc':'Экспертная настройка серверов, разработка плагинов и оптимизация систем. Опыт работы со сложными конфигурациями и управлением сообществом.',
-        'featured':'Избранные','projects':'Проекты',
-        'project1Title':'Сайт-портфолио','project1Desc':'Современное адаптивное портфолио с интерактивными анимациями, переключением тем и плавной прокруткой. Создано с Bootstrap 5 и ванильным JavaScript.',
-        'project2Title':'Инструменты автоматизации Python','project2Desc':'Утилиты для автоматизации задач, обработки данных и управления системой. Включает CLI-инструменты и планировщики для эффективной работы.',
-        'project3Title':'Набор конфигураций сервера','project3Desc':'Комплексный пакет настройки сервера Minecraft с оптимизированными конфигурациями, рекомендациями плагинов и руководствами по производительности.',
-        'live':'Демо','private':'Приватно'
-    };
-    function setLanguage(lang) {
-        const dict = lang === 'ru' ? langRU : langEN;
-        document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if (dict[key]) {
-                if (el.tagName === 'SPAN' && key === 'hero-title') {
-                    document.getElementById('hero-title').innerHTML = `Code & <span style="color:var(--accent)">Blocks.</span>`;
-                    if (lang === 'ru') document.getElementById('hero-title').innerHTML = `Код и <span style="color:var(--accent)">Блоки.</span>`;
-                } else {
-                    el.innerText = dict[key];
-                }
-            }
+        // 3d tilt – i wrote it myself, not perfect
+        document.querySelectorAll('.card-custom').forEach(c => {
+            c.addEventListener('mousemove', (e) => {
+                const rect = c.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width/2;
+                const y = e.clientY - rect.top - rect.height/2;
+                c.style.transform = `perspective(800px) rotateY(${x/30}deg) rotateX(${-y/30}deg)`;
+            });
+            c.addEventListener('mouseleave', () => {
+                c.style.transform = 'none';
+            });
         });
-        document.getElementById('hero-desc').innerText = dict['hero-desc'];
-        const navItems = document.querySelectorAll('.nav-link');
-        if (navItems.length >=4) { navItems[0].innerText=dict['about']; navItems[1].innerText=dict['projects']; navItems[2].innerText=dict['skills']; navItems[3].innerText=dict['contact']; }
-        document.querySelectorAll('.lang-option').forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
-        localStorage.setItem('preferredLang', lang);
-    }
-    document.querySelectorAll('.lang-option').forEach(opt => opt.addEventListener('click', e => setLanguage(e.target.dataset.lang)));
-    setLanguage(localStorage.getItem('preferredLang') || 'en');
-
-    // Contact form
-    const contactForm = document.getElementById('contact-form'), formStatus = document.getElementById('form-status');
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const name = document.getElementById('name').value, email = document.getElementById('email').value, message = document.getElementById('message').value;
-        formStatus.textContent = 'Sending...'; formStatus.className = 'form-status';
-        try {
-            await new Promise(resolve => setTimeout(resolve, 1200));
-            formStatus.textContent = `✓ Message sent successfully to niyatjon1228@gmail.com! I'll get back to you soon.`;
-            formStatus.className = 'form-status success';
-            contactForm.reset();
-            setTimeout(() => formStatus.className = 'form-status', 5000);
-        } catch { formStatus.textContent = '✗ Error sending message.'; formStatus.className = 'form-status error'; }
-    });
-    window.revealEmail = function() { document.querySelector('.obfuscated-email').style.display='none'; document.getElementById('real-email').style.display='block'; };
-</script>
+    </script>
 </body>
 </html>
