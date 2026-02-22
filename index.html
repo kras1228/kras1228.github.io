@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="description" content="16 y.o. dev crafting web, python tools & minecraft stuff. portfolio by kras.">
     <meta name="author" content="kras">
     <title>kras / dev</title>
@@ -25,6 +25,8 @@
             color: #ddd;
             font-family: 'Inter', sans-serif;
             line-height: 1.5;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         #noise-bg {
@@ -47,25 +49,28 @@
             pointer-events: none;
         }
 
+        /* ========== МОБИЛЬНАЯ НАВИГАЦИЯ ========== */
         .nav-bar {
             position: fixed;
-            top: 18px; left: 5%; right: 5%;
-            width: 90%; max-width: 1100px; margin: 0 auto;
-            background: rgba(10,10,10,0.95);
-            backdrop-filter: blur(6px);
+            top: 12px; left: 4%; right: 4%;
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(10,10,10,0.98);
+            backdrop-filter: blur(8px);
             border: 1px solid #333;
-            border-radius: 40px;
-            padding: 8px 22px;
+            border-radius: 30px;
+            padding: 8px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 999;
-            box-shadow: 0 5px 20px rgba(255,77,0,0.1);
+            box-shadow: 0 5px 20px rgba(255,77,0,0.15);
         }
 
         .logo a {
             font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--orange);
             text-decoration: none;
             letter-spacing: -1px;
@@ -73,20 +78,23 @@
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 20px;
             list-style: none;
             margin: 0;
             padding: 0;
         }
+        
         .nav-links a {
             color: #ccc;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             padding: 4px 0;
             border-bottom: 2px solid transparent;
             transition: 0.2s;
+            white-space: nowrap;
         }
+        
         .nav-links a:hover {
             color: var(--orange);
             border-bottom-color: var(--orange);
@@ -94,110 +102,135 @@
 
         .lang {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             background: #222;
-            padding: 4px 12px;
+            padding: 3px 8px;
             border-radius: 30px;
             border: 1px solid #3a3a3a;
-            margin-left: 15px;
+            margin-left: 10px;
         }
+        
         .lang span {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             cursor: pointer;
-            padding: 2px 8px;
+            padding: 2px 6px;
             border-radius: 20px;
             color: #888;
             font-family: 'Fira Code', monospace;
             transition: 0.2s;
         }
+        
         .lang span.active {
             background: var(--orange);
             color: #000;
         }
 
+        /* ========== МОБИЛЬНЫЙ ПЛЕЕР ========== */
         .music-widget {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             background: #1a1a1a;
-            padding: 5px 15px;
-            border-radius: 40px;
+            padding: 4px 10px;
+            border-radius: 30px;
             border: 1px solid #333;
         }
+        
         .music-widget button {
             background: none;
             border: none;
             color: #aaa;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: 0.2s;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
         .music-widget button:hover { color: var(--orange); }
+        
         #trackDisplay {
             font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #bbb;
-            max-width: 100px;
+            max-width: 70px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        
         .vol-slider {
-            width: 45px;
+            width: 35px;
             height: 3px;
             accent-color: var(--orange);
         }
 
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
         section {
-            padding: 120px 0 80px;
-            min-height: 100vh;
+            padding: 100px 0 60px;
+            min-height: auto;
             display: flex;
             align-items: center;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
         }
 
         .hero-title {
-            font-size: clamp(2.2rem, 10vw, 4.2rem);
+            font-size: clamp(2rem, 8vw, 4.2rem);
             font-weight: 900;
             line-height: 1.1;
             letter-spacing: -2px;
+            word-break: break-word;
         }
+        
         .hero-desc {
             font-family: 'Fira Code', monospace;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             max-width: 600px;
             color: #aaa;
+            word-break: break-word;
         }
+        
         .badge-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 25px;
+            gap: 6px;
+            margin-top: 20px;
         }
+        
         .badge {
             background: #1c1c1c;
             border: 1px solid #333;
-            padding: 5px 14px;
+            padding: 4px 10px;
             border-radius: 25px;
             font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #bbb;
         }
-        .badge:hover {
-            border-color: var(--orange);
-            color: var(--orange);
-        }
 
+        /* ========== КАРТОЧКИ ========== */
         .card-custom {
             background: var(--card-bg);
             border: 1px solid #2a2a2a;
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px 20px;
             height: 100%;
             transition: 0.2s;
             position: relative;
             overflow: hidden;
         }
+        
         .card-custom:hover {
             border-color: var(--orange);
             transform: translateY(-5px);
@@ -208,129 +241,272 @@
             display: inline-block;
             background: #2a2a2a;
             border-left: 3px solid var(--orange);
-            padding: 4px 12px;
-            font-size: 0.7rem;
+            padding: 4px 10px;
+            font-size: 0.65rem;
             font-family: 'Fira Code', monospace;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #ccc;
         }
 
         .project-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            word-break: break-word;
         }
+        
         .project-desc {
             color: #999;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1.5;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            word-break: break-word;
         }
+        
         .btn-ghost {
             background: transparent;
             border: 1px solid #444;
             color: #ccc;
-            padding: 6px 16px;
+            padding: 5px 12px;
             border-radius: 30px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-decoration: none;
             transition: 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-        }
-        .btn-ghost:hover {
-            border-color: var(--orange);
-            color: var(--orange);
+            gap: 5px;
         }
 
+        /* ========== СКИЛЛЫ ========== */
         .skill-item {
             background: #1e1e1e;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 15px 10px;
             text-align: center;
             border: 1px solid #2a2a2a;
             transition: 0.2s;
             height: 100%;
         }
-        .skill-item:hover {
-            border-color: var(--orange);
-        }
+        
         .skill-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--orange);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
+        
+        .skill-item h6 {
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+        
         .skill-bar-bg {
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: #333;
             border-radius: 3px;
-            margin: 10px 0 5px;
+            margin: 8px 0 4px;
         }
+        
         .skill-fill {
-            height: 5px;
+            height: 4px;
             background: var(--orange);
             border-radius: 3px;
         }
+        
+        .skill-item small {
+            font-size: 0.65rem;
+        }
 
+        /* ========== ФОРМА ========== */
         .form-control-dark {
             background: #1e1e1e;
             border: 1px solid #333;
             color: #eee;
-            padding: 12px;
+            padding: 10px 12px;
             border-radius: 12px;
             width: 100%;
             font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
         }
-        .form-control-dark:focus {
-            outline: none;
-            border-color: var(--orange);
-        }
+        
         .btn-submit {
             background: var(--orange);
             border: none;
             color: #000;
             font-weight: 700;
-            padding: 12px 30px;
+            padding: 10px 25px;
             border-radius: 40px;
             cursor: pointer;
             transition: 0.2s;
-        }
-        .btn-submit:hover {
-            background: #ff661a;
-            transform: scale(0.98);
+            width: 100%;
+            font-size: 0.95rem;
         }
 
         .obfuscated {
             font-family: 'Fira Code', monospace;
             background: #222;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 30px;
             border: 1px dashed var(--orange);
             display: inline-block;
             cursor: pointer;
+            font-size: 0.8rem;
         }
-        .revealed-email { display: none; }
+        
         .soc-link {
             color: #fff;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             transition: 0.2s;
+            display: inline-block;
         }
-        .soc-link:hover { color: var(--orange); }
 
         footer {
             border-top: 1px solid #222;
-            padding: 40px;
+            padding: 30px 20px;
             text-align: center;
             color: #555;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-family: 'Fira Code', monospace;
         }
 
+        /* ========== МЕДИА ЗАПРОСЫ ========== */
+        @media (max-width: 992px) {
+            .nav-links { gap: 15px; }
+            .nav-links a { font-size: 0.8rem; }
+        }
+
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .music-widget { gap: 5px; }
+            .nav-bar {
+                padding: 6px 12px;
+                top: 10px;
+            }
+            
+            .logo a { font-size: 1.2rem; }
+            
+            .nav-links { display: none; } /* скрываем на телефонах */
+            
+            .lang { margin-left: 0; }
+            
+            .music-widget {
+                padding: 3px 6px;
+                gap: 3px;
+            }
+            
+            .music-widget button {
+                width: 22px;
+                height: 22px;
+                font-size: 0.7rem;
+            }
+            
+            #trackDisplay { max-width: 50px; }
+            
+            .vol-slider { width: 30px; }
+            
+            section { padding: 80px 0 40px; }
+            
+            .hero-title { font-size: 2.2rem; }
+            
+            .hero-desc { font-size: 0.85rem; }
+            
+            .badge { font-size: 0.6rem; padding: 3px 8px; }
+            
+            .card-custom { padding: 20px 15px; }
+            
+            .project-title { font-size: 1.2rem; }
+            
+            .project-desc { font-size: 0.8rem; }
+            
+            .btn-ghost { 
+                padding: 4px 10px; 
+                font-size: 0.7rem; 
+            }
+            
+            .col-6 { padding: 0 6px; }
+            
+            .skill-item { padding: 12px 6px; }
+            
+            .skill-icon { font-size: 1.5rem; }
+            
+            .skill-item h6 { font-size: 0.7rem; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-bar { padding: 5px 10px; }
+            
+            .music-widget button {
+                width: 20px;
+                height: 20px;
+                font-size: 0.65rem;
+            }
+            
+            #trackDisplay { max-width: 40px; }
+            
+            .vol-slider { width: 25px; }
+            
+            .hero-title { font-size: 1.8rem; }
+            
+            .badge-list { gap: 4px; }
+            
+            .badge { 
+                font-size: 0.55rem; 
+                padding: 2px 6px; 
+            }
+            
+            .card-custom { padding: 15px 12px; }
+            
+            .project-badge { 
+                font-size: 0.6rem; 
+                padding: 3px 8px; 
+            }
+            
+            .project-title { font-size: 1.1rem; }
+            
+            .project-desc { font-size: 0.75rem; }
+            
+            .btn-ghost { 
+                padding: 3px 8px; 
+                font-size: 0.65rem; 
+            }
+            
+            .btn-ghost i { font-size: 0.7rem; }
+            
+            .skill-item { padding: 10px 4px; }
+            
+            .skill-icon { font-size: 1.3rem; }
+            
+            .skill-item h6 { font-size: 0.65rem; }
+            
+            .form-control-dark { 
+                padding: 8px 10px; 
+                font-size: 0.8rem; 
+            }
+            
+            .btn-submit { 
+                padding: 8px 20px; 
+                font-size: 0.85rem; 
+            }
+            
+            .obfuscated { 
+                font-size: 0.7rem; 
+                padding: 4px 8px; 
+            }
+            
+            .soc-link { font-size: 1rem; }
+        }
+
+        /* для очень маленьких экранов */
+        @media (max-width: 360px) {
+            .music-widget button {
+                width: 18px;
+                height: 18px;
+            }
+            
+            #trackDisplay { max-width: 35px; }
+            
+            .lang span { 
+                font-size: 0.65rem; 
+                padding: 2px 4px; 
+            }
         }
     </style>
 </head>
@@ -341,7 +517,7 @@
     <div class="nav-bar">
         <div class="logo"><a href="#home">KRAS</a></div>
         
-        <div style="display: flex; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 8px;">
             <ul class="nav-links">
                 <li><a href="#about" id="nav-about">About</a></li>
                 <li><a href="#projects" id="nav-projects">Projects</a></li>
@@ -353,21 +529,21 @@
                 <span class="lang-opt active" data-lang="en">EN</span>
                 <span class="lang-opt" data-lang="ru">RU</span>
             </div>
-        </div>
 
-        <div class="music-widget">
-            <button id="playBtn"><i class="fas fa-play"></i></button>
-            <button id="prevBtn"><i class="fas fa-backward"></i></button>
-            <button id="nextBtn"><i class="fas fa-forward"></i></button>
-            <span id="trackDisplay">MIYAGI - BULLET</span>
-            <input type="range" id="volControl" class="vol-slider" min="0" max="1" step="0.05" value="0.5">
+            <div class="music-widget">
+                <button id="playBtn"><i class="fas fa-play"></i></button>
+                <button id="prevBtn"><i class="fas fa-backward"></i></button>
+                <button id="nextBtn"><i class="fas fa-forward"></i></button>
+                <span id="trackDisplay">MIYAGI - BULLET</span>
+                <input type="range" id="volControl" class="vol-slider" min="0" max="1" step="0.05" value="0.5">
+            </div>
         </div>
     </div>
 
     <section id="home">
         <div class="container">
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-12 col-lg-10">
                     <div style="width: 40px; height: 40px; background: #2d2d2d; box-shadow: inset -3px -3px 0 #000, inset 3px 3px 0 #555; margin-bottom: 20px;">
                         <div style="width: 8px; height: 8px; background: #0ff; transform: translate(6px,6px); box-shadow: 12px 10px 0 #0ff, 6px 18px 0 #0ff;"></div>
                     </div>
@@ -391,7 +567,7 @@
                     <div class="card-custom">
                         <h3><i class="fas fa-code" style="color:var(--orange);"></i> <span id="devTitle">Development</span></h3>
                         <p class="project-desc" id="devDesc">Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.</p>
-                        <div style="font-size: 1.8rem; color: var(--orange);">
+                        <div style="font-size: 1.5rem; color: var(--orange);">
                             <i class="fab fa-html5 me-2"></i><i class="fab fa-css3-alt me-2"></i><i class="fab fa-bootstrap me-2"></i><i class="fab fa-js"></i>
                         </div>
                     </div>
@@ -400,7 +576,7 @@
                     <div class="card-custom">
                         <h3><i class="fas fa-cube" style="color:var(--orange);"></i> <span id="mcTitle">Minecraft Tech</span></h3>
                         <p class="project-desc" id="mcDesc">Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.</p>
-                        <div style="font-family:'Fira Code'; color:var(--orange);">CONFIG // PLUGINS // OPT</div>
+                        <div style="font-family:'Fira Code'; color:var(--orange); font-size:0.8rem;">CONFIG // PLUGINS // OPT</div>
                     </div>
                 </div>
             </div>
@@ -409,14 +585,14 @@
 
     <section id="projects">
         <div class="container">
-            <h2 class="hero-title mb-5"><span id="featured">Featured</span> <span style="color:var(--orange);" id="projectsTitle">Projects</span></h2>
-            <div class="row g-4">
+            <h2 class="hero-title mb-4"><span id="featured">Featured</span> <span style="color:var(--orange);" id="projectsTitle">Projects</span></h2>
+            <div class="row g-3">
                 <div class="col-md-4">
                     <div class="card-custom">
                         <div class="project-badge">HTML5 • CSS3 • JS</div>
                         <div class="project-title" id="project1Title">Portfolio Website</div>
                         <div class="project-desc" id="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</div>
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2 flex-wrap">
                             <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
                             <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span id="live">Live</span></a>
                         </div>
@@ -448,37 +624,37 @@
 
     <section id="skills">
         <div class="container">
-            <h2 class="hero-title mb-5">Tech <span style="color:var(--orange);">Stack</span></h2>
-            <div class="row g-3">
-                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-js"></i></div><h6>JavaScript</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:85%"></div></div><small>85%</small></div></div>
-                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-html5"></i></div><h6>HTML5</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:90%"></div></div><small>90%</small></div></div>
-                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h6>CSS3</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:88%"></div></div><small>88%</small></div></div>
-                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-python"></i></div><h6>Python</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:82%"></div></div><small>82%</small></div></div>
-                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fab fa-bootstrap"></i></div><h6>Bootstrap</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:87%"></div></div><small>87%</small></div></div>
-                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fas fa-cube"></i></div><h6>Minecraft</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:89%"></div></div><small>89%</small></div></div>
-                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fas fa-server"></i></div><h6>Server</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:80%"></div></div><small>80%</small></div></div>
-                <div class="col-md-3 col-6"><div class="skill-item"><div class="skill-icon"><i class="fas fa-terminal"></i></div><h6>CLI/Git</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:84%"></div></div><small>84%</small></div></div>
+            <h2 class="hero-title mb-4">Tech <span style="color:var(--orange);">Stack</span></h2>
+            <div class="row g-2">
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-js"></i></div><h6>JavaScript</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:85%"></div></div><small>85%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-html5"></i></div><h6>HTML5</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:90%"></div></div><small>90%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h6>CSS3</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:88%"></div></div><small>88%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-python"></i></div><h6>Python</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:82%"></div></div><small>82%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-bootstrap"></i></div><h6>Bootstrap</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:87%"></div></div><small>87%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fas fa-cube"></i></div><h6>Minecraft</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:89%"></div></div><small>89%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fas fa-server"></i></div><h6>Server</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:80%"></div></div><small>80%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fas fa-terminal"></i></div><h6>CLI/Git</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:84%"></div></div><small>84%</small></div></div>
             </div>
         </div>
     </section>
 
     <section id="contact">
         <div class="container">
-            <div class="row">
+            <div class="row g-4">
                 <div class="col-lg-6">
-                    <h2 class="hero-title mb-4">Let's <span style="color:var(--orange);">Connect</span></h2>
-                    <form id="contactForm" class="mt-4">
+                    <h2 class="hero-title mb-3">Let's <span style="color:var(--orange);">Connect</span></h2>
+                    <form id="contactForm" class="mt-3">
                         <input type="text" id="nameInput" placeholder="your name" class="form-control-dark mb-3" required>
                         <input type="email" id="emailInput" placeholder="your email" class="form-control-dark mb-3" required>
-                        <textarea id="msgInput" placeholder="your message..." class="form-control-dark mb-3" rows="5" required></textarea>
+                        <textarea id="msgInput" placeholder="your message..." class="form-control-dark mb-3" rows="4" required></textarea>
                         <button type="submit" class="btn-submit">Send Message</button>
-                        <div id="formStatus" class="mt-3" style="font-family:'Fira Code';"></div>
+                        <div id="formStatus" class="mt-3" style="font-family:'Fira Code'; font-size:0.8rem;"></div>
                     </form>
                 </div>
                 <div class="col-lg-6">
                     <div class="card-custom">
-                        <h4 class="mb-4">Get in Touch</h4>
-                        <p class="project-desc">Have a project or wanna collab? Feel free to reach out.</p>
+                        <h4 class="mb-3">Get in Touch</h4>
+                        <p class="project-desc mb-3">Have a project or wanna collab? Feel free to reach out.</p>
                         <div class="mb-3">
                             <span class="text-secondary"><i class="fas fa-envelope" style="color:var(--orange);"></i> Email</span><br>
                             <span class="obfuscated" onclick="reveal()">•••@gmail.com (click)</span>
@@ -509,7 +685,7 @@
 
     <script>
         const tracks = [
-            { name: "MIYAGI - BULLET", src: "https://raw.githubusercontent.com/kras1228/kras1228.github.io/main/music/‎Miyagi & Эндшпиль - Bullet.mp3" }
+            { name: "MIYAGI - BULLET", src: "https://raw.githubusercontent.com/kras1228/kras1228.github.io/main/music/‎Miyagi & Эндшпиль - Bullet.mp3" },
             { name: "MIYAGI - MINOR", src: "https://example.com/track2.mp3" },
             { name: "MIYAGI - CAPTAIN", src: "https://example.com/track3.mp3" }
         ];
@@ -523,30 +699,37 @@
         const volSlider = document.getElementById('volControl');
 
         function loadTrack(index) {
-            audio.src = tracks[index].src;
-            trackSpan.innerText = tracks[index].name;
+            if (tracks[index] && tracks[index].src) {
+                audio.src = tracks[index].src;
+                trackSpan.innerText = tracks[index].name || 'Unknown';
+            }
         }
         loadTrack(0);
 
         playBtn.onclick = () => {
             if (audio.paused) {
-                audio.play();
+                audio.play().catch(() => {
+                    trackSpan.innerText = 'playback error';
+                });
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
             } else {
                 audio.pause();
                 playBtn.innerHTML = '<i class="fas fa-play"></i>';
             }
         };
+        
         prevBtn.onclick = () => {
             curTrack = (curTrack - 1 + tracks.length) % tracks.length;
             loadTrack(curTrack);
             if (!audio.paused) audio.play();
         };
+        
         nextBtn.onclick = () => {
             curTrack = (curTrack + 1) % tracks.length;
             loadTrack(curTrack);
             if (!audio.paused) audio.play();
         };
+        
         volSlider.oninput = (e) => { audio.volume = e.target.value; };
 
         const langEN = {
@@ -635,7 +818,6 @@
         const savedLang = localStorage.getItem('lang') || 'en';
         setLanguage(savedLang);
 
-        // Contact form
         const form = document.getElementById('contactForm');
         const statusDiv = document.getElementById('formStatus');
         form.addEventListener('submit', async (e) => {
@@ -654,7 +836,6 @@
             document.getElementById('realMail').style.display = 'inline';
         };
 
-        // 3d tilt
         document.querySelectorAll('.card-custom').forEach(c => {
             c.addEventListener('mousemove', (e) => {
                 const rect = c.getBoundingClientRect();
