@@ -49,7 +49,6 @@
             pointer-events: none;
         }
 
-        /* ========== МОБИЛЬНАЯ НАВИГАЦИЯ ========== */
         .nav-bar {
             position: fixed;
             top: 12px; left: 4%; right: 4%;
@@ -126,7 +125,6 @@
             color: #000;
         }
 
-        /* ========== МОБИЛЬНЫЙ ПЛЕЕР ========== */
         .music-widget {
             display: flex;
             align-items: center;
@@ -169,7 +167,6 @@
             accent-color: var(--orange);
         }
 
-        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
         section {
             padding: 100px 0 60px;
             min-height: auto;
@@ -219,7 +216,6 @@
             color: #bbb;
         }
 
-        /* ========== КАРТОЧКИ ========== */
         .card-custom {
             background: var(--card-bg);
             border: 1px solid #2a2a2a;
@@ -277,7 +273,6 @@
             gap: 5px;
         }
 
-        /* ========== СКИЛЛЫ ========== */
         .skill-item {
             background: #1e1e1e;
             border-radius: 16px;
@@ -317,7 +312,6 @@
             font-size: 0.65rem;
         }
 
-        /* ========== ФОРМА ========== */
         .form-control-dark {
             background: #1e1e1e;
             border: 1px solid #333;
@@ -369,7 +363,6 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* ========== МЕДИА ЗАПРОСЫ ========== */
         @media (max-width: 992px) {
             .nav-links { gap: 15px; }
             .nav-links a { font-size: 0.8rem; }
@@ -383,7 +376,7 @@
             
             .logo a { font-size: 1.2rem; }
             
-            .nav-links { display: none; } /* скрываем на телефонах */
+            .nav-links { display: none; } 
             
             .lang { margin-left: 0; }
             
@@ -494,7 +487,6 @@
             .soc-link { font-size: 1rem; }
         }
 
-        /* для очень маленьких экранов */
         @media (max-width: 360px) {
             .music-widget button {
                 width: 18px;
@@ -547,7 +539,7 @@
                     <div style="width: 40px; height: 40px; background: #2d2d2d; box-shadow: inset -3px -3px 0 #000, inset 3px 3px 0 #555; margin-bottom: 20px;">
                         <div style="width: 8px; height: 8px; background: #0ff; transform: translate(6px,6px); box-shadow: 12px 10px 0 #0ff, 6px 18px 0 #0ff;"></div>
                     </div>
-                    <h1 class="hero-title" id="heroTitle">Code & <span style="color:var(--orange);"></span></h1>
+                    <h1 class="hero-title" id="heroTitle">Code<span style="color:var(--orange);"></span></h1>
                     <p class="hero-desc" id="heroDesc">
                         16 years old. Full‑Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.
                     </p>
