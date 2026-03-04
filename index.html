@@ -3,73 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="kras // 16 y.o. full-stack developer & python automation">
+    <meta name="description" content="kras // frontend developer (html, css, js)">
     <meta name="author" content="kras">
-    <title>kras / dev</title>
+    <title>kras / frontend</title>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- только то, что реально нужно -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* сброс стандартных стилей */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        /* мои цвета — теперь реально темно и красиво */
         :root {
-            --primary: #3b82f6;
-            --primary-dark: #2563eb;
-            --bg: #0f172a;
-            --bg-light: #1e293b;
-            --card: #1e293b;
-            --text: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg: #0a0c0f;           /* почти черный с синим отливом */
+            --bg-card: #111316;       /* темно-серый для карточек */
+            --surface: #1a1d23;        /* для элементов */
+            --primary: #64b5f6;        /* мягкий синий, не вырвиглаз */
+            --primary-glow: rgba(100, 181, 246, 0.2);
+            --text: #eaeef2;           /* основной текст */
+            --text-secondary: #9aa4b8;  /* второстепенный */
+            --border: #23272e;          /* границы */
+            --transition: 0.25s ease;
         }
 
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* minimalist background */
-        #gradient-bg {
+        /* красивый темный градиент на фон */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 0% 0%, rgba(59,130,246,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(59,130,246,0.1) 0%, transparent 50%),
-                var(--bg);
+                radial-gradient(circle at 20% 30%, rgba(100, 181, 246, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(100, 181, 246, 0.03) 0%, transparent 50%);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* navigation */
+        /* навбар — минималистичный, чистый */
         .nav-bar {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
-            max-width: 1200px;
-            background: rgba(30, 41, 59, 0.8);
+            max-width: 1100px;
+            background: rgba(17, 19, 22, 0.8);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border);
-            border-radius: 100px;
-            padding: 12px 24px;
+            border-radius: 60px;
+            padding: 12px 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            z-index: 1000;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            z-index: 100;
+            box-shadow: 0 15px 40px -15px rgba(0,0,0,0.8);
         }
 
         .logo a {
@@ -78,152 +81,88 @@
             color: var(--primary);
             text-decoration: none;
             letter-spacing: -0.5px;
-            transition: var(--transition);
         }
 
-        .logo a:hover {
-            color: var(--primary-dark);
-        }
-
+        /* навигация — просто ссылки, без выпендрежа */
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 36px;
             list-style: none;
-            margin: 0;
-            padding: 0;
         }
         
         .nav-links a {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.95rem;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
+            font-weight: 600;
             transition: var(--transition);
         }
         
         .nav-links a:hover {
-            color: var(--text);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
+            color: var(--primary);
         }
 
-        .lang {
+        /* переключатель языка — маленький, аккуратный */
+        .lang-switch {
             display: flex;
             gap: 4px;
-            background: var(--bg-light);
+            background: var(--surface);
             padding: 4px;
-            border-radius: 100px;
+            border-radius: 40px;
             border: 1px solid var(--border);
-            margin-left: 16px;
+            margin-left: 20px;
         }
         
-        .lang span {
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 4px 12px;
-            border-radius: 100px;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-        
-        .lang span.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .music-widget {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-light);
-            padding: 4px 12px;
-            border-radius: 100px;
-            border: 1px solid var(--border);
-        }
-        
-        .music-widget button {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        
-        .music-widget button:hover {
-            color: var(--primary);
-            background: rgba(59,130,246,0.1);
-        }
-        
-        #trackDisplay {
+        .lang-switch span {
             font-size: 0.75rem;
-            color: var(--text);
-            max-width: 100px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 30px;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            text-transform: uppercase;
         }
         
-        .vol-slider {
-            width: 50px;
-            height: 4px;
-            accent-color: var(--primary);
+        .lang-switch span.active {
+            background: var(--primary);
+            color: #0a0c0f;
         }
 
-        /* sections */
+        /* секции — каждая со своим настроением */
         section {
-            padding: 120px 0 80px;
+            padding: 140px 0 100px;
             min-height: 100vh;
             display: flex;
             align-items: center;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* hero */
+        /* главный экран — минимум текста, максимум смысла */
         .hero-title {
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 800;
             line-height: 1.1;
             letter-spacing: -2px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
         
         .hero-title span {
             color: var(--primary);
-            display: inline-block;
             position: relative;
+            display: inline-block;
         }
         
+        /* легкое подчеркивание */
         .hero-title span::after {
             content: '';
             position: absolute;
-            bottom: 10px;
+            bottom: 8px;
             left: 0;
             width: 100%;
             height: 8px;
@@ -234,71 +173,81 @@
         
         .hero-desc {
             font-size: 1.1rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             max-width: 600px;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
         }
-        
-        .badge-list {
+
+        /* стек технологий — именно то, что ты знаешь */
+        .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 16px;
+            margin-bottom: 30px;
         }
         
-        .badge {
-            background: var(--bg-light);
+        .tech-item {
+            background: var(--surface);
             border: 1px solid var(--border);
-            padding: 6px 16px;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-muted);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .badge:hover {
-            border-color: var(--primary);
+        .tech-item i {
             color: var(--primary);
+            font-size: 1rem;
+        }
+        
+        .tech-item:hover {
+            border-color: var(--primary);
+            color: var(--text);
             transform: translateY(-2px);
         }
 
-        /* cards */
-        .card-custom {
-            background: var(--card);
+        /* карточки — темные, но с душой */
+        .card {
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 32px;
             height: 100%;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
         
-        .card-custom::before {
+        /* тонкий градиент при наведении */
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), transparent);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, var(--primary-glow), transparent 70%);
             opacity: 0;
             transition: var(--transition);
+            pointer-events: none;
         }
         
-        .card-custom:hover {
-            transform: translateY(-8px);
+        .card:hover {
             border-color: var(--primary);
-            box-shadow: 0 20px 40px -15px rgba(59,130,246,0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.8), 0 0 0 1px rgba(100, 181, 246, 0.1);
         }
         
-        .card-custom:hover::before {
-            opacity: 1;
+        .card:hover::before {
+            opacity: 0.5;
         }
 
-        .card-custom h3 {
+        .card h3 {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 16px;
@@ -307,21 +256,23 @@
             gap: 10px;
         }
         
-        .card-custom h3 i {
+        .card h3 i {
             color: var(--primary);
         }
 
+        /* для проектов */
         .project-badge {
             display: inline-block;
-            background: rgba(59,130,246,0.1);
+            background: rgba(100, 181, 246, 0.1);
+            border: 1px solid rgba(100, 181, 246, 0.2);
             color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 100px;
+            padding: 4px 14px;
+            border-radius: 40px;
             font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
             margin-bottom: 16px;
-            border: 1px solid rgba(59,130,246,0.2);
+            text-transform: uppercase;
         }
 
         .project-title {
@@ -332,48 +283,40 @@
         }
         
         .project-desc {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1;
+            margin-bottom: 24px;
         }
-        
-        .btn-ghost {
+
+        /* кнопки — простые, как я люблю */
+        .btn {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text);
-            padding: 8px 18px;
-            border-radius: 100px;
+            padding: 8px 20px;
+            border-radius: 40px;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            width: fit-content;
         }
         
-        .btn-ghost:hover {
+        .btn:hover {
             border-color: var(--primary);
             color: var(--primary);
-            background: rgba(59,130,246,0.05);
-            transform: translateY(-2px);
-        }
-        
-        .btn-ghost.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
+            background: rgba(100, 181, 246, 0.05);
         }
 
-        /* skills */
+        /* скиллы — простые бары, без понтов */
         .skill-item {
-            background: var(--bg-light);
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 20px;
+            padding: 20px 15px;
             text-align: center;
             transition: var(--transition);
             height: 100%;
@@ -387,39 +330,26 @@
         .skill-icon {
             font-size: 2rem;
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
-        .skill-item h6 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text);
-        }
-        
-        .skill-bar-bg {
+        .skill-bar {
             width: 100%;
-            height: 6px;
+            height: 4px;
             background: var(--border);
-            border-radius: 3px;
-            margin: 10px 0 6px;
+            border-radius: 4px;
+            margin: 12px 0 6px;
         }
         
         .skill-fill {
-            height: 6px;
-            background: linear-gradient(90deg, var(--primary), #60a5fa);
-            border-radius: 3px;
-        }
-        
-        .skill-item small {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            font-weight: 500;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 4px;
         }
 
-        /* contact */
-        .form-control-dark {
-            background: var(--bg-light);
+        /* форма — тоже в тему */
+        .form-control {
+            background: var(--surface);
             border: 1px solid var(--border);
             color: var(--text);
             padding: 14px 18px;
@@ -427,64 +357,60 @@
             width: 100%;
             font-size: 0.95rem;
             transition: var(--transition);
+            font-family: inherit;
         }
         
-        .form-control-dark:focus {
+        .form-control:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-        }
-        
-        .form-control-dark::placeholder {
-            color: var(--text-muted);
-            opacity: 0.5;
+            box-shadow: 0 0 0 3px var(--primary-glow);
         }
         
         .btn-submit {
             background: var(--primary);
             border: none;
-            color: white;
-            font-weight: 600;
-            padding: 14px 32px;
-            border-radius: 100px;
+            color: #0a0c0f;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 40px;
             cursor: pointer;
             transition: var(--transition);
             width: 100%;
             font-size: 1rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         
         .btn-submit:hover {
-            background: var(--primary-dark);
+            background: #7ac2ff;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(59,130,246,0.4);
+            box-shadow: 0 10px 25px -5px rgba(100, 181, 246, 0.3);
         }
 
-        .obfuscated {
-            background: var(--bg-light);
+        /* email — скрытый, но красивый */
+        .email-hidden {
+            background: var(--surface);
             border: 1px dashed var(--primary);
-            color: var(--text-muted);
-            padding: 6px 14px;
-            border-radius: 100px;
+            color: var(--text-secondary);
+            padding: 6px 16px;
+            border-radius: 40px;
             display: inline-block;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             transition: var(--transition);
         }
         
-        .obfuscated:hover {
-            background: rgba(59,130,246,0.1);
+        .email-hidden:hover {
+            background: rgba(100, 181, 246, 0.1);
             color: var(--primary);
         }
         
-        .soc-link {
-            color: var(--text-muted);
+        .social-link {
+            color: var(--text-secondary);
             font-size: 1.4rem;
             transition: var(--transition);
-            display: inline-block;
         }
         
-        .soc-link:hover {
+        .social-link:hover {
             color: var(--primary);
             transform: translateY(-3px);
         }
@@ -493,257 +419,221 @@
             border-top: 1px solid var(--border);
             padding: 40px 20px;
             text-align: center;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.8rem;
         }
 
-        /* responsive */
-        @media (max-width: 992px) {
-            .nav-links { gap: 24px; }
-            .nav-links a { font-size: 0.85rem; }
-        }
-
+        /* адаптация для мобильных */
         @media (max-width: 768px) {
             .nav-bar {
                 padding: 10px 20px;
             }
             
-            .logo a { font-size: 1.3rem; }
-            
-            .nav-links { display: none; }
-            
-            .lang { margin-left: 0; }
-            
-            .music-widget {
-                padding: 4px 8px;
+            .nav-links {
+                display: none;
             }
             
-            .music-widget button {
-                width: 24px;
-                height: 24px;
+            .hero-title {
+                font-size: 2.5rem;
             }
             
-            #trackDisplay { max-width: 60px; }
-            
-            .vol-slider { width: 40px; }
-            
-            section { padding: 100px 0 60px; }
-            
-            .hero-title { font-size: 2.8rem; }
-            
-            .hero-desc { font-size: 1rem; }
-            
-            .card-custom { padding: 24px; }
-            
-            .project-title { font-size: 1.2rem; }
-        }
-
-        @media (max-width: 480px) {
-            .nav-bar { padding: 8px 16px; }
-            
-            .music-widget button {
-                width: 22px;
-                height: 22px;
-                font-size: 0.7rem;
+            section {
+                padding: 120px 0 60px;
             }
             
-            #trackDisplay { max-width: 45px; }
-            
-            .vol-slider { width: 35px; }
-            
-            .hero-title { font-size: 2.2rem; }
-            
-            .badge { 
-                font-size: 0.75rem; 
-                padding: 4px 12px; 
+            .card {
+                padding: 24px;
             }
-            
-            .card-custom { padding: 20px; }
-            
-            .btn-ghost { 
-                padding: 6px 14px; 
-                font-size: 0.8rem; 
-            }
-            
-            .skill-item { padding: 15px 10px; }
-            
-            .skill-icon { font-size: 1.6rem; }
-            
-            .skill-item h6 { font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
-    <div id="gradient-bg"></div>
 
+    <!-- навигация — ничего лишнего -->
     <div class="nav-bar">
-        <div class="logo"><a href="#home">kras</a></div>
+        <div class="logo"><a href="#home">kras.</a></div>
         
-        <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="display: flex; align-items: center;">
             <ul class="nav-links">
-                <li><a href="#about" id="nav-about">About</a></li>
-                <li><a href="#projects" id="nav-projects">Projects</a></li>
-                <li><a href="#skills" id="nav-skills">Skills</a></li>
-                <li><a href="#contact" id="nav-contact">Contact</a></li>
+                <li><a href="#about" id="nav-about">about</a></li>
+                <li><a href="#projects" id="nav-projects">projects</a></li>
+                <li><a href="#skills" id="nav-skills">skills</a></li>
+                <li><a href="#contact" id="nav-contact">contact</a></li>
             </ul>
             
-            <div class="lang">
-                <span class="lang-opt active" data-lang="en">EN</span>
-                <span class="lang-opt" data-lang="ru">RU</span>
-            </div>
-
-            <div class="music-widget">
-                <button id="playBtn"><i class="fas fa-play"></i></button>
-                <button id="prevBtn"><i class="fas fa-backward"></i></button>
-                <button id="nextBtn"><i class="fas fa-forward"></i></button>
-                <span id="trackDisplay">MIYAGI - BULLET</span>
-                <input type="range" id="volControl" class="vol-slider" min="0" max="1" step="0.05" value="0.5">
+            <div class="lang-switch">
+                <span class="lang-opt active" data-lang="en">en</span>
+                <span class="lang-opt" data-lang="ru">ru</span>
             </div>
         </div>
     </div>
 
+    <!-- главная — всё по делу -->
     <section id="home">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-10">
-                    <h1 class="hero-title" id="heroTitle"><span>code</span> & create</h1>
-                    <p class="hero-desc" id="heroDesc">
-                        16 years old. full-stack developer specializing in responsive web design, python automation, and clean code. passionate about creating elegant solutions and seamless user experiences.
-                    </p>
-                    <div class="badge-list">
-                        <span class="badge">HTML5</span>
-                        <span class="badge">CSS3</span>
-                        <span class="badge">JavaScript</span>
-                        <span class="badge">Bootstrap</span>
-                        <span class="badge">Python</span>
-                        <span class="badge">React</span>
-                        <span class="badge">Node.js</span>
-                        <span class="badge">Git</span>
-                    </div>
+            <div class="row" style="display: block;">
+                <h1 class="hero-title" id="heroTitle"><span>frontend</span> developer</h1>
+                <p class="hero-desc" id="heroDesc">
+                    я знаю html, css и javascript. делаю аккуратные интерфейсы, которые работают. мне 16 лет и это моё портфолио.
+                </p>
+                
+                <!-- именно то, что я реально знаю -->
+                <div class="tech-stack">
+                    <span class="tech-item"><i class="fab fa-html5"></i> HTML5</span>
+                    <span class="tech-item"><i class="fab fa-css3-alt"></i> CSS3</span>
+                    <span class="tech-item"><i class="fab fa-js"></i> JavaScript</span>
+                    <span class="tech-item"><i class="fas fa-mobile-alt"></i> адаптив</span>
+                    <span class="tech-item"><i class="fas fa-paint-brush"></i> дизайн</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- обо мне — кратко и честно -->
     <section id="about">
         <div class="container">
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card-custom">
-                        <h3><i class="fas fa-code"></i> <span id="devTitle">web development</span></h3>
-                        <p class="project-desc" id="devDesc">creating responsive, modern websites and web applications using cutting-edge technologies. focused on clean code, performance optimization, and user-centric design.</p>
-                        <div style="font-size: 1.5rem; color: var(--primary); margin-top: auto;">
-                            <i class="fab fa-html5 me-2"></i>
-                            <i class="fab fa-css3-alt me-2"></i>
-                            <i class="fab fa-js me-2"></i>
-                            <i class="fab fa-react me-2"></i>
-                            <i class="fab fa-node"></i>
-                        </div>
-                    </div>
+            <div class="row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> <span id="about1">html & css</span></h3>
+                    <p class="project-desc" id="about1desc">верстаю аккуратно, семантично, с заботой о пользователе. разбираюсь в flex, grid, адаптивной верстке.</p>
                 </div>
-                <div class="col-md-6">
-                    <div class="card-custom">
-                        <h3><i class="fas fa-robot"></i> <span id="automationTitle">python & automation</span></h3>
-                        <p class="project-desc" id="automationDesc">building powerful automation tools, scripts, and backend systems. experienced with data processing, api development, and workflow optimization.</p>
-                        <div style="font-family: 'Inter', monospace; color: var(--primary); font-size:0.9rem; margin-top: auto;">
-                            PYTHON // AUTOMATION // SCRIPTS
-                        </div>
-                    </div>
+                <div class="card">
+                    <h3><i class="fas fa-cubes"></i> <span id="about2">javascript</span></h3>
+                    <p class="project-desc" id="about2desc">пишу на чистом js без фреймворков. понимаю основы, умею работать с DOM, событиями, асинхронностью.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-magic"></i> <span id="about3">инструменты</span></h3>
+                    <p class="project-desc" id="about3desc">git, bootstrap, figma. разбираюсь в том, что реально нужно для работы.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- проекты — то, что реально сделано -->
     <section id="projects">
         <div class="container">
-            <h2 class="hero-title mb-5"><span id="featured">featured</span> <span style="color:var(--primary);" id="projectsTitle">projects</span></h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card-custom">
-                        <div class="project-badge">HTML5 • CSS3 • JS</div>
-                        <div class="project-title" id="project1Title">modern portfolio</div>
-                        <div class="project-desc" id="project1Desc">clean, responsive portfolio with smooth animations and minimalist design. built with vanilla javascript and bootstrap 5.</div>
-                        <div class="d-flex gap-2 flex-wrap">
-                            <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> github</a>
-                            <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span id="live">live demo</span></a>
-                        </div>
+            <h2 class="hero-title" style="margin-bottom: 50px;"><span id="projects-title">мои</span> проекты</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                <!-- проект 1 -->
+                <div class="card">
+                    <div class="project-badge">html/css/js</div>
+                    <div class="project-title" id="proj1">портфолио сайт</div>
+                    <p class="project-desc" id="proj1desc">этот сайт, который ты видишь. полностью на чистом html, css и js. адаптивный, с переключателем языка.</p>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="#" class="btn"><i class="fab fa-github"></i> код</a>
+                        <a href="#" class="btn"><i class="fas fa-link"></i> <span id="live1">live</span></a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card-custom">
-                        <div class="project-badge">PYTHON • AUTOMATION</div>
-                        <div class="project-title" id="project2Title">task automator</div>
-                        <div class="project-desc" id="project2Desc">python scripts for automating repetitive tasks, file management, and data processing. includes cli interface and scheduling.</div>
-                        <div class="d-flex gap-2">
-                            <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> github</a>
-                        </div>
+                
+                <!-- проект 2 -->
+                <div class="card">
+                    <div class="project-badge">javascript</div>
+                    <div class="project-title" id="proj2">todo-приложение</div>
+                    <p class="project-desc" id="proj2desc">классическое приложение для задач. добавление, удаление, сохранение в localStorage.</p>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="#" class="btn"><i class="fab fa-github"></i> код</a>
+                        <a href="#" class="btn"><i class="fas fa-link"></i> <span id="live2">live</span></a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card-custom">
-                        <div class="project-badge">REACT • NODE.JS</div>
-                        <div class="project-title" id="project3Title">taskflow app</div>
-                        <div class="project-desc" id="project3Desc">full-stack task management application with real-time updates, user authentication, and responsive design.</div>
-                        <div class="d-flex gap-2">
-                            <a href="#" class="btn-ghost"><i class="fab fa-github"></i> github</a>
-                            <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span id="live2">live demo</span></a>
-                        </div>
+                
+                <!-- проект 3 -->
+                <div class="card">
+                    <div class="project-badge">адаптив</div>
+                    <div class="project-title" id="proj3">лендинг</div>
+                    <p class="project-desc" id="proj3desc">лендинг для вымышленного продукта. чистый код, анимации при скролле.</p>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="#" class="btn"><i class="fab fa-github"></i> код</a>
+                        <a href="#" class="btn"><i class="fas fa-link"></i> <span id="live3">live</span></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- навыки — с процентными барами (честно) -->
     <section id="skills">
         <div class="container">
-            <h2 class="hero-title mb-5">tech <span style="color:var(--primary);">stack</span></h2>
-            <div class="row g-3">
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-js"></i></div><h6>JavaScript</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:85%"></div></div><small>85%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-python"></i></div><h6>Python</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:80%"></div></div><small>80%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-react"></i></div><h6>React</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:75%"></div></div><small>75%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-node"></i></div><h6>Node.js</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:70%"></div></div><small>70%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-html5"></i></div><h6>HTML5</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:90%"></div></div><small>90%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h6>CSS3</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:85%"></div></div><small>85%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fas fa-database"></i></div><h6>SQL</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:65%"></div></div><small>65%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-git-alt"></i></div><h6>Git</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:80%"></div></div><small>80%</small></div></div>
+            <h2 class="hero-title" style="margin-bottom: 50px;"><span>мои</span> навыки</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <h6>HTML5</h6>
+                    <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+                    <small>90%</small>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <h6>CSS3</h6>
+                    <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+                    <small>85%</small>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-js"></i></div>
+                    <h6>JavaScript</h6>
+                    <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+                    <small>75%</small>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h6>адаптив</h6>
+                    <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+                    <small>85%</small>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                    <h6>Git</h6>
+                    <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+                    <small>70%</small>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h6>дизайн</h6>
+                    <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+                    <small>65%</small>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- контакты -->
     <section id="contact">
         <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <h2 class="hero-title mb-3">let's <span style="color:var(--primary);">connect</span></h2>
-                    <form id="contactForm" class="mt-4">
-                        <input type="text" id="nameInput" placeholder="your name" class="form-control-dark mb-3" required>
-                        <input type="email" id="emailInput" placeholder="your email" class="form-control-dark mb-3" required>
-                        <textarea id="msgInput" placeholder="your message..." class="form-control-dark mb-3" rows="4" required></textarea>
-                        <button type="submit" class="btn-submit">send message</button>
-                        <div id="formStatus" class="mt-3" style="font-size:0.9rem;"></div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- форма -->
+                <div>
+                    <h2 class="hero-title" style="margin-bottom: 20px;"><span>напиши</span> мне</h2>
+                    <form id="contactForm">
+                        <input type="text" id="nameInput" placeholder="твое имя" class="form-control mb-3" required>
+                        <input type="email" id="emailInput" placeholder="твой email" class="form-control mb-3" required>
+                        <textarea id="msgInput" placeholder="сообщение..." class="form-control mb-3" rows="4" required></textarea>
+                        <button type="submit" class="btn-submit">отправить</button>
+                        <div id="formStatus" class="mt-3" style="font-size:0.9rem; color: var(--text-secondary);"></div>
                     </form>
                 </div>
-                <div class="col-lg-6">
-                    <div class="card-custom">
-                        <h4 class="mb-3">get in touch</h4>
-                        <p class="project-desc mb-4">have a project or want to collaborate? feel free to reach out.</p>
-                        <div class="mb-4">
-                            <span class="text-secondary"><i class="fas fa-envelope" style="color:var(--primary);"></i> email</span><br>
-                            <span class="obfuscated" onclick="reveal()">•••@gmail.com (click)</span>
-                            <span id="realMail" style="display:none;"><a href="mailto:niyatjon1228@gmail.com" style="color:var(--primary);">niyatjon1228@gmail.com</a></span>
-                        </div>
-                        <div class="mb-4">
-                            <span class="text-secondary"><i class="fas fa-map-marker-alt" style="color:var(--primary);"></i> location</span><br>
-                            <span>remote / worldwide</span>
-                        </div>
-                        <div>
-                            <span class="text-secondary"><i class="fas fa-link" style="color:var(--primary);"></i> social</span><br>
-                            <div class="d-flex gap-4 mt-3">
-                                <a href="https://t.me/pik_fra" class="soc-link" target="_blank"><i class="fab fa-telegram"></i></a>
-                                <a href="https://github.com/kras1228" class="soc-link" target="_blank"><i class="fab fa-github"></i></a>
-                                <a href="#" class="soc-link"><i class="fab fa-discord"></i></a>
-                                <a href="#" class="soc-link"><i class="fab fa-x-twitter"></i></a>
-                            </div>
+                
+                <!-- контакты -->
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">связаться</h3>
+                    <p class="project-desc" style="margin-bottom: 30px;">если есть идея или просто хочешь поздороваться — пиши</p>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="color: var(--text-secondary); margin-bottom: 5px;"><i class="fas fa-envelope" style="color: var(--primary);"></i> email</div>
+                        <span class="email-hidden" onclick="revealEmail()">•••@gmail.com (показать)</span>
+                        <div id="realEmail" style="display: none;"><a href="mailto:niyatjon1228@gmail.com" style="color: var(--primary); text-decoration: none;">niyatjon1228@gmail.com</a></div>
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="color: var(--text-secondary); margin-bottom: 5px;"><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> локация</div>
+                        <span>россия / онлайн</span>
+                    </div>
+                    
+                    <div>
+                        <div style="color: var(--text-secondary); margin-bottom: 10px;"><i class="fas fa-link" style="color: var(--primary);"></i> соцсети</div>
+                        <div style="display: flex; gap: 20px;">
+                            <a href="https://t.me/pik_fra" class="social-link" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a href="https://github.com/kras1228" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -752,137 +642,96 @@
     </section>
 
     <footer>
-        <p>© 2026 kras // since day one</p>
-        <p style="font-size:0.7rem; margin-top: 8px;">built with <span style="color: var(--primary);">❤</span> and caffeine</p>
+        <p>© 2026 kras // сделано на html, css и js</p>
     </footer>
 
     <script>
-        const tracks = [
-            { name: "MIYAGI - BULLET", src: "https://raw.githubusercontent.com/kras1228/kras1228.github.io/main/music/Miyagi%20%26%20%D0%AD%D0%BD%D0%B4%D1%88%D0%BF%D0%B8%D0%BB%D1%8C%20-%20Bullet.mp3" },
-            { name: "MIYAGI - MINOR", src: "https://example.com/track2.mp3" },
-            { name: "MIYAGI - CAPTAIN", src: "https://example.com/track3.mp3" }
-        ];
-        
-        let curTrack = 0;
-        const audio = new Audio();
-        const playBtn = document.getElementById('playBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const trackSpan = document.getElementById('trackDisplay');
-        const volSlider = document.getElementById('volControl');
-
-        function loadTrack(index) {
-            if (tracks[index] && tracks[index].src) {
-                audio.src = tracks[index].src;
-                trackSpan.innerText = tracks[index].name || 'unknown';
+        // переключение языка — просто и понятно
+        const translations = {
+            en: {
+                'nav-about': 'about',
+                'nav-projects': 'projects',
+                'nav-skills': 'skills',
+                'nav-contact': 'contact',
+                'heroTitle': 'frontend developer',
+                'heroDesc': 'i know html, css and javascript. i make clean interfaces that work. i\'m 16 and this is my portfolio.',
+                'about1': 'html & css',
+                'about1desc': 'i code neatly, semantically, with care for the user. i understand flex, grid, responsive design.',
+                'about2': 'javascript',
+                'about2desc': 'i write vanilla js without frameworks. i know the basics, dom, events, async.',
+                'about3': 'tools',
+                'about3desc': 'git, bootstrap, figma. i know what\'s actually needed for work.',
+                'projects-title': 'my',
+                'proj1': 'portfolio website',
+                'proj1desc': 'this site you\'re looking at. pure html, css and js. responsive, with language switch.',
+                'proj2': 'todo app',
+                'proj2desc': 'classic task app. add, delete, save to localStorage.',
+                'proj3': 'landing page',
+                'proj3desc': 'landing for a fictional product. clean code, scroll animations.',
+                'live1': 'live',
+                'live2': 'live',
+                'live3': 'live'
+            },
+            ru: {
+                'nav-about': 'обо мне',
+                'nav-projects': 'проекты',
+                'nav-skills': 'навыки',
+                'nav-contact': 'контакты',
+                'heroTitle': 'frontend разработчик',
+                'heroDesc': 'я знаю html, css и javascript. делаю аккуратные интерфейсы, которые работают. мне 16 лет и это моё портфолио.',
+                'about1': 'html & css',
+                'about1desc': 'верстаю аккуратно, семантично, с заботой о пользователе. разбираюсь в flex, grid, адаптивной верстке.',
+                'about2': 'javascript',
+                'about2desc': 'пишу на чистом js без фреймворков. понимаю основы, умею работать с DOM, событиями, асинхронностью.',
+                'about3': 'инструменты',
+                'about3desc': 'git, bootstrap, figma. разбираюсь в том, что реально нужно для работы.',
+                'projects-title': 'мои',
+                'proj1': 'портфолио сайт',
+                'proj1desc': 'этот сайт, который ты видишь. полностью на чистом html, css и js. адаптивный, с переключателем языка.',
+                'proj2': 'todo-приложение',
+                'proj2desc': 'классическое приложение для задач. добавление, удаление, сохранение в localStorage.',
+                'proj3': 'лендинг',
+                'proj3desc': 'лендинг для вымышленного продукта. чистый код, анимации при скролле.',
+                'live1': 'демо',
+                'live2': 'демо',
+                'live3': 'демо'
             }
-        }
-        loadTrack(0);
-
-        playBtn.onclick = () => {
-            if (audio.paused) {
-                audio.play().catch(() => {
-                    trackSpan.innerText = 'error';
-                });
-                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            } else {
-                audio.pause();
-                playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            }
-        };
-        
-        prevBtn.onclick = () => {
-            curTrack = (curTrack - 1 + tracks.length) % tracks.length;
-            loadTrack(curTrack);
-            if (!audio.paused) audio.play();
-        };
-        
-        nextBtn.onclick = () => {
-            curTrack = (curTrack + 1) % tracks.length;
-            loadTrack(curTrack);
-            if (!audio.paused) audio.play();
-        };
-        
-        volSlider.oninput = (e) => { audio.volume = e.target.value; };
-
-        const langEN = {
-            'nav-about': 'About',
-            'nav-projects': 'Projects',
-            'nav-skills': 'Skills',
-            'nav-contact': 'Contact',
-            'heroTitle': 'code & create',
-            'heroDesc': '16 years old. full-stack developer specializing in responsive web design, python automation, and clean code. passionate about creating elegant solutions and seamless user experiences.',
-            'devTitle': 'web development',
-            'devDesc': 'creating responsive, modern websites and web applications using cutting-edge technologies. focused on clean code, performance optimization, and user-centric design.',
-            'automationTitle': 'python & automation',
-            'automationDesc': 'building powerful automation tools, scripts, and backend systems. experienced with data processing, api development, and workflow optimization.',
-            'featured': 'featured',
-            'projectsTitle': 'projects',
-            'project1Title': 'modern portfolio',
-            'project1Desc': 'clean, responsive portfolio with smooth animations and minimalist design. built with vanilla javascript and bootstrap 5.',
-            'project2Title': 'task automator',
-            'project2Desc': 'python scripts for automating repetitive tasks, file management, and data processing. includes cli interface and scheduling.',
-            'project3Title': 'taskflow app',
-            'project3Desc': 'full-stack task management application with real-time updates, user authentication, and responsive design.',
-            'live': 'live demo',
-            'live2': 'live demo',
-            'private': 'private'
-        };
-
-        const langRU = {
-            'nav-about': 'Обо мне',
-            'nav-projects': 'Проекты',
-            'nav-skills': 'Навыки',
-            'nav-contact': 'Контакты',
-            'heroTitle': 'код и творчество',
-            'heroDesc': '16 лет. full-stack разработчик, специализирующийся на адаптивном веб-дизайне, автоматизации на python и чистом коде. создаю элегантные решения.',
-            'devTitle': 'веб-разработка',
-            'devDesc': 'создание современных адаптивных сайтов и веб-приложений. чистый код, оптимизация, пользовательский опыт.',
-            'automationTitle': 'python и автоматизация',
-            'automationDesc': 'разработка инструментов автоматизации, скриптов и бэкенд систем. опыт работы с обработкой данных и api.',
-            'featured': 'избранные',
-            'projectsTitle': 'проекты',
-            'project1Title': 'современное портфолио',
-            'project1Desc': 'минималистичное портфолио с плавными анимациями. сделано на чистом js и bootstrap 5.',
-            'project2Title': 'автоматизация задач',
-            'project2Desc': 'python скрипты для автоматизации рутинных задач, управления файлами и обработки данных.',
-            'project3Title': 'taskflow приложение',
-            'project3Desc': 'full-stack приложение для управления задачами с real-time обновлениями и авторизацией.',
-            'live': 'демо',
-            'live2': 'демо',
-            'private': 'приватно'
         };
 
         function setLanguage(lang) {
-            const dict = lang === 'ru' ? langRU : langEN;
+            const t = translations[lang];
             
-            document.getElementById('nav-about').innerText = dict['nav-about'];
-            document.getElementById('nav-projects').innerText = dict['nav-projects'];
-            document.getElementById('nav-skills').innerText = dict['nav-skills'];
-            document.getElementById('nav-contact').innerText = dict['nav-contact'];
+            document.getElementById('nav-about').innerText = t['nav-about'];
+            document.getElementById('nav-projects').innerText = t['nav-projects'];
+            document.getElementById('nav-skills').innerText = t['nav-skills'];
+            document.getElementById('nav-contact').innerText = t['nav-contact'];
             
-            document.getElementById('heroTitle').innerHTML = `<span>${dict['heroTitle'].split(' ')[0]}</span> ${dict['heroTitle'].split(' ').slice(1).join(' ')}`;
-            document.getElementById('heroDesc').innerText = dict['heroDesc'];
+            document.getElementById('heroTitle').innerHTML = `<span>${t['heroTitle'].split(' ')[0]}</span> ${t['heroTitle'].split(' ').slice(1).join(' ')}`;
+            document.getElementById('heroDesc').innerText = t['heroDesc'];
             
-            document.getElementById('devTitle').innerText = dict['devTitle'];
-            document.getElementById('devDesc').innerText = dict['devDesc'];
-            document.getElementById('automationTitle').innerText = dict['automationTitle'];
-            document.getElementById('automationDesc').innerText = dict['automationDesc'];
+            document.getElementById('about1').innerText = t['about1'];
+            document.getElementById('about1desc').innerText = t['about1desc'];
+            document.getElementById('about2').innerText = t['about2'];
+            document.getElementById('about2desc').innerText = t['about2desc'];
+            document.getElementById('about3').innerText = t['about3'];
+            document.getElementById('about3desc').innerText = t['about3desc'];
             
-            document.getElementById('featured').innerText = dict['featured'];
-            document.getElementById('projectsTitle').innerText = dict['projectsTitle'];
-            document.getElementById('project1Title').innerText = dict['project1Title'];
-            document.getElementById('project1Desc').innerText = dict['project1Desc'];
-            document.getElementById('project2Title').innerText = dict['project2Title'];
-            document.getElementById('project2Desc').innerText = dict['project2Desc'];
-            document.getElementById('project3Title').innerText = dict['project3Title'];
-            document.getElementById('project3Desc').innerText = dict['project3Desc'];
-            document.getElementById('live').innerText = dict['live'];
-            document.getElementById('live2').innerText = dict['live2'];
+            document.getElementById('projects-title').innerText = t['projects-title'];
+            document.getElementById('proj1').innerText = t['proj1'];
+            document.getElementById('proj1desc').innerText = t['proj1desc'];
+            document.getElementById('proj2').innerText = t['proj2'];
+            document.getElementById('proj2desc').innerText = t['proj2desc'];
+            document.getElementById('proj3').innerText = t['proj3'];
+            document.getElementById('proj3desc').innerText = t['proj3desc'];
+            
+            document.getElementById('live1').innerText = t['live1'];
+            document.getElementById('live2').innerText = t['live2'];
+            document.getElementById('live3').innerText = t['live3'];
 
             document.querySelectorAll('.lang-opt').forEach(opt => {
                 opt.classList.toggle('active', opt.dataset.lang === lang);
             });
+            
             localStorage.setItem('lang', lang);
         }
 
@@ -890,36 +739,38 @@
             opt.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
         });
 
-        const savedLang = localStorage.getItem('lang') || 'en';
+        const savedLang = localStorage.getItem('lang') || 'ru';
         setLanguage(savedLang);
 
+        // форма обратной связи
         const form = document.getElementById('contactForm');
         const statusDiv = document.getElementById('formStatus');
+        
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            statusDiv.innerText = 'sending...';
-            statusDiv.style.color = '#94a3b8';
+            statusDiv.innerText = 'отправка...';
             await new Promise(r => setTimeout(r, 1000));
-            statusDiv.innerText = '✓ message sent to niyatjon1228@gmail.com';
-            statusDiv.style.color = '#3b82f6';
+            statusDiv.innerText = '✓ сообщение отправлено (демо)';
             form.reset();
-            setTimeout(() => statusDiv.innerText = '', 4000);
+            setTimeout(() => statusDiv.innerText = '', 3000);
         });
 
-        window.reveal = function() {
-            document.querySelector('.obfuscated').style.display = 'none';
-            document.getElementById('realMail').style.display = 'inline';
+        // показать email
+        window.revealEmail = function() {
+            document.querySelector('.email-hidden').style.display = 'none';
+            document.getElementById('realEmail').style.display = 'block';
         };
 
-        document.querySelectorAll('.card-custom').forEach(c => {
-            c.addEventListener('mousemove', (e) => {
-                const rect = c.getBoundingClientRect();
+        // 3d эффект для карточек (легкий)
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width/2;
                 const y = e.clientY - rect.top - rect.height/2;
-                c.style.transform = `perspective(1000px) rotateY(${x/40}deg) rotateX(${-y/40}deg)`;
+                card.style.transform = `perspective(1000px) rotateY(${x/50}deg) rotateX(${-y/50}deg)`;
             });
-            c.addEventListener('mouseleave', () => {
-                c.style.transform = 'none';
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'none';
             });
         });
     </script>
