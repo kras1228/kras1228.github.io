@@ -3,387 +3,543 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="16 y.o. dev crafting web, python tools & minecraft stuff. portfolio by kras.">
+    <meta name="description" content="kras // 16 y.o. full-stack developer & python automation">
     <meta name="author" content="kras">
     <title>kras / dev</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
         :root {
-            --orange: #ff4d00;
-            --black: #0a0a0a;
-            --gray: #1e1e1e;
-            --card-bg: #141414;
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --bg: #0f172a;
+            --bg-light: #1e293b;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            background: var(--black);
-            color: #ddd;
+            background: var(--bg);
+            color: var(--text);
             font-family: 'Inter', sans-serif;
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        /* minimalist background */
+        #gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-        }
-
-        #noise-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            height: 100%;
             background: 
-                repeating-linear-gradient(0deg, rgba(255,77,0,0.02) 0px, transparent 2px, transparent 4px),
-                repeating-linear-gradient(90deg, rgba(255,77,0,0.02) 0px, transparent 2px, transparent 4px),
-                radial-gradient(circle at 30% 40%, #1a1a1a 0%, #000 90%);
-            z-index: -2;
-            pointer-events: none;
-        }
-        
-        #scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.7) 0px, transparent 1px, transparent 3px);
+                radial-gradient(circle at 0% 0%, rgba(59,130,246,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(59,130,246,0.1) 0%, transparent 50%),
+                var(--bg);
             z-index: -1;
-            opacity: 0.4;
             pointer-events: none;
         }
 
+        /* navigation */
         .nav-bar {
             position: fixed;
-            top: 12px; left: 4%; right: 4%;
-            width: 92%;
-            max-width: 1100px;
-            margin: 0 auto;
-            background: rgba(10,10,10,0.98);
-            backdrop-filter: blur(8px);
-            border: 1px solid #333;
-            border-radius: 30px;
-            padding: 8px 16px;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 12px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            z-index: 999;
-            box-shadow: 0 5px 20px rgba(255,77,0,0.15);
+            z-index: 1000;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
 
         .logo a {
-            font-weight: 900;
-            font-size: 1.4rem;
-            color: var(--orange);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
             text-decoration: none;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
+            transition: var(--transition);
+        }
+
+        .logo a:hover {
+            color: var(--primary-dark);
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 32px;
             list-style: none;
             margin: 0;
             padding: 0;
         }
         
         .nav-links a {
-            color: #ccc;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            padding: 4px 0;
-            border-bottom: 2px solid transparent;
-            transition: 0.2s;
-            white-space: nowrap;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
         }
         
         .nav-links a:hover {
-            color: var(--orange);
-            border-bottom-color: var(--orange);
+            color: var(--text);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .lang {
             display: flex;
             gap: 4px;
-            background: #222;
-            padding: 3px 8px;
-            border-radius: 30px;
-            border: 1px solid #3a3a3a;
-            margin-left: 10px;
+            background: var(--bg-light);
+            padding: 4px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            margin-left: 16px;
         }
         
         .lang span {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 20px;
-            color: #888;
-            font-family: 'Fira Code', monospace;
-            transition: 0.2s;
+            padding: 4px 12px;
+            border-radius: 100px;
+            color: var(--text-muted);
+            transition: var(--transition);
         }
         
         .lang span.active {
-            background: var(--orange);
-            color: #000;
+            background: var(--primary);
+            color: white;
         }
 
         .music-widget {
             display: flex;
             align-items: center;
-            gap: 6px;
-            background: #1a1a1a;
-            padding: 4px 10px;
-            border-radius: 30px;
-            border: 1px solid #333;
+            gap: 8px;
+            background: var(--bg-light);
+            padding: 4px 12px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
         }
         
         .music-widget button {
             background: none;
             border: none;
-            color: #aaa;
-            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: 0.2s;
-            width: 24px;
-            height: 24px;
+            transition: var(--transition);
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
         }
         
-        .music-widget button:hover { color: var(--orange); }
+        .music-widget button:hover {
+            color: var(--primary);
+            background: rgba(59,130,246,0.1);
+        }
         
         #trackDisplay {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
-            color: #bbb;
-            max-width: 70px;
+            font-size: 0.75rem;
+            color: var(--text);
+            max-width: 100px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         
         .vol-slider {
-            width: 35px;
-            height: 3px;
-            accent-color: var(--orange);
+            width: 50px;
+            height: 4px;
+            accent-color: var(--primary);
         }
 
+        /* sections */
         section {
-            padding: 100px 0 60px;
-            min-height: auto;
+            padding: 120px 0 80px;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            width: 100%;
         }
 
         .container {
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
+        /* hero */
         .hero-title {
-            font-size: clamp(2rem, 8vw, 4.2rem);
-            font-weight: 900;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
             line-height: 1.1;
             letter-spacing: -2px;
-            word-break: break-word;
+            margin-bottom: 24px;
+        }
+        
+        .hero-title span {
+            color: var(--primary);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--primary);
+            opacity: 0.2;
+            z-index: -1;
         }
         
         .hero-desc {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
             max-width: 600px;
-            color: #aaa;
-            word-break: break-word;
+            margin-bottom: 32px;
         }
         
         .badge-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 20px;
+            gap: 10px;
         }
         
         .badge {
-            background: #1c1c1c;
-            border: 1px solid #333;
-            padding: 4px 10px;
-            border-radius: 25px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
-            color: #bbb;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        
+        .badge:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
+        /* cards */
         .card-custom {
-            background: var(--card-bg);
-            border: 1px solid #2a2a2a;
-            border-radius: 20px;
-            padding: 25px 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 32px;
             height: 100%;
-            transition: 0.2s;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            opacity: 0;
+            transition: var(--transition);
         }
         
         .card-custom:hover {
-            border-color: var(--orange);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255,77,0,0.15);
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px -15px rgba(59,130,246,0.3);
+        }
+        
+        .card-custom:hover::before {
+            opacity: 1;
+        }
+
+        .card-custom h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-custom h3 i {
+            color: var(--primary);
         }
 
         .project-badge {
             display: inline-block;
-            background: #2a2a2a;
-            border-left: 3px solid var(--orange);
-            padding: 4px 10px;
-            font-size: 0.65rem;
-            font-family: 'Fira Code', monospace;
-            margin-bottom: 12px;
-            color: #ccc;
+            background: rgba(59,130,246,0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(59,130,246,0.2);
         }
 
         .project-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            word-break: break-word;
+            margin-bottom: 12px;
+            color: var(--text);
         }
         
         .project-desc {
-            color: #999;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            word-break: break-word;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
         }
         
         .btn-ghost {
             background: transparent;
-            border: 1px solid #444;
-            color: #ccc;
-            padding: 5px 12px;
-            border-radius: 30px;
-            font-size: 0.75rem;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
             text-decoration: none;
-            transition: 0.2s;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            width: fit-content;
+        }
+        
+        .btn-ghost:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(59,130,246,0.05);
+            transform: translateY(-2px);
+        }
+        
+        .btn-ghost.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
+        /* skills */
         .skill-item {
-            background: #1e1e1e;
-            border-radius: 16px;
-            padding: 15px 10px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
             text-align: center;
-            border: 1px solid #2a2a2a;
-            transition: 0.2s;
+            transition: var(--transition);
             height: 100%;
         }
         
+        .skill-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
         .skill-icon {
-            font-size: 1.8rem;
-            color: var(--orange);
-            margin-bottom: 8px;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
         }
         
         .skill-item h6 {
-            font-size: 0.8rem;
-            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text);
         }
         
         .skill-bar-bg {
             width: 100%;
-            height: 4px;
-            background: #333;
+            height: 6px;
+            background: var(--border);
             border-radius: 3px;
-            margin: 8px 0 4px;
+            margin: 10px 0 6px;
         }
         
         .skill-fill {
-            height: 4px;
-            background: var(--orange);
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), #60a5fa);
             border-radius: 3px;
         }
         
         .skill-item small {
-            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 500;
         }
 
+        /* contact */
         .form-control-dark {
-            background: #1e1e1e;
-            border: 1px solid #333;
-            color: #eee;
-            padding: 10px 12px;
-            border-radius: 12px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 14px 18px;
+            border-radius: 16px;
             width: 100%;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .form-control-dark:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+        
+        .form-control-dark::placeholder {
+            color: var(--text-muted);
+            opacity: 0.5;
         }
         
         .btn-submit {
-            background: var(--orange);
+            background: var(--primary);
             border: none;
-            color: #000;
-            font-weight: 700;
-            padding: 10px 25px;
-            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 100px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: var(--transition);
             width: 100%;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-submit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(59,130,246,0.4);
         }
 
         .obfuscated {
-            font-family: 'Fira Code', monospace;
-            background: #222;
-            padding: 5px 10px;
-            border-radius: 30px;
-            border: 1px dashed var(--orange);
+            background: var(--bg-light);
+            border: 1px dashed var(--primary);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 100px;
             display: inline-block;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        .obfuscated:hover {
+            background: rgba(59,130,246,0.1);
+            color: var(--primary);
         }
         
         .soc-link {
-            color: #fff;
-            font-size: 1.2rem;
-            transition: 0.2s;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            transition: var(--transition);
             display: inline-block;
+        }
+        
+        .soc-link:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
         }
 
         footer {
-            border-top: 1px solid #222;
-            padding: 30px 20px;
+            border-top: 1px solid var(--border);
+            padding: 40px 20px;
             text-align: center;
-            color: #555;
-            font-size: 0.65rem;
-            font-family: 'Fira Code', monospace;
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
 
+        /* responsive */
         @media (max-width: 992px) {
-            .nav-links { gap: 15px; }
-            .nav-links a { font-size: 0.8rem; }
+            .nav-links { gap: 24px; }
+            .nav-links a { font-size: 0.85rem; }
         }
 
         @media (max-width: 768px) {
             .nav-bar {
-                padding: 6px 12px;
-                top: 10px;
+                padding: 10px 20px;
             }
             
-            .logo a { font-size: 1.2rem; }
+            .logo a { font-size: 1.3rem; }
             
-            .nav-links { display: none; } 
+            .nav-links { display: none; }
             
             .lang { margin-left: 0; }
             
             .music-widget {
-                padding: 3px 6px;
-                gap: 3px;
+                padding: 4px 8px;
             }
+            
+            .music-widget button {
+                width: 24px;
+                height: 24px;
+            }
+            
+            #trackDisplay { max-width: 60px; }
+            
+            .vol-slider { width: 40px; }
+            
+            section { padding: 100px 0 60px; }
+            
+            .hero-title { font-size: 2.8rem; }
+            
+            .hero-desc { font-size: 1rem; }
+            
+            .card-custom { padding: 24px; }
+            
+            .project-title { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-bar { padding: 8px 16px; }
             
             .music-widget button {
                 width: 22px;
@@ -391,125 +547,39 @@
                 font-size: 0.7rem;
             }
             
-            #trackDisplay { max-width: 50px; }
+            #trackDisplay { max-width: 45px; }
             
-            .vol-slider { width: 30px; }
-            
-            section { padding: 80px 0 40px; }
+            .vol-slider { width: 35px; }
             
             .hero-title { font-size: 2.2rem; }
             
-            .hero-desc { font-size: 0.85rem; }
-            
-            .badge { font-size: 0.6rem; padding: 3px 8px; }
-            
-            .card-custom { padding: 20px 15px; }
-            
-            .project-title { font-size: 1.2rem; }
-            
-            .project-desc { font-size: 0.8rem; }
-            
-            .btn-ghost { 
-                padding: 4px 10px; 
-                font-size: 0.7rem; 
-            }
-            
-            .col-6 { padding: 0 6px; }
-            
-            .skill-item { padding: 12px 6px; }
-            
-            .skill-icon { font-size: 1.5rem; }
-            
-            .skill-item h6 { font-size: 0.7rem; }
-        }
-
-        @media (max-width: 480px) {
-            .nav-bar { padding: 5px 10px; }
-            
-            .music-widget button {
-                width: 20px;
-                height: 20px;
-                font-size: 0.65rem;
-            }
-            
-            #trackDisplay { max-width: 40px; }
-            
-            .vol-slider { width: 25px; }
-            
-            .hero-title { font-size: 1.8rem; }
-            
-            .badge-list { gap: 4px; }
-            
             .badge { 
-                font-size: 0.55rem; 
-                padding: 2px 6px; 
+                font-size: 0.75rem; 
+                padding: 4px 12px; 
             }
             
-            .card-custom { padding: 15px 12px; }
-            
-            .project-badge { 
-                font-size: 0.6rem; 
-                padding: 3px 8px; 
-            }
-            
-            .project-title { font-size: 1.1rem; }
-            
-            .project-desc { font-size: 0.75rem; }
+            .card-custom { padding: 20px; }
             
             .btn-ghost { 
-                padding: 3px 8px; 
-                font-size: 0.65rem; 
-            }
-            
-            .btn-ghost i { font-size: 0.7rem; }
-            
-            .skill-item { padding: 10px 4px; }
-            
-            .skill-icon { font-size: 1.3rem; }
-            
-            .skill-item h6 { font-size: 0.65rem; }
-            
-            .form-control-dark { 
-                padding: 8px 10px; 
+                padding: 6px 14px; 
                 font-size: 0.8rem; 
             }
             
-            .btn-submit { 
-                padding: 8px 20px; 
-                font-size: 0.85rem; 
-            }
+            .skill-item { padding: 15px 10px; }
             
-            .obfuscated { 
-                font-size: 0.7rem; 
-                padding: 4px 8px; 
-            }
+            .skill-icon { font-size: 1.6rem; }
             
-            .soc-link { font-size: 1rem; }
-        }
-
-        @media (max-width: 360px) {
-            .music-widget button {
-                width: 18px;
-                height: 18px;
-            }
-            
-            #trackDisplay { max-width: 35px; }
-            
-            .lang span { 
-                font-size: 0.65rem; 
-                padding: 2px 4px; 
-            }
+            .skill-item h6 { font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
-    <div id="noise-bg"></div>
-    <div id="scanlines"></div>
+    <div id="gradient-bg"></div>
 
     <div class="nav-bar">
-        <div class="logo"><a href="#home">KRAS</a></div>
+        <div class="logo"><a href="#home">kras</a></div>
         
-        <div style="display: flex; align-items: center; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
             <ul class="nav-links">
                 <li><a href="#about" id="nav-about">About</a></li>
                 <li><a href="#projects" id="nav-projects">Projects</a></li>
@@ -535,17 +605,20 @@
     <section id="home">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-10">
-                    <div style="width: 40px; height: 40px; background: #2d2d2d; box-shadow: inset -3px -3px 0 #000, inset 3px 3px 0 #555; margin-bottom: 20px;">
-                        <div style="width: 8px; height: 8px; background: #0ff; transform: translate(6px,6px); box-shadow: 12px 10px 0 #0ff, 6px 18px 0 #0ff;"></div>
-                    </div>
-                    <h1 class="hero-title" id="heroTitle">Code<span style="color:var(--orange);"></span></h1>
+                <div class="col-lg-10">
+                    <h1 class="hero-title" id="heroTitle"><span>code</span> & create</h1>
                     <p class="hero-desc" id="heroDesc">
-                        16 years old. Full‑Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.
+                        16 years old. full-stack developer specializing in responsive web design, python automation, and clean code. passionate about creating elegant solutions and seamless user experiences.
                     </p>
                     <div class="badge-list">
-                        <span class="badge">HTML5</span><span class="badge">CSS3</span><span class="badge">JavaScript</span>
-                        <span class="badge">Bootstrap5</span><span class="badge">Python</span><span class="badge">Minecraft</span>
+                        <span class="badge">HTML5</span>
+                        <span class="badge">CSS3</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">Bootstrap</span>
+                        <span class="badge">Python</span>
+                        <span class="badge">React</span>
+                        <span class="badge">Node.js</span>
+                        <span class="badge">Git</span>
                     </div>
                 </div>
             </div>
@@ -557,18 +630,24 @@
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="card-custom">
-                        <h3><i class="fas fa-code" style="color:var(--orange);"></i> <span id="devTitle">Development</span></h3>
-                        <p class="project-desc" id="devDesc">Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.</p>
-                        <div style="font-size: 1.5rem; color: var(--orange);">
-                            <i class="fab fa-html5 me-2"></i><i class="fab fa-css3-alt me-2"></i><i class="fab fa-bootstrap me-2"></i><i class="fab fa-js"></i>
+                        <h3><i class="fas fa-code"></i> <span id="devTitle">web development</span></h3>
+                        <p class="project-desc" id="devDesc">creating responsive, modern websites and web applications using cutting-edge technologies. focused on clean code, performance optimization, and user-centric design.</p>
+                        <div style="font-size: 1.5rem; color: var(--primary); margin-top: auto;">
+                            <i class="fab fa-html5 me-2"></i>
+                            <i class="fab fa-css3-alt me-2"></i>
+                            <i class="fab fa-js me-2"></i>
+                            <i class="fab fa-react me-2"></i>
+                            <i class="fab fa-node"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="card-custom">
-                        <h3><i class="fas fa-cube" style="color:var(--orange);"></i> <span id="mcTitle">Minecraft Tech</span></h3>
-                        <p class="project-desc" id="mcDesc">Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.</p>
-                        <div style="font-family:'Fira Code'; color:var(--orange); font-size:0.8rem;">CONFIG // PLUGINS // OPT</div>
+                        <h3><i class="fas fa-robot"></i> <span id="automationTitle">python & automation</span></h3>
+                        <p class="project-desc" id="automationDesc">building powerful automation tools, scripts, and backend systems. experienced with data processing, api development, and workflow optimization.</p>
+                        <div style="font-family: 'Inter', monospace; color: var(--primary); font-size:0.9rem; margin-top: auto;">
+                            PYTHON // AUTOMATION // SCRIPTS
+                        </div>
                     </div>
                 </div>
             </div>
@@ -577,36 +656,37 @@
 
     <section id="projects">
         <div class="container">
-            <h2 class="hero-title mb-4"><span id="featured">Featured</span> <span style="color:var(--orange);" id="projectsTitle">Projects</span></h2>
-            <div class="row g-3">
+            <h2 class="hero-title mb-5"><span id="featured">featured</span> <span style="color:var(--primary);" id="projectsTitle">projects</span></h2>
+            <div class="row g-4">
                 <div class="col-md-4">
                     <div class="card-custom">
                         <div class="project-badge">HTML5 • CSS3 • JS</div>
-                        <div class="project-title" id="project1Title">Portfolio Website</div>
-                        <div class="project-desc" id="project1Desc">Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.</div>
+                        <div class="project-title" id="project1Title">modern portfolio</div>
+                        <div class="project-desc" id="project1Desc">clean, responsive portfolio with smooth animations and minimalist design. built with vanilla javascript and bootstrap 5.</div>
                         <div class="d-flex gap-2 flex-wrap">
-                            <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span id="live">Live</span></a>
+                            <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> github</a>
+                            <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span id="live">live demo</span></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card-custom">
-                        <div class="project-badge">Python • Automation</div>
-                        <div class="project-title" id="project2Title">Python Automation Tools</div>
-                        <div class="project-desc" id="project2Desc">Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities.</div>
+                        <div class="project-badge">PYTHON • AUTOMATION</div>
+                        <div class="project-title" id="project2Title">task automator</div>
+                        <div class="project-desc" id="project2Desc">python scripts for automating repetitive tasks, file management, and data processing. includes cli interface and scheduling.</div>
                         <div class="d-flex gap-2">
-                            <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="https://github.com/kras1228" class="btn-ghost"><i class="fab fa-github"></i> github</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card-custom">
-                        <div class="project-badge">Minecraft • Config</div>
-                        <div class="project-title" id="project3Title">Server Configuration Kit</div>
-                        <div class="project-desc" id="project3Desc">Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.</div>
+                        <div class="project-badge">REACT • NODE.JS</div>
+                        <div class="project-title" id="project3Title">taskflow app</div>
+                        <div class="project-desc" id="project3Desc">full-stack task management application with real-time updates, user authentication, and responsive design.</div>
                         <div class="d-flex gap-2">
-                            <a href="#" class="btn-ghost disabled"><i class="fas fa-lock"></i> <span id="private">Private</span></a>
+                            <a href="#" class="btn-ghost"><i class="fab fa-github"></i> github</a>
+                            <a href="#" class="btn-ghost"><i class="fas fa-link"></i> <span id="live2">live demo</span></a>
                         </div>
                     </div>
                 </div>
@@ -616,16 +696,16 @@
 
     <section id="skills">
         <div class="container">
-            <h2 class="hero-title mb-4">Tech <span style="color:var(--orange);">Stack</span></h2>
-            <div class="row g-2">
+            <h2 class="hero-title mb-5">tech <span style="color:var(--primary);">stack</span></h2>
+            <div class="row g-3">
                 <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-js"></i></div><h6>JavaScript</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:85%"></div></div><small>85%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-python"></i></div><h6>Python</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:80%"></div></div><small>80%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-react"></i></div><h6>React</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:75%"></div></div><small>75%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-node"></i></div><h6>Node.js</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:70%"></div></div><small>70%</small></div></div>
                 <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-html5"></i></div><h6>HTML5</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:90%"></div></div><small>90%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h6>CSS3</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:88%"></div></div><small>88%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-python"></i></div><h6>Python</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:82%"></div></div><small>82%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-bootstrap"></i></div><h6>Bootstrap</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:87%"></div></div><small>87%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fas fa-cube"></i></div><h6>Minecraft</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:89%"></div></div><small>89%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fas fa-server"></i></div><h6>Server</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:80%"></div></div><small>80%</small></div></div>
-                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fas fa-terminal"></i></div><h6>CLI/Git</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:84%"></div></div><small>84%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><h6>CSS3</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:85%"></div></div><small>85%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fas fa-database"></i></div><h6>SQL</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:65%"></div></div><small>65%</small></div></div>
+                <div class="col-6 col-md-3"><div class="skill-item"><div class="skill-icon"><i class="fab fa-git-alt"></i></div><h6>Git</h6><div class="skill-bar-bg"><div class="skill-fill" style="width:80%"></div></div><small>80%</small></div></div>
             </div>
         </div>
     </section>
@@ -634,34 +714,35 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-6">
-                    <h2 class="hero-title mb-3">Let's <span style="color:var(--orange);">Connect</span></h2>
-                    <form id="contactForm" class="mt-3">
+                    <h2 class="hero-title mb-3">let's <span style="color:var(--primary);">connect</span></h2>
+                    <form id="contactForm" class="mt-4">
                         <input type="text" id="nameInput" placeholder="your name" class="form-control-dark mb-3" required>
                         <input type="email" id="emailInput" placeholder="your email" class="form-control-dark mb-3" required>
                         <textarea id="msgInput" placeholder="your message..." class="form-control-dark mb-3" rows="4" required></textarea>
-                        <button type="submit" class="btn-submit">Send Message</button>
-                        <div id="formStatus" class="mt-3" style="font-family:'Fira Code'; font-size:0.8rem;"></div>
+                        <button type="submit" class="btn-submit">send message</button>
+                        <div id="formStatus" class="mt-3" style="font-size:0.9rem;"></div>
                     </form>
                 </div>
                 <div class="col-lg-6">
                     <div class="card-custom">
-                        <h4 class="mb-3">Get in Touch</h4>
-                        <p class="project-desc mb-3">Have a project or wanna collab? Feel free to reach out.</p>
-                        <div class="mb-3">
-                            <span class="text-secondary"><i class="fas fa-envelope" style="color:var(--orange);"></i> Email</span><br>
+                        <h4 class="mb-3">get in touch</h4>
+                        <p class="project-desc mb-4">have a project or want to collaborate? feel free to reach out.</p>
+                        <div class="mb-4">
+                            <span class="text-secondary"><i class="fas fa-envelope" style="color:var(--primary);"></i> email</span><br>
                             <span class="obfuscated" onclick="reveal()">•••@gmail.com (click)</span>
-                            <span id="realMail" style="display:none;"><a href="mailto:niyatjon1228@gmail.com" style="color:var(--orange);">niyatjon1228@gmail.com</a></span>
+                            <span id="realMail" style="display:none;"><a href="mailto:niyatjon1228@gmail.com" style="color:var(--primary);">niyatjon1228@gmail.com</a></span>
                         </div>
-                        <div class="mb-3">
-                            <span class="text-secondary"><i class="fas fa-map-marker-alt" style="color:var(--orange);"></i> Location</span><br>
-                            <span>somewhere, earth</span>
+                        <div class="mb-4">
+                            <span class="text-secondary"><i class="fas fa-map-marker-alt" style="color:var(--primary);"></i> location</span><br>
+                            <span>remote / worldwide</span>
                         </div>
                         <div>
-                            <span class="text-secondary"><i class="fas fa-link" style="color:var(--orange);"></i> Social</span><br>
-                            <div class="d-flex gap-3 mt-2">
+                            <span class="text-secondary"><i class="fas fa-link" style="color:var(--primary);"></i> social</span><br>
+                            <div class="d-flex gap-4 mt-3">
                                 <a href="https://t.me/pik_fra" class="soc-link" target="_blank"><i class="fab fa-telegram"></i></a>
                                 <a href="https://github.com/kras1228" class="soc-link" target="_blank"><i class="fab fa-github"></i></a>
                                 <a href="#" class="soc-link"><i class="fab fa-discord"></i></a>
+                                <a href="#" class="soc-link"><i class="fab fa-x-twitter"></i></a>
                             </div>
                         </div>
                     </div>
@@ -671,13 +752,13 @@
     </section>
 
     <footer>
-        <p>© 2026 KRAS // SINCE DAY ONE</p>
-        <p style="font-size:0.6rem;">built with ❤ and monster energy</p>
+        <p>© 2026 kras // since day one</p>
+        <p style="font-size:0.7rem; margin-top: 8px;">built with <span style="color: var(--primary);">❤</span> and caffeine</p>
     </footer>
 
     <script>
         const tracks = [
-            { name: "MIYAGI - BULLET", src: "https://github.com/kras1228/kras1228.github.io/blob/main/Miyagi%20%26%20%D0%AD%D0%BD%D0%B4%D1%88%D0%BF%D0%B8%D0%BB%D1%8C%20-%20Bullet.mp3" },
+            { name: "MIYAGI - BULLET", src: "https://raw.githubusercontent.com/kras1228/kras1228.github.io/main/music/Miyagi%20%26%20%D0%AD%D0%BD%D0%B4%D1%88%D0%BF%D0%B8%D0%BB%D1%8C%20-%20Bullet.mp3" },
             { name: "MIYAGI - MINOR", src: "https://example.com/track2.mp3" },
             { name: "MIYAGI - CAPTAIN", src: "https://example.com/track3.mp3" }
         ];
@@ -693,7 +774,7 @@
         function loadTrack(index) {
             if (tracks[index] && tracks[index].src) {
                 audio.src = tracks[index].src;
-                trackSpan.innerText = tracks[index].name || 'Unknown';
+                trackSpan.innerText = tracks[index].name || 'unknown';
             }
         }
         loadTrack(0);
@@ -701,7 +782,7 @@
         playBtn.onclick = () => {
             if (audio.paused) {
                 audio.play().catch(() => {
-                    trackSpan.innerText = 'playback error';
+                    trackSpan.innerText = 'error';
                 });
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
             } else {
@@ -729,22 +810,23 @@
             'nav-projects': 'Projects',
             'nav-skills': 'Skills',
             'nav-contact': 'Contact',
-            'heroTitle': 'Code',
-            'heroDesc': '16 years old. Full‑Stack Developer specializing in responsive web design, Python automation, and Minecraft server optimization. Passionate about creating elegant solutions and seamless user experiences.',
-            'devTitle': 'Development',
-            'devDesc': 'Creating responsive, modern websites and web applications using cutting-edge technologies. Focused on clean code, performance optimization, and user-centric design.',
-            'mcTitle': 'Minecraft Tech',
-            'mcDesc': 'Expert server configuration, plugin development, and system optimization. Experienced with complex configurations, performance tuning, and community management.',
-            'featured': 'Featured',
-            'projectsTitle': 'Projects',
-            'project1Title': 'Portfolio Website',
-            'project1Desc': 'Modern, responsive portfolio with interactive animations, dark/light mode toggle, and smooth scrolling. Built with Bootstrap 5 and vanilla JavaScript.',
-            'project2Title': 'Python Automation Tools',
-            'project2Desc': 'Utility scripts for workflow automation, data processing, and system management. Includes CLI tools and scheduling capabilities.',
-            'project3Title': 'Server Configuration Kit',
-            'project3Desc': 'Comprehensive Minecraft server setup package with optimized configurations, plugin recommendations, and performance tuning guides.',
-            'live': 'Live',
-            'private': 'Private'
+            'heroTitle': 'code & create',
+            'heroDesc': '16 years old. full-stack developer specializing in responsive web design, python automation, and clean code. passionate about creating elegant solutions and seamless user experiences.',
+            'devTitle': 'web development',
+            'devDesc': 'creating responsive, modern websites and web applications using cutting-edge technologies. focused on clean code, performance optimization, and user-centric design.',
+            'automationTitle': 'python & automation',
+            'automationDesc': 'building powerful automation tools, scripts, and backend systems. experienced with data processing, api development, and workflow optimization.',
+            'featured': 'featured',
+            'projectsTitle': 'projects',
+            'project1Title': 'modern portfolio',
+            'project1Desc': 'clean, responsive portfolio with smooth animations and minimalist design. built with vanilla javascript and bootstrap 5.',
+            'project2Title': 'task automator',
+            'project2Desc': 'python scripts for automating repetitive tasks, file management, and data processing. includes cli interface and scheduling.',
+            'project3Title': 'taskflow app',
+            'project3Desc': 'full-stack task management application with real-time updates, user authentication, and responsive design.',
+            'live': 'live demo',
+            'live2': 'live demo',
+            'private': 'private'
         };
 
         const langRU = {
@@ -752,22 +834,23 @@
             'nav-projects': 'Проекты',
             'nav-skills': 'Навыки',
             'nav-contact': 'Контакты',
-            'heroTitle': 'Код',
-            'heroDesc': '16 лет. Full‑Stack разработчик: адаптивный веб, автоматизация на Python, настройка серверов Minecraft. Создаю элегантные решения.',
-            'devTitle': 'Разработка',
-            'devDesc': 'Создание современных адаптивных сайтов и веб-приложений. Чистый код, оптимизация, пользовательский опыт.',
-            'mcTitle': 'Minecraft',
-            'mcDesc': 'Настройка серверов, плагины, оптимизация. Работа со сложными конфигами и управление сообществом.',
-            'featured': 'Избранные',
-            'projectsTitle': 'Проекты',
-            'project1Title': 'Сайт-портфолио',
-            'project1Desc': 'Адаптивное портфолио с анимациями, переключением тем. Сделано на Bootstrap 5 и чистом JS.',
-            'project2Title': 'Python автоматизация',
-            'project2Desc': 'Скрипты для автоматизации, обработки данных, CLI инструменты.',
-            'project3Title': 'Настройка сервера',
-            'project3Desc': 'Комплект для настройки Minecraft сервера: конфиги, плагины, гайды по оптимизации.',
-            'live': 'Демо',
-            'private': 'Приватно'
+            'heroTitle': 'код и творчество',
+            'heroDesc': '16 лет. full-stack разработчик, специализирующийся на адаптивном веб-дизайне, автоматизации на python и чистом коде. создаю элегантные решения.',
+            'devTitle': 'веб-разработка',
+            'devDesc': 'создание современных адаптивных сайтов и веб-приложений. чистый код, оптимизация, пользовательский опыт.',
+            'automationTitle': 'python и автоматизация',
+            'automationDesc': 'разработка инструментов автоматизации, скриптов и бэкенд систем. опыт работы с обработкой данных и api.',
+            'featured': 'избранные',
+            'projectsTitle': 'проекты',
+            'project1Title': 'современное портфолио',
+            'project1Desc': 'минималистичное портфолио с плавными анимациями. сделано на чистом js и bootstrap 5.',
+            'project2Title': 'автоматизация задач',
+            'project2Desc': 'python скрипты для автоматизации рутинных задач, управления файлами и обработки данных.',
+            'project3Title': 'taskflow приложение',
+            'project3Desc': 'full-stack приложение для управления задачами с real-time обновлениями и авторизацией.',
+            'live': 'демо',
+            'live2': 'демо',
+            'private': 'приватно'
         };
 
         function setLanguage(lang) {
@@ -778,13 +861,13 @@
             document.getElementById('nav-skills').innerText = dict['nav-skills'];
             document.getElementById('nav-contact').innerText = dict['nav-contact'];
             
-            document.getElementById('heroTitle').innerHTML = dict['heroTitle'] + '<span style="color:var(--orange);"></span>';
+            document.getElementById('heroTitle').innerHTML = `<span>${dict['heroTitle'].split(' ')[0]}</span> ${dict['heroTitle'].split(' ').slice(1).join(' ')}`;
             document.getElementById('heroDesc').innerText = dict['heroDesc'];
             
             document.getElementById('devTitle').innerText = dict['devTitle'];
             document.getElementById('devDesc').innerText = dict['devDesc'];
-            document.getElementById('mcTitle').innerText = dict['mcTitle'];
-            document.getElementById('mcDesc').innerText = dict['mcDesc'];
+            document.getElementById('automationTitle').innerText = dict['automationTitle'];
+            document.getElementById('automationDesc').innerText = dict['automationDesc'];
             
             document.getElementById('featured').innerText = dict['featured'];
             document.getElementById('projectsTitle').innerText = dict['projectsTitle'];
@@ -795,7 +878,7 @@
             document.getElementById('project3Title').innerText = dict['project3Title'];
             document.getElementById('project3Desc').innerText = dict['project3Desc'];
             document.getElementById('live').innerText = dict['live'];
-            document.getElementById('private').innerText = dict['private'];
+            document.getElementById('live2').innerText = dict['live2'];
 
             document.querySelectorAll('.lang-opt').forEach(opt => {
                 opt.classList.toggle('active', opt.dataset.lang === lang);
@@ -815,10 +898,10 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             statusDiv.innerText = 'sending...';
-            statusDiv.style.color = '#aaa';
+            statusDiv.style.color = '#94a3b8';
             await new Promise(r => setTimeout(r, 1000));
-            statusDiv.innerText = '✓ sent to niyatjon1228@gmail.com';
-            statusDiv.style.color = '#4caf50';
+            statusDiv.innerText = '✓ message sent to niyatjon1228@gmail.com';
+            statusDiv.style.color = '#3b82f6';
             form.reset();
             setTimeout(() => statusDiv.innerText = '', 4000);
         });
@@ -833,7 +916,7 @@
                 const rect = c.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width/2;
                 const y = e.clientY - rect.top - rect.height/2;
-                c.style.transform = `perspective(800px) rotateY(${x/30}deg) rotateX(${-y/30}deg)`;
+                c.style.transform = `perspective(1000px) rotateY(${x/40}deg) rotateX(${-y/40}deg)`;
             });
             c.addEventListener('mouseleave', () => {
                 c.style.transform = 'none';
