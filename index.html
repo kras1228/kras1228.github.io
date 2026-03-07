@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="description" content="kras // frontend developer (html, css, js)">
     <meta name="author" content="kras">
     <title>kras / frontend</title>
-    
+
     <!-- только то, что реально нужно -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         /* сброс стандартных стилей */
         * {
@@ -18,17 +20,24 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         /* мои цвета — теперь реально темно и красиво */
         :root {
-            --bg: #0a0c0f;           /* почти черный с синим отливом */
-            --bg-card: #111316;       /* темно-серый для карточек */
-            --surface: #1a1d23;        /* для элементов */
-            --primary: #64b5f6;        /* мягкий синий, не вырвиглаз */
+            --bg: #0a0c0f;
+            /* почти черный с синим отливом */
+            --bg-card: #111316;
+            /* темно-серый для карточек */
+            --surface: #1a1d23;
+            /* для элементов */
+            --primary: #64b5f6;
+            /* мягкий синий, не вырвиглаз */
             --primary-glow: rgba(100, 181, 246, 0.2);
-            --text: #eaeef2;           /* основной текст */
-            --text-secondary: #9aa4b8;  /* второстепенный */
-            --border: #23272e;          /* границы */
+            --text: #eaeef2;
+            /* основной текст */
+            --text-secondary: #9aa4b8;
+            /* второстепенный */
+            --border: #23272e;
+            /* границы */
             --transition: 0.25s ease;
         }
 
@@ -40,6 +49,10 @@
             overflow-x: hidden;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* красивый темный градиент на фон */
         body::before {
             content: '';
@@ -48,7 +61,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(100, 181, 246, 0.03) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(100, 181, 246, 0.03) 0%, transparent 50%);
             z-index: -1;
@@ -63,8 +76,9 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 1100px;
-            background: rgba(17, 19, 22, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(17, 19, 22, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border);
             border-radius: 60px;
             padding: 12px 28px;
@@ -72,7 +86,15 @@
             align-items: center;
             justify-content: space-between;
             z-index: 100;
-            box-shadow: 0 15px 40px -15px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 40px -15px rgba(0, 0, 0, 0.8);
+            transition: padding 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-bar.scrolled {
+            padding: 8px 24px;
+            background: rgba(10, 12, 15, 0.9);
+            border-color: rgba(100, 181, 246, 0.2);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9);
         }
 
         .logo a {
@@ -89,17 +111,35 @@
             gap: 36px;
             list-style: none;
         }
-        
+
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 600;
             transition: var(--transition);
+            position: relative;
         }
-        
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -6px;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
         .nav-links a:hover {
             color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* переключатель языка — маленький, аккуратный */
@@ -112,7 +152,7 @@
             border: 1px solid var(--border);
             margin-left: 20px;
         }
-        
+
         .lang-switch span {
             font-size: 0.75rem;
             font-weight: 700;
@@ -123,7 +163,7 @@
             transition: var(--transition);
             text-transform: uppercase;
         }
-        
+
         .lang-switch span.active {
             background: var(--primary);
             color: #0a0c0f;
@@ -151,13 +191,16 @@
             letter-spacing: -2px;
             margin-bottom: 20px;
         }
-        
+
         .hero-title span {
-            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #a29bfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             position: relative;
             display: inline-block;
         }
-        
+
         /* легкое подчеркивание */
         .hero-title span::after {
             content: '';
@@ -166,11 +209,11 @@
             left: 0;
             width: 100%;
             height: 8px;
-            background: var(--primary);
-            opacity: 0.2;
+            background: rgba(100, 181, 246, 0.2);
             z-index: -1;
+            border-radius: 4px;
         }
-        
+
         .hero-desc {
             font-size: 1.1rem;
             color: var(--text-secondary);
@@ -185,7 +228,7 @@
             gap: 16px;
             margin-bottom: 30px;
         }
-        
+
         .tech-item {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -199,12 +242,12 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .tech-item i {
             color: var(--primary);
             font-size: 1rem;
         }
-        
+
         .tech-item:hover {
             border-color: var(--primary);
             color: var(--text);
@@ -222,7 +265,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         /* тонкий градиент при наведении */
         .card::before {
             content: '';
@@ -236,13 +279,13 @@
             transition: var(--transition);
             pointer-events: none;
         }
-        
+
         .card:hover {
             border-color: var(--primary);
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.8), 0 0 0 1px rgba(100, 181, 246, 0.1);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(100, 181, 246, 0.1);
         }
-        
+
         .card:hover::before {
             opacity: 0.5;
         }
@@ -255,7 +298,7 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .card h3 i {
             color: var(--primary);
         }
@@ -281,7 +324,7 @@
             margin-bottom: 12px;
             color: var(--text);
         }
-        
+
         .project-desc {
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -304,7 +347,7 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .btn:hover {
             border-color: var(--primary);
             color: var(--primary);
@@ -321,18 +364,18 @@
             transition: var(--transition);
             height: 100%;
         }
-        
+
         .skill-item:hover {
             border-color: var(--primary);
             transform: translateY(-5px);
         }
-        
+
         .skill-icon {
             font-size: 2rem;
             color: var(--primary);
             margin-bottom: 10px;
         }
-        
+
         .skill-bar {
             width: 100%;
             height: 4px;
@@ -340,7 +383,7 @@
             border-radius: 4px;
             margin: 12px 0 6px;
         }
-        
+
         .skill-fill {
             height: 4px;
             background: var(--primary);
@@ -359,13 +402,13 @@
             transition: var(--transition);
             font-family: inherit;
         }
-        
+
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px var(--primary-glow);
         }
-        
+
         .btn-submit {
             background: var(--primary);
             border: none;
@@ -379,7 +422,7 @@
             font-size: 1rem;
             letter-spacing: 0.3px;
         }
-        
+
         .btn-submit:hover {
             background: #7ac2ff;
             transform: translateY(-2px);
@@ -398,18 +441,18 @@
             font-size: 0.9rem;
             transition: var(--transition);
         }
-        
+
         .email-hidden:hover {
             background: rgba(100, 181, 246, 0.1);
             color: var(--primary);
         }
-        
+
         .social-link {
             color: var(--text-secondary);
             font-size: 1.4rem;
             transition: var(--transition);
         }
-        
+
         .social-link:hover {
             color: var(--primary);
             transform: translateY(-3px);
@@ -423,36 +466,74 @@
             font-size: 0.8rem;
         }
 
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-5 {
+            transition-delay: 0.5s;
+        }
+
+        .delay-6 {
+            transition-delay: 0.6s;
+        }
+
         /* адаптация для мобильных */
         @media (max-width: 768px) {
             .nav-bar {
                 padding: 10px 20px;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .hero-title {
                 font-size: 2.5rem;
             }
-            
+
             section {
                 padding: 120px 0 60px;
             }
-            
+
             .card {
                 padding: 24px;
             }
         }
     </style>
 </head>
+
 <body>
 
     <!-- навигация — ничего лишнего -->
     <div class="nav-bar">
         <div class="logo"><a href="#home">kras.</a></div>
-        
+
         <div style="display: flex; align-items: center;">
             <ul class="nav-links">
                 <li><a href="#about" id="nav-about">about</a></li>
@@ -460,7 +541,7 @@
                 <li><a href="#skills" id="nav-skills">skills</a></li>
                 <li><a href="#contact" id="nav-contact">contact</a></li>
             </ul>
-            
+
             <div class="lang-switch">
                 <span class="lang-opt active" data-lang="en">en</span>
                 <span class="lang-opt" data-lang="ru">ru</span>
@@ -469,79 +550,90 @@
     </div>
 
     <!-- главная — всё по делу -->
-    <section id="home">
+    <section id="home" class="fade-in">
         <div class="container">
             <div class="row" style="display: block;">
                 <h1 class="hero-title" id="heroTitle"><span>frontend</span> developer</h1>
                 <p class="hero-desc" id="heroDesc">
-                    я знаю html, css и javascript. делаю аккуратные интерфейсы, которые работают. мне 16 лет и это моё портфолио.
+                    я знаю html, css и javascript. делаю аккуратные интерфейсы, которые работают. мне 16 лет и это моё
+                    портфолио.
                 </p>
-                
+
                 <!-- именно то, что я реально знаю -->
-                <div class="tech-stack">
+                <div class="tech-stack" id="techStack">
                     <span class="tech-item"><i class="fab fa-html5"></i> HTML5</span>
                     <span class="tech-item"><i class="fab fa-css3-alt"></i> CSS3</span>
                     <span class="tech-item"><i class="fab fa-js"></i> JavaScript</span>
-                    <span class="tech-item"><i class="fas fa-mobile-alt"></i> адаптив</span>
-                    <span class="tech-item"><i class="fas fa-paint-brush"></i> дизайн</span>
+                    <span class="tech-item"><i class="fas fa-mobile-alt"></i> <span
+                            id="tech-adaptive">адаптив</span></span>
+                    <span class="tech-item"><i class="fas fa-paint-brush"></i> <span
+                            id="tech-design">дизайн</span></span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- обо мне — кратко и честно -->
-    <section id="about">
+    <section id="about" class="fade-in delay-1">
         <div class="container">
-            <div class="row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+            <div class="row"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
                 <div class="card">
                     <h3><i class="fas fa-code"></i> <span id="about1">html & css</span></h3>
-                    <p class="project-desc" id="about1desc">верстаю аккуратно, семантично, с заботой о пользователе. разбираюсь в flex, grid, адаптивной верстке.</p>
+                    <p class="project-desc" id="about1desc">верстаю аккуратно, семантично, с заботой о пользователе.
+                        разбираюсь в flex, grid, адаптивной верстке.</p>
                 </div>
                 <div class="card">
                     <h3><i class="fas fa-cubes"></i> <span id="about2">javascript</span></h3>
-                    <p class="project-desc" id="about2desc">пишу на чистом js без фреймворков. понимаю основы, умею работать с DOM, событиями, асинхронностью.</p>
+                    <p class="project-desc" id="about2desc">пишу на чистом js без фреймворков. понимаю основы, умею
+                        работать с DOM, событиями, асинхронностью.</p>
                 </div>
                 <div class="card">
                     <h3><i class="fas fa-magic"></i> <span id="about3">инструменты</span></h3>
-                    <p class="project-desc" id="about3desc">git, bootstrap, figma. разбираюсь в том, что реально нужно для работы.</p>
+                    <p class="project-desc" id="about3desc">git, bootstrap, figma. разбираюсь в том, что реально нужно
+                        для работы.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- проекты — то, что реально сделано -->
-    <section id="projects">
+    <section id="projects" class="fade-in delay-2">
         <div class="container">
-            <h2 class="hero-title" style="margin-bottom: 50px;"><span id="projects-title">мои</span> проекты</h2>
-            
+            <h2 class="hero-title" style="margin-bottom: 50px;"><span id="projects-title">мои</span> <span
+                    id="projects-title-2">проекты</span></h2>
+
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
                 <!-- проект 1 -->
                 <div class="card">
                     <div class="project-badge">html/css/js</div>
                     <div class="project-title" id="proj1">портфолио сайт</div>
-                    <p class="project-desc" id="proj1desc">этот сайт, который ты видишь. полностью на чистом html, css и js. адаптивный, с переключателем языка.</p>
+                    <p class="project-desc" id="proj1desc">этот сайт, который ты видишь. полностью на чистом html, css и
+                        js. адаптивный, с переключателем языка.</p>
                     <div style="display: flex; gap: 12px;">
                         <a href="#" class="btn"><i class="fab fa-github"></i> код</a>
                         <a href="#" class="btn"><i class="fas fa-link"></i> <span id="live1">live</span></a>
                     </div>
                 </div>
-                
+
                 <!-- проект 2 -->
                 <div class="card">
                     <div class="project-badge">javascript</div>
                     <div class="project-title" id="proj2">todo-приложение</div>
-                    <p class="project-desc" id="proj2desc">классическое приложение для задач. добавление, удаление, сохранение в localStorage.</p>
+                    <p class="project-desc" id="proj2desc">классическое приложение для задач. добавление, удаление,
+                        сохранение в localStorage.</p>
                     <div style="display: flex; gap: 12px;">
                         <a href="#" class="btn"><i class="fab fa-github"></i> код</a>
                         <a href="#" class="btn"><i class="fas fa-link"></i> <span id="live2">live</span></a>
                     </div>
                 </div>
-                
+
                 <!-- проект 3 -->
                 <div class="card">
                     <div class="project-badge">адаптив</div>
                     <div class="project-title" id="proj3">лендинг</div>
-                    <p class="project-desc" id="proj3desc">лендинг для вымышленного продукта. чистый код, анимации при скролле.</p>
+                    <p class="project-desc" id="proj3desc">лендинг для вымышленного продукта. чистый код, анимации при
+                        скролле.</p>
                     <div style="display: flex; gap: 12px;">
                         <a href="#" class="btn"><i class="fab fa-github"></i> код</a>
                         <a href="#" class="btn"><i class="fas fa-link"></i> <span id="live3">live</span></a>
@@ -552,45 +644,58 @@
     </section>
 
     <!-- навыки — с процентными барами (честно) -->
-    <section id="skills">
+    <section id="skills" class="fade-in delay-3">
         <div class="container">
-            <h2 class="hero-title" style="margin-bottom: 50px;"><span>мои</span> навыки</h2>
-            
+            <h2 class="hero-title" style="margin-bottom: 50px;"><span id="skills-title">мои</span> <span
+                    id="skills-title-2">навыки</span></h2>
+
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
                 <div class="skill-item">
                     <div class="skill-icon"><i class="fab fa-html5"></i></div>
                     <h6>HTML5</h6>
-                    <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width:90%"></div>
+                    </div>
                     <small>90%</small>
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
                     <h6>CSS3</h6>
-                    <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width:85%"></div>
+                    </div>
                     <small>85%</small>
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon"><i class="fab fa-js"></i></div>
                     <h6>JavaScript</h6>
-                    <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width:75%"></div>
+                    </div>
                     <small>75%</small>
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h6>адаптив</h6>
-                    <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+                    <h6 id="skill-adaptive">адаптив</h6>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width:85%"></div>
+                    </div>
                     <small>85%</small>
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
                     <h6>Git</h6>
-                    <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width:70%"></div>
+                    </div>
                     <small>70%</small>
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
-                    <h6>дизайн</h6>
-                    <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+                    <h6 id="skill-design">дизайн</h6>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="width:65%"></div>
+                    </div>
                     <small>65%</small>
                 </div>
             </div>
@@ -598,42 +703,53 @@
     </section>
 
     <!-- контакты -->
-    <section id="contact">
+    <section id="contact" class="fade-in delay-4">
         <div class="container">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                 <!-- форма -->
                 <div>
-                    <h2 class="hero-title" style="margin-bottom: 20px;"><span>напиши</span> мне</h2>
+                    <h2 class="hero-title" style="margin-bottom: 20px;"><span id="contact-title">напиши</span> <span
+                            id="contact-title-2">мне</span></h2>
                     <form id="contactForm">
                         <input type="text" id="nameInput" placeholder="твое имя" class="form-control mb-3" required>
                         <input type="email" id="emailInput" placeholder="твой email" class="form-control mb-3" required>
-                        <textarea id="msgInput" placeholder="сообщение..." class="form-control mb-3" rows="4" required></textarea>
-                        <button type="submit" class="btn-submit">отправить</button>
+                        <textarea id="msgInput" placeholder="сообщение..." class="form-control mb-3" rows="4"
+                            required></textarea>
+                        <button type="submit" class="btn-submit" id="btn-submit">отправить</button>
                         <div id="formStatus" class="mt-3" style="font-size:0.9rem; color: var(--text-secondary);"></div>
                     </form>
                 </div>
-                
+
                 <!-- контакты -->
                 <div class="card">
-                    <h3 style="margin-bottom: 20px;">связаться</h3>
-                    <p class="project-desc" style="margin-bottom: 30px;">если есть идея или просто хочешь поздороваться — пиши</p>
-                    
+                    <h3 style="margin-bottom: 20px;" id="contact-info-title">связаться</h3>
+                    <p class="project-desc" style="margin-bottom: 30px;" id="contact-info-desc">если есть идея или
+                        просто хочешь поздороваться
+                        — пиши</p>
+
                     <div style="margin-bottom: 25px;">
-                        <div style="color: var(--text-secondary); margin-bottom: 5px;"><i class="fas fa-envelope" style="color: var(--primary);"></i> email</div>
-                        <span class="email-hidden" onclick="revealEmail()">•••@gmail.com (показать)</span>
-                        <div id="realEmail" style="display: none;"><a href="mailto:niyatjon1228@gmail.com" style="color: var(--primary); text-decoration: none;">niyatjon1228@gmail.com</a></div>
+                        <div style="color: var(--text-secondary); margin-bottom: 5px;"><i class="fas fa-envelope"
+                                style="color: var(--primary);"></i> email</div>
+                        <span class="email-hidden" onclick="revealEmail()" id="contact-show">•••@gmail.com
+                            (показать)</span>
+                        <div id="realEmail" style="display: none;"><a href="mailto:niyatjon1228@gmail.com"
+                                style="color: var(--primary); text-decoration: none;">niyatjon1228@gmail.com</a></div>
                     </div>
-                    
+
                     <div style="margin-bottom: 25px;">
-                        <div style="color: var(--text-secondary); margin-bottom: 5px;"><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> локация</div>
-                        <span>россия / онлайн</span>
+                        <div style="color: var(--text-secondary); margin-bottom: 5px;"><i class="fas fa-map-marker-alt"
+                                style="color: var(--primary);"></i> <span id="contact-loc-label">локация</span></div>
+                        <span>somewhere, earth</span>
                     </div>
-                    
+
                     <div>
-                        <div style="color: var(--text-secondary); margin-bottom: 10px;"><i class="fas fa-link" style="color: var(--primary);"></i> соцсети</div>
+                        <div style="color: var(--text-secondary); margin-bottom: 10px;"><i class="fas fa-link"
+                                style="color: var(--primary);"></i> <span id="contact-social-label">соцсети</span></div>
                         <div style="display: flex; gap: 20px;">
-                            <a href="https://t.me/pik_fra" class="social-link" target="_blank"><i class="fab fa-telegram"></i></a>
-                            <a href="https://github.com/kras1228" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://t.me/pik_fra" class="social-link" target="_blank"><i
+                                    class="fab fa-telegram"></i></a>
+                            <a href="https://github.com/kras1228" class="social-link" target="_blank"><i
+                                    class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -642,10 +758,31 @@
     </section>
 
     <footer>
-        <p>© 2026 kras // сделано на html, css и js</p>
+        <p id="footer-text">© 2026 kras // сделано на html, css и js</p>
     </footer>
 
     <script>
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-bar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
         // переключение языка — просто и понятно
         const translations = {
             en: {
@@ -655,6 +792,8 @@
                 'nav-contact': 'contact',
                 'heroTitle': 'frontend developer',
                 'heroDesc': 'i know html, css and javascript. i make clean interfaces that work. i\'m 16 and this is my portfolio.',
+                'tech-adaptive': 'responsive',
+                'tech-design': 'design',
                 'about1': 'html & css',
                 'about1desc': 'i code neatly, semantically, with care for the user. i understand flex, grid, responsive design.',
                 'about2': 'javascript',
@@ -662,6 +801,7 @@
                 'about3': 'tools',
                 'about3desc': 'git, bootstrap, figma. i know what\'s actually needed for work.',
                 'projects-title': 'my',
+                'projects-title-2': 'projects',
                 'proj1': 'portfolio website',
                 'proj1desc': 'this site you\'re looking at. pure html, css and js. responsive, with language switch.',
                 'proj2': 'todo app',
@@ -670,7 +810,23 @@
                 'proj3desc': 'landing for a fictional product. clean code, scroll animations.',
                 'live1': 'live',
                 'live2': 'live',
-                'live3': 'live'
+                'live3': 'live',
+                'skills-title': 'my',
+                'skills-title-2': 'skills',
+                'skill-adaptive': 'responsive',
+                'skill-design': 'design',
+                'contact-title': 'write',
+                'contact-title-2': 'me',
+                'nameInput_ph': 'your name',
+                'emailInput_ph': 'your email',
+                'msgInput_ph': 'message...',
+                'btn-submit': 'send',
+                'contact-info-title': 'get in touch',
+                'contact-info-desc': 'if you have an idea or just want to say hi — write me',
+                'contact-show': '•••@gmail.com (show)',
+                'contact-loc-label': 'location',
+                'contact-social-label': 'socials',
+                'footer-text': '© 2026 kras // made with html, css and js'
             },
             ru: {
                 'nav-about': 'обо мне',
@@ -679,6 +835,8 @@
                 'nav-contact': 'контакты',
                 'heroTitle': 'frontend разработчик',
                 'heroDesc': 'я знаю html, css и javascript. делаю аккуратные интерфейсы, которые работают. мне 16 лет и это моё портфолио.',
+                'tech-adaptive': 'адаптив',
+                'tech-design': 'дизайн',
                 'about1': 'html & css',
                 'about1desc': 'верстаю аккуратно, семантично, с заботой о пользователе. разбираюсь в flex, grid, адаптивной верстке.',
                 'about2': 'javascript',
@@ -686,6 +844,7 @@
                 'about3': 'инструменты',
                 'about3desc': 'git, bootstrap, figma. разбираюсь в том, что реально нужно для работы.',
                 'projects-title': 'мои',
+                'projects-title-2': 'проекты',
                 'proj1': 'портфолио сайт',
                 'proj1desc': 'этот сайт, который ты видишь. полностью на чистом html, css и js. адаптивный, с переключателем языка.',
                 'proj2': 'todo-приложение',
@@ -694,44 +853,66 @@
                 'proj3desc': 'лендинг для вымышленного продукта. чистый код, анимации при скролле.',
                 'live1': 'демо',
                 'live2': 'демо',
-                'live3': 'демо'
+                'live3': 'демо',
+                'skills-title': 'мои',
+                'skills-title-2': 'навыки',
+                'skill-adaptive': 'адаптив',
+                'skill-design': 'дизайн',
+                'contact-title': 'напиши',
+                'contact-title-2': 'мне',
+                'nameInput_ph': 'твое имя',
+                'emailInput_ph': 'твой email',
+                'msgInput_ph': 'сообщение...',
+                'btn-submit': 'отправить',
+                'contact-info-title': 'связаться',
+                'contact-info-desc': 'если есть идея или просто хочешь поздороваться — пиши',
+                'contact-show': '•••@gmail.com (показать)',
+                'contact-loc-label': 'локация',
+                'contact-social-label': 'соцсети',
+                'footer-text': '© 2026 kras // сделано на html, css и js'
             }
         };
 
         function setLanguage(lang) {
             const t = translations[lang];
-            
-            document.getElementById('nav-about').innerText = t['nav-about'];
-            document.getElementById('nav-projects').innerText = t['nav-projects'];
-            document.getElementById('nav-skills').innerText = t['nav-skills'];
-            document.getElementById('nav-contact').innerText = t['nav-contact'];
-            
-            document.getElementById('heroTitle').innerHTML = `<span>${t['heroTitle'].split(' ')[0]}</span> ${t['heroTitle'].split(' ').slice(1).join(' ')}`;
-            document.getElementById('heroDesc').innerText = t['heroDesc'];
-            
-            document.getElementById('about1').innerText = t['about1'];
-            document.getElementById('about1desc').innerText = t['about1desc'];
-            document.getElementById('about2').innerText = t['about2'];
-            document.getElementById('about2desc').innerText = t['about2desc'];
-            document.getElementById('about3').innerText = t['about3'];
-            document.getElementById('about3desc').innerText = t['about3desc'];
-            
-            document.getElementById('projects-title').innerText = t['projects-title'];
-            document.getElementById('proj1').innerText = t['proj1'];
-            document.getElementById('proj1desc').innerText = t['proj1desc'];
-            document.getElementById('proj2').innerText = t['proj2'];
-            document.getElementById('proj2desc').innerText = t['proj2desc'];
-            document.getElementById('proj3').innerText = t['proj3'];
-            document.getElementById('proj3desc').innerText = t['proj3desc'];
-            
-            document.getElementById('live1').innerText = t['live1'];
-            document.getElementById('live2').innerText = t['live2'];
-            document.getElementById('live3').innerText = t['live3'];
+
+            // Setup basic IDs
+            const idsToUpdate = [
+                'nav-about', 'nav-projects', 'nav-skills', 'nav-contact',
+                'heroDesc', 'tech-adaptive', 'tech-design',
+                'about1', 'about1desc', 'about2', 'about2desc', 'about3', 'about3desc',
+                'projects-title', 'projects-title-2', 'proj1', 'proj1desc', 'proj2', 'proj2desc', 'proj3', 'proj3desc',
+                'live1', 'live2', 'live3',
+                'skills-title', 'skills-title-2', 'skill-adaptive', 'skill-design',
+                'contact-title', 'contact-title-2', 'btn-submit', 'contact-info-title', 'contact-info-desc',
+                'contact-show', 'contact-loc-label', 'contact-social-label', 'footer-text'
+            ];
+
+            idsToUpdate.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = t[id];
+            });
+
+            // Special Title Setup
+            const titleParts = t['heroTitle'].split(' ');
+            document.getElementById('heroTitle').innerHTML = `<span>${titleParts[0]}</span> ${titleParts.slice(1).join(' ')}`;
+
+            // Placeholders Setup
+            const placeholdersToUpdate = [
+                { id: 'nameInput', key: 'nameInput_ph' },
+                { id: 'emailInput', key: 'emailInput_ph' },
+                { id: 'msgInput', key: 'msgInput_ph' }
+            ];
+
+            placeholdersToUpdate.forEach(p => {
+                const el = document.getElementById(p.id);
+                if (el) el.placeholder = t[p.key];
+            });
 
             document.querySelectorAll('.lang-opt').forEach(opt => {
                 opt.classList.toggle('active', opt.dataset.lang === lang);
             });
-            
+
             localStorage.setItem('lang', lang);
         }
 
@@ -745,19 +926,20 @@
         // форма обратной связи
         const form = document.getElementById('contactForm');
         const statusDiv = document.getElementById('formStatus');
-        
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            statusDiv.innerText = 'отправка...';
+            const lang = localStorage.getItem('lang') || 'ru';
+            statusDiv.innerText = lang === 'en' ? 'sending...' : 'отправка...';
             await new Promise(r => setTimeout(r, 1000));
-            statusDiv.innerText = '✓ сообщение отправлено (демо)';
+            statusDiv.innerText = lang === 'en' ? '✓ message sent (demo)' : '✓ сообщение отправлено (демо)';
             form.reset();
             setTimeout(() => statusDiv.innerText = '', 3000);
         });
 
         // показать email
-        window.revealEmail = function() {
-            document.querySelector('.email-hidden').style.display = 'none';
+        window.revealEmail = function () {
+            document.getElementById('contact-show').style.display = 'none';
             document.getElementById('realEmail').style.display = 'block';
         };
 
@@ -765,9 +947,9 @@
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width/2;
-                const y = e.clientY - rect.top - rect.height/2;
-                card.style.transform = `perspective(1000px) rotateY(${x/50}deg) rotateX(${-y/50}deg)`;
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateY(${x / 50}deg) rotateX(${-y / 50}deg)`;
             });
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'none';
@@ -775,4 +957,5 @@
         });
     </script>
 </body>
+
 </html>
