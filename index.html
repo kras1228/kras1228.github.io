@@ -13,6 +13,7 @@
       box-sizing: border-box;
     }
 
+    /* ── Themes ── */
     :root[data-theme="dark"] {
       --bg: #0c0c0e;
       --bg2: #111114;
@@ -52,7 +53,7 @@
     }
 
     html {
-      scroll-behavior: auto; 
+      scroll-behavior: auto; /* управляем вручную через JS */
     }
 
     body {
@@ -66,6 +67,7 @@
       overflow-x: hidden;
     }
 
+    /* ── Custom Cursor (только десктоп) ── */
     @media (pointer: fine) {
       .cursor {
         width: 7px;
@@ -91,12 +93,14 @@
       }
     }
 
+    /* ── Layout ── */
     .container {
       max-width: 700px;
       margin: 0 auto;
       padding: 0 clamp(18px, 5vw, 32px);
     }
 
+    /* ── Nav ── */
     nav {
       position: fixed;
       top: 0;
@@ -138,6 +142,7 @@
       gap: 6px;
     }
 
+    /* Desktop nav links */
     .nav-links {
       display: flex;
       gap: 2px;
@@ -165,6 +170,7 @@
       color: var(--accent);
     }
 
+    /* ── Nav Controls ── */
     .nav-btn {
       display: flex;
       align-items: center;
@@ -206,6 +212,8 @@
       background: var(--accent);
       flex-shrink: 0;
     }
+
+    /* ── Hamburger ── */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -243,6 +251,7 @@
       transform: translateY(-6.5px) rotate(-45deg);
     }
 
+    /* ── Mobile Menu Overlay ── */
     .mobile-menu {
       display: none;
       position: fixed;
@@ -290,6 +299,7 @@
       border-bottom: none;
     }
 
+    /* ── Hero ── */
     .hero {
       padding: clamp(90px, 15vw, 130px) 0 clamp(60px, 10vw, 90px);
     }
@@ -350,6 +360,7 @@
       animation: fadeUp 0.7s ease 0.48s forwards;
     }
 
+    /* ── Buttons ── */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -390,6 +401,7 @@
       transform: translateY(-2px);
     }
 
+    /* ── Section ── */
     section {
       padding: clamp(52px, 8vw, 72px) 0;
       border-top: 1px solid var(--border);
@@ -405,6 +417,7 @@
       transition: color 0.3s;
     }
 
+    /* ── About ── */
     .about-text {
       color: var(--text2);
       line-height: 1.9;
@@ -453,6 +466,7 @@
       font-weight: 400;
     }
 
+    /* ── Skills ── */
     .skills-wrap { margin-top: 32px; }
 
     .skills-list {
@@ -489,6 +503,14 @@
       color: var(--accent);
       background: var(--accent-glow);
     }
+
+    /* ── Projects ── */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -565,6 +587,7 @@
       border: 1px solid var(--accent-glow);
     }
 
+    /* ── Contact ── */
     .contact-desc {
       color: var(--text2);
       font-size: 14.5px;
@@ -610,6 +633,7 @@
       transition: background 0.3s;
     }
 
+    /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 0 40px;
@@ -633,6 +657,7 @@
 
     footer a:hover { color: var(--text2); }
 
+    /* ── Blink cursor ── */
     .blink {
       display: inline-block;
       width: 2px;
@@ -644,6 +669,7 @@
       border-radius: 1px;
     }
 
+    /* ── Animations ── */
     @keyframes blinkAnim {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
@@ -671,6 +697,9 @@
     .fade-in:nth-child(4) { transition-delay: 0.21s; }
     .fade-in:nth-child(5) { transition-delay: 0.28s; }
 
+    /* ── Responsive ── */
+
+    /* Tablet */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: flex; }
@@ -682,6 +711,7 @@
       }
     }
 
+    /* Mobile */
     @media (max-width: 480px) {
       .about-grid {
         grid-template-columns: 1fr;
@@ -707,6 +737,7 @@
       }
     }
 
+    /* Small mobile */
     @media (max-width: 360px) {
       .about-card {
         padding: 14px 16px;
@@ -720,13 +751,16 @@
 </head>
 <body>
 
+  <!-- Custom cursor (hidden on touch) -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
+  <!-- ── Nav ── -->
   <nav id="navbar">
     <div class="nav-inner">
       <a href="#" class="logo" onclick="smoothScrollTo(0, event)">pik_fra</a>
 
+      <!-- Desktop links -->
       <ul class="nav-links" id="desktopLinks">
         <li><a href="#about"    data-section="about"    data-i18n="nav_about">обо мне</a></li>
         <li><a href="#projects" data-section="projects" data-i18n="nav_projects">проекты</a></li>
@@ -734,16 +768,18 @@
       </ul>
 
       <div class="nav-right">
-          
+        <!-- Lang -->
         <button class="nav-btn lang-btn" id="langBtn" onclick="toggleLang()" title="Switch language">
           <span class="lang-indicator"></span>
           <span id="langLabel" class="lang-text">RU</span>
         </button>
 
+        <!-- Theme -->
         <button class="nav-btn theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">
           <span id="themeIcon">☀️</span>
         </button>
 
+        <!-- Hamburger -->
         <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Меню">
           <span></span>
           <span></span>
@@ -753,14 +789,17 @@
     </div>
   </nav>
 
+  <!-- Mobile menu -->
   <div class="mobile-menu" id="mobileMenu">
     <a data-section="about"    data-i18n="nav_about">обо мне</a>
     <a data-section="projects" data-i18n="nav_projects">проекты</a>
     <a data-section="contact"  data-i18n="nav_contact">контакт</a>
   </div>
 
+  <!-- ── Content ── -->
   <div class="container">
 
+    <!-- Hero -->
     <div class="hero" id="top">
       <div class="hero-label" data-i18n="hero_label">портфолио</div>
       <h1>
@@ -777,6 +816,7 @@
       </div>
     </div>
 
+    <!-- About -->
     <section id="about">
       <div class="section-label" data-i18n="section_about">— обо мне</div>
       <p class="about-text fade-in" data-i18n-html="about_text">
@@ -818,22 +858,40 @@
       </div>
     </section>
 
+    <!-- Projects -->
     <section id="projects">
       <div class="section-label" data-i18n="section_projects">— проекты</div>
-      <a href="https://simulator-hacker.netlify.app" target="_blank" class="project-card fade-in">
-        <div class="project-name">Simulator Hacker</div>
-        <p class="project-desc" data-i18n="proj_desc">
-          Маленькая браузерная игра — симулятор хакера. Попробуй взломать всё что можно.
-        </p>
-        <div class="project-tags">
-          <span class="project-tag">HTML</span>
-          <span class="project-tag">CSS</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag" data-i18n="proj_tag_game">игра</span>
-        </div>
-      </a>
+      
+      <div class="projects-grid">
+        <a href="https://simulator-hacker.netlify.app" target="_blank" class="project-card fade-in">
+          <div class="project-name">Simulator Hacker</div>
+          <p class="project-desc" data-i18n="proj_desc">
+            Маленькая браузерная игра — симулятор хакера. Попробуй взломать всё что можно.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag" data-i18n="proj_tag_game">игра</span>
+          </div>
+        </a>
+
+        <a href="https://t.me/sna1ch_bot" target="_blank" class="project-card fade-in">
+          <div class="project-name">Music Search Bot</div>
+          <p class="project-desc" data-i18n="proj_bot_desc">
+            Telegram бот для быстрого поиска и прослушивания любой музыки.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">API</span>
+            <span class="project-tag">Telegram</span>
+            <span class="project-tag" data-i18n="proj_tag_bot">бот</span>
+          </div>
+        </a>
+      </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact">
       <div class="section-label" data-i18n="section_contact">— контакт</div>
       <p class="contact-desc fade-in" data-i18n="contact_desc">
@@ -847,6 +905,7 @@
       </div>
     </section>
 
+    <!-- Footer -->
     <footer class="fade-in">
       <span>© 2025 pik_fra</span>
       <a href="https://t.me/pik_fra" target="_blank">@pik_fra</a>
@@ -855,7 +914,9 @@
   </div>
 
   <script>
-
+    /* ══════════════════════════════════
+       Smooth scroll
+    ══════════════════════════════════ */
     const NAV_H = 68;
 
     function smoothScrollTo(target, e) {
@@ -869,18 +930,20 @@
       if (el) smoothScrollTo(el);
     }
 
-
+    // Bind desktop nav links
     document.querySelectorAll('[data-section]').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
         const sec = this.getAttribute('data-section');
         scrollToSection(sec);
-
+        // close mobile menu if open
         closeMobileMenu();
       });
     });
 
-
+    /* ══════════════════════════════════
+       Active nav link on scroll
+    ══════════════════════════════════ */
     const sections = ['about', 'projects', 'contact'];
 
     function updateActiveLink() {
@@ -901,6 +964,9 @@
 
     window.addEventListener('scroll', updateActiveLink, { passive: true });
 
+    /* ══════════════════════════════════
+       Mobile Menu
+    ══════════════════════════════════ */
     let menuOpen = false;
 
     function toggleMenu() {
@@ -920,6 +986,9 @@
       document.body.style.overflow = '';
     }
 
+    /* ══════════════════════════════════
+       i18n
+    ══════════════════════════════════ */
     const translations = {
       ru: {
         nav_about:         'обо мне',
@@ -943,10 +1012,12 @@
         section_stack:     'стек',
         section_projects:  '— проекты',
         proj_desc:         'Маленькая браузерная игра — симулятор хакера. Попробуй взломать всё что можно.',
+        proj_bot_desc:     'Telegram бот для быстрого поиска и прослушивания любой музыки.',
         proj_tag_game:     'игра',
+        proj_tag_bot:      'бот',
         section_contact:   '— контакт',
         contact_desc:      'Хочешь поговорить или есть идеи для коллаба? Пиши в телеграм, отвечу.',
-        typed_text:        'начинающий разработчик.',
+        typed_text:        'начинающий разраб.',
       },
       en: {
         nav_about:         'about',
@@ -970,7 +1041,9 @@
         section_stack:     'stack',
         section_projects:  '— projects',
         proj_desc:         'A small browser game — a hacker simulator. Try to hack everything you can.',
+        proj_bot_desc:     'Telegram bot for fast music search and listening to any music.',
         proj_tag_game:     'game',
+        proj_tag_bot:      'bot',
         section_contact:   '— contact',
         contact_desc:      'Wanna chat or have a collab idea? Hit me up on Telegram, I\'ll reply.',
         typed_text:        'a beginner dev.',
@@ -1002,6 +1075,9 @@
       applyLang(currentLang);
     }
 
+    /* ══════════════════════════════════
+       Theme
+    ══════════════════════════════════ */
     let currentTheme = 'dark';
 
     function applyTheme(theme) {
@@ -1018,6 +1094,9 @@
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) { currentTheme = savedTheme; applyTheme(currentTheme); }
 
+    /* ══════════════════════════════════
+       Typing effect
+    ══════════════════════════════════ */
     let typingTimer = null;
 
     function startTyping(text) {
@@ -1039,6 +1118,9 @@
 
     startTyping(translations[currentLang].typed_text);
 
+    /* ══════════════════════════════════
+       Custom Cursor
+    ══════════════════════════════════ */
     const cursorEl = document.getElementById('cursor');
     const ringEl   = document.getElementById('cursorRing');
 
@@ -1062,6 +1144,9 @@
       });
     }
 
+    /* ══════════════════════════════════
+       Scroll Fade-in
+    ══════════════════════════════════ */
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1072,7 +1157,10 @@
     }, { threshold: 0.07 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-      
+
+    /* ══════════════════════════════════
+       Nav scroll shadow
+    ══════════════════════════════════ */
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
       nav.style.boxShadow = window.scrollY > 10
