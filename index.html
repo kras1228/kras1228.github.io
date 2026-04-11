@@ -14,41 +14,41 @@
     }
 
     :root[data-theme="dark"] {
-      --bg: #0a0a0f;
-      --bg2: #0e0e14;
-      --surface: #14141c;
-      --surface2: #1a1a24;
-      --border: #1f1f2e;
-      --border2: #2a2a3e;
-      --text: #e8e8f0;
-      --text2: #9898b0;
-      --muted: #48486f;
-      --accent: #6b5fff;
-      --accent2: #8777ff;
-      --accent-dim: rgba(107, 95, 255, 0.08);
-      --accent-glow: rgba(107, 95, 255, 0.18);
-      --nav-bg: rgba(10, 10, 15, 0.90);
+      --bg: #0a0e1a;
+      --bg2: #0d1220;
+      --surface: #131829;
+      --surface2: #1a2137;
+      --border: #1f2842;
+      --border2: #2a3551;
+      --text: #e8eef9;
+      --text2: #a0b1d8;
+      --muted: #5a6b8f;
+      --accent: #4fc3f7;
+      --accent2: #29b6f6;
+      --accent-dim: rgba(79, 195, 247, 0.1);
+      --accent-glow: rgba(79, 195, 247, 0.25);
+      --nav-bg: rgba(10, 14, 26, 0.92);
       --shadow: rgba(0, 0, 0, 0.6);
-      --menu-bg: #0e0e14;
+      --menu-bg: #0d1220;
     }
 
     :root[data-theme="light"] {
-      --bg: #f8f8fa;
-      --bg2: #f0f0f5;
+      --bg: #f0f7ff;
+      --bg2: #e3f2fd;
       --surface: #ffffff;
-      --surface2: #f4f4f8;
-      --border: #e0e0ea;
-      --border2: #d0d0de;
-      --text: #0e0e18;
-      --text2: #3e3e5a;
-      --muted: #7e7e99;
-      --accent: #5544dd;
-      --accent2: #4433bb;
-      --accent-dim: rgba(85, 68, 221, 0.09);
-      --accent-glow: rgba(85, 68, 221, 0.20);
-      --nav-bg: rgba(248, 248, 250, 0.92);
-      --shadow: rgba(0, 0, 0, 0.12);
-      --menu-bg: #f8f8fa;
+      --surface2: #f5faff;
+      --border: #d6e9ff;
+      --border2: #b3d9ff;
+      --text: #0a1929;
+      --text2: #3d5a80;
+      --muted: #6b8bad;
+      --accent: #0288d1;
+      --accent2: #0277bd;
+      --accent-dim: rgba(2, 136, 209, 0.08);
+      --accent-glow: rgba(2, 136, 209, 0.2);
+      --nav-bg: rgba(240, 247, 255, 0.94);
+      --shadow: rgba(2, 136, 209, 0.15);
+      --menu-bg: #f0f7ff;
     }
 
     html {
@@ -369,11 +369,11 @@
 
     .btn-primary {
       background: var(--accent);
-      color: #fff;
+      color: #0a1929;
     }
 
     .btn-primary:hover {
-      filter: brightness(1.1);
+      filter: brightness(1.15);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px var(--accent-glow);
     }
@@ -453,7 +453,10 @@
     .coming-soon h2 {
       font-size: clamp(32px, 7vw, 64px);
       font-weight: 600;
-      color: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 16px;
       letter-spacing: -0.02em;
     }
@@ -488,11 +491,11 @@
     }
 
     .contact-link:hover {
-      border-color: rgba(41, 182, 246, 0.35);
-      color: #29b6f6;
-      background: rgba(41, 182, 246, 0.05);
+      border-color: var(--accent-glow);
+      color: var(--accent);
+      background: var(--accent-dim);
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(41, 182, 246, 0.1);
+      box-shadow: 0 8px 28px var(--accent-glow);
     }
 
     .contact-icon {
@@ -608,6 +611,7 @@
 
       <ul class="nav-links" id="desktopLinks">
         <li><a href="#skills" data-section="skills" data-i18n="nav_skills">навыки</a></li>
+        <li><a href="#projects" data-section="projects" data-i18n="nav_projects">проекты</a></li>
         <li><a href="#contact" data-section="contact" data-i18n="nav_contact">контакт</a></li>
       </ul>
 
@@ -632,6 +636,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <a data-section="skills" data-i18n="nav_skills">навыки</a>
+    <a data-section="projects" data-i18n="nav_projects">проекты</a>
     <a data-section="contact" data-i18n="nav_contact">контакт</a>
   </div>
 
@@ -660,7 +665,10 @@
         <span class="skill-tag main">JavaScript</span>
         <span class="skill-tag main">PHP</span>
       </div>
+    </section>
 
+    <section id="projects">
+      <div class="section-label" data-i18n="section_projects">— проекты</div>
       <div class="coming-soon">
         <h2 data-i18n="coming_soon">Скоро</h2>
         <p data-i18n="coming_soon_desc">Проекты в разработке...</p>
@@ -710,7 +718,7 @@
       });
     });
 
-    const sections = ['skills', 'contact'];
+    const sections = ['skills', 'projects', 'contact'];
 
     function updateActiveLink() {
       const scrollY = window.scrollY;
@@ -752,12 +760,14 @@
     const translations = {
       ru: {
         nav_skills: 'навыки',
+        nav_projects: 'проекты',
         nav_contact: 'контакт',
         hero_label: 'портфолио',
         hero_greeting: 'Привет, я',
         hero_desc: 'Мне <strong>16 лет</strong>, живу где-то на Земле.<br>Учусь программировать и делаю крутые штуки.',
         btn_contact: 'написать мне',
         section_stack: '— мои навыки',
+        section_projects: '— проекты',
         coming_soon: 'Скоро',
         coming_soon_desc: 'Проекты в разработке...',
         section_contact: '— контакт',
@@ -766,12 +776,14 @@
       },
       en: {
         nav_skills: 'skills',
+        nav_projects: 'projects',
         nav_contact: 'contact',
         hero_label: 'portfolio',
         hero_greeting: 'Hey, I\'m',
         hero_desc: 'I\'m <strong>16 years old</strong>, living somewhere on Earth.<br>Learning to code and building cool stuff.',
         btn_contact: 'message me',
         section_stack: '— my skills',
+        section_projects: '— projects',
         coming_soon: 'Soon',
         coming_soon_desc: 'Projects in development...',
         section_contact: '— contact',
